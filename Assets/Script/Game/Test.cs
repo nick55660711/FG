@@ -8,5 +8,14 @@ public class Test : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("r")) { transform.position = Respwan.transform.position; }
+
+
+        if (transform.localPosition.y < -10)
+        {
+            transform.localPosition = new Vector3(-5, 2, 0);
+        }
     }
+
+
+
 }

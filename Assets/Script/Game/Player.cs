@@ -7,19 +7,26 @@ public class Player : MonoBehaviour
 {
 
     #region 欄位
-    public float Speed;
+    //public float Speed = 10;
     public Rigidbody2D rig;
-    public float JumpH;
-    float v;
+    public Weapon AttackType;
     public enum Weapon
     {
         弓箭 , 劍
     }
 
-    public Weapon AttackType;
+    public float FireRate;
 
+    public float Timer;
+        
 
+    [Header("移動速度")]
+    public float SpeedF;
+    [Header("跳躍高度")]
+    public float JumpH;
+    float v;
     // public GameObject[] Ground;
+    [Header("弓箭物件")]
     public GameObject Arrow;
     //public bool[] OnGround;
     private bool On_GroundAll;
@@ -29,9 +36,19 @@ public class Player : MonoBehaviour
     }
 
 
-    public RaycastHit2D hit1;
-    public RaycastHit2D hit2;
+     RaycastHit2D hit1;
+     RaycastHit2D hit2;
+
+    [Header("生成弓箭的位置")]
     public Transform CreateObject;
+    [Header("全部弓箭")]
+    public GameObject[] ArrowAll;
+    public bool GetBow = true;
+
+
+
+
+
     #endregion 
 
 
@@ -51,14 +68,15 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3  (0, 180, 0);
         }
 
-            transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
-
-        
-
+         //   transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
+        rig.velocity = new Vector2( SpeedF * v , rig.velocity.y);
 
     }
 
-    public void jump() {
+
+
+    public void jump() 
+    {
         if (On_GroundAll && Input.GetKeyDown("z"))
         {
             rig.AddForce(new Vector2(0, JumpH));
@@ -68,8 +86,18 @@ public class Player : MonoBehaviour
 
     void CreateBullet()
     {
-
+        //產生箭
         Instantiate(Arrow, CreateObject.position, CreateObject.rotation);
+
+        // 抓取所有有Arrow標籤的物件
+        ArrowAll = GameObject.FindGameObjectsWithTag("Arrow");
+        
+        // 若有兩個以上Arrow物件，則摧毀最早的Arrow
+        if(ArrowAll.Length > 2)
+        {
+            Destroy(ArrowAll[0]);
+        }
+
     }
 
 
@@ -79,11 +107,21 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown("x"))
         {
+            //判定武器型態
             switch ((int)AttackType)
             {
-                case 0:
-                    CreateBullet();
+                case 0: //弓
+                    if (GetBow) //如果已取得弓
+                    {
+                        if (Timer > FireRate)
+                        {
 
+                            CreateBullet();
+
+                            Timer = 0;
+                        }
+
+                    }
 
                     break;
 
@@ -118,6 +156,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+
         // Ground = GameObject.FindGameObjectsWithTag("Ground") ;
         // OnGround = new bool[Ground.Length];
 
@@ -142,40 +181,48 @@ public class Player : MonoBehaviour
             if (OnGround[i]) { break; }
         }
         */
-        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.16f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
+
+
+        #region 射線貼地判定
+
+        // 向下射出一道射線偵測，如果有擊中目標則往下執行
+        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
 
         {
-            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.16f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f);
+            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f);
 
+
+            //若目標具有"地面"或"弓箭"標籤的物件 則判定為在地上
             if (hit1.collider.tag == "Ground" || hit1.collider.tag == "Arrow")
             {
                 On_GroundAll = true;
             }
         }
-        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.11f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
+
+        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
         {
-            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.11f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f);
+            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f);
             if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow")
             {
                 On_GroundAll = true;
             }
         }
 
+        //若沒有擊中目標，則判定不在地上
         else
         {
             On_GroundAll = false;
         }
 
+        #endregion
 
         move();
         jump();
         Attack();
 
+        Timer += Time.deltaTime;
 
-        if (transform.localPosition.y < -10)
-        {
-            transform.localPosition = new Vector3(-5, 2, 0);
-        }
+
 
     }
 

@@ -10,9 +10,12 @@ public class Bullet : MonoBehaviour
      public float speedF;
     // public GameObject Effect;
     // public AudioSource EffectAudio;
+    [Header("攻擊力")]
     public float atk;
     public Rigidbody2D rig;
     #endregion 
+
+
 
     #region 方法
     void OnTriggerEnter2D(Collider2D other)
@@ -25,23 +28,11 @@ public class Bullet : MonoBehaviour
             Destroy(other.gameObject);
 
             Destroy(gameObject);
-
-
-
-
-            if (other.tag == "PlayerBullet" && gameObject.tag == "EnemyBullet")
-            {
-
-                // Instantiate(Effect, other.transform.position, other.transform.rotation);
-
-                //  EffectAudio.Play();
-
-                Destroy(gameObject);
-
-                Destroy(other.gameObject);
-            }
         } 
+
+          
         
+        // 擊中目標為地面時，停止並固定，開啟碰撞判定(可以被玩家踩)
         if (other.gameObject.tag == "Ground" )
         {
 
@@ -50,8 +41,6 @@ public class Bullet : MonoBehaviour
              speedF = 0;
             GetComponents<BoxCollider2D>()[0].enabled = true;
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
-
-
 
         }
     }
