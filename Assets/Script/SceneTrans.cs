@@ -15,9 +15,19 @@ public class SceneTrans : MonoBehaviour
     
     SceneManager.LoadScene(NextSceneName);
     
-    
-    
     }
 
-    
+
+    public void Quit()
+    {
+
+        Application.Quit();
+
+
+
+    }
+
+
+
+
 }

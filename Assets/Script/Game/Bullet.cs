@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     #region 欄位
     [Header("子彈速度")]
      // public float speed;
-    public float speedF;
+     public float speedF;
     // public GameObject Effect;
     // public AudioSource EffectAudio;
     public float atk;
@@ -46,10 +46,10 @@ public class Bullet : MonoBehaviour
         {
 
             //  rig.velocity = new Vector2(0, 0);
-            //speed = 0;
-            speedF = 0;
+            // speed = 0;
+             speedF = 0;
             GetComponents<BoxCollider2D>()[0].enabled = true;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            rig.constraints = RigidbodyConstraints2D.FreezeAll;
 
 
 
@@ -90,7 +90,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
        
-        rig.velocity = transform.right * speedF ;
+         rig.velocity = transform.right * speedF ;
         //transform.Translate(Vector2.right * speed );
 
         if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x)>10 ) { Destroy(gameObject); }
