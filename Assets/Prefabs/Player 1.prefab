@@ -175,14 +175,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6abe83e531d47d43b2235b72ff9edd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  SpeedF: 10
   rig: {fileID: 0}
-  JumpH: 700
   AttackType: 0
+  HpText: {fileID: 0}
+  FireRate: 0.3
+  Timer: 0
+  Timer2: 0
+  Hp: 100
+  SpeedF: 10
+  JumpH: 700
   Arrow: {fileID: 6083876531516064138, guid: b6eb4b2825ce1134881ea4ab5e2aca40, type: 3}
   CreateObject: {fileID: 722977552016600688}
   ArrowAll: []
+  GetBow: 1
 --- !u!114 &1765378244920251430
 MonoBehaviour:
   m_ObjectHideFlags: 0

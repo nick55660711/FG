@@ -10,17 +10,29 @@ public class Player : MonoBehaviour
     //public float Speed = 10;
     public Rigidbody2D rig;
     public Weapon AttackType;
+    public Text HpText;
+    public Animator ani;
     public enum Weapon
     {
         弓箭 , 劍
     }
 
-    public float FireRate;
 
+    // 射擊計時器
     public float Timer;
-        
+    // 射擊間隔
+    public float FireRate;
+    // 受傷計時器
+    public float Timer2;
+    //受傷間隔
+    public float TimeDamage;
+    public int Hp;
 
     [Header("移動速度")]
+    //public float SpeedV;
+    /// <summary>
+    /// 以velocity控制速度
+    /// </summary>
     public float SpeedF;
     [Header("跳躍高度")]
     public float JumpH;
@@ -34,6 +46,7 @@ public class Player : MonoBehaviour
     {
         get => On_GroundAll ;
     }
+
 
 
      RaycastHit2D hit1;
@@ -68,8 +81,14 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3  (0, 180, 0);
         }
 
-         //   transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
+        //   transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
         rig.velocity = new Vector2( SpeedF * v , rig.velocity.y);
+        /*
+        if (Mathf.Abs(rig.velocity.x)<9)
+        {
+            rig.AddForce(new Vector2(SpeedV * v, 0));
+        }
+        */
 
     }
 
@@ -132,59 +151,54 @@ public class Player : MonoBehaviour
 
                     break;
 
-
-
-
             }
 
         }
 
+    }
+
+    public void damage(int ATK)
+    {
+        if(Timer2 > TimeDamage)
+        {
+
+            Hp -= ATK ;
+
+
+            HpText.text = "Hp：" + Hp ;
+            GetComponent<SpriteRenderer>().color = Color.red;
+
+            Timer2 = 0;
+
+            
+
+
+
+            if(Hp<=0)
+            {
+                Destroy(gameObject);
+            }
+
+
+        }
 
     }
 
-
-
-    #endregion   
-
-
-
-
-
-
-
-    #region 事件
-    private void Start()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        rig = GetComponent<Rigidbody2D>();
-
-        // Ground = GameObject.FindGameObjectsWithTag("Ground") ;
-        // OnGround = new bool[Ground.Length];
+        if(collision.gameObject.tag == "Enemy")
+        {
+            damage(collision.gameObject.GetComponent<Enemy>().ATK);
+        
+        }
 
 
     }
 
-    private void Update()
+    private void OnGround()
     {
-
-
-
-
-        /*
-        for (int i = 0; i < Ground.Length; i++)
-        {
-        OnGround[i] = rig.IsTouching(Ground[i].GetComponent<Collider2D>());
-        }
-
-        for (int i = 0; i < OnGround.Length; i++)
-        {
-            On_GroundAll = OnGround[i];
-            if (OnGround[i]) { break; }
-        }
-        */
-
 
         #region 射線貼地判定
-
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
         if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
 
@@ -216,13 +230,67 @@ public class Player : MonoBehaviour
 
         #endregion
 
+    }
+
+
+    #endregion   
+
+
+
+
+
+
+
+    #region 事件
+    private void Start()
+    {
+        rig = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
+
+        // Ground = GameObject.FindGameObjectsWithTag("Ground") ;
+        // OnGround = new bool[Ground.Length];
+
+        Timer = 10;
+        Timer2 = 10;
+
+
+
+
+    }
+
+    private void Update()
+    {
+
+
+
+
+        /*
+        for (int i = 0; i < Ground.Length; i++)
+        {
+        OnGround[i] = rig.IsTouching(Ground[i].GetComponent<Collider2D>());
+        }
+
+        for (int i = 0; i < OnGround.Length; i++)
+        {
+            On_GroundAll = OnGround[i];
+            if (OnGround[i]) { break; }
+        }
+        */
+
+
+
+
+
         move();
+        OnGround();
         jump();
         Attack();
 
         Timer += Time.deltaTime;
+        Timer2 += Time.deltaTime;
 
-
+        ani.SetFloat("DamageTimer", Timer2);
+       
 
     }
 

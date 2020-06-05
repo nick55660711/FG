@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     // public GameObject Effect;
     // public AudioSource EffectAudio;
     [Header("攻擊力")]
-    public float atk;
+    public int atk;
     public Rigidbody2D rig;
     #endregion 
 
@@ -20,14 +20,15 @@ public class Bullet : MonoBehaviour
     #region 方法
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy" && gameObject.tag == "PlayerBullet")
+        if (other.tag == "Enemy" )
         {
 
             // Instantiate(Effect, other.transform.position, other.transform.rotation);
             // EffectAudio.Play();
-            Destroy(other.gameObject);
+            other.GetComponent<Enemy>().damage(atk);
 
             Destroy(gameObject);
+
         } 
 
           
@@ -37,9 +38,10 @@ public class Bullet : MonoBehaviour
         {
 
             //  rig.velocity = new Vector2(0, 0);
-            // speed = 0;
-             speedF = 0;
+            //  speed = 0;
+            speedF = 0;
             GetComponents<BoxCollider2D>()[0].enabled = true;
+            GetComponents<BoxCollider2D>()[1].enabled = false;
             rig.constraints = RigidbodyConstraints2D.FreezeAll;
 
         }
