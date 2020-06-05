@@ -61,8 +61,9 @@ public class Enemy : MonoBehaviour
         {
 
 
-            rig.AddForce(transform.right * SpeedForce * v  + new Vector3(0, JumpH ,0 ));
+            rig.AddForce(transform.right * SpeedForce * v * rig.mass  + new Vector3(0, JumpH * rig.mass, 0 ));
             Timer = 0;
+
 
         }
 

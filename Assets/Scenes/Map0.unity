@@ -348,6 +348,11 @@ PrefabInstance:
       propertyPath: Hp
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714473, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1960120344931714475, guid: 8212b436d7b58f44ab053a64e66268ae,
         type: 3}
       propertyPath: m_RootOrder
@@ -426,6 +431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Hp
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714473, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1960120344931714475, guid: 8212b436d7b58f44ab053a64e66268ae,
         type: 3}
@@ -889,6 +899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Hp
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714473, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1960120344931714475, guid: 8212b436d7b58f44ab053a64e66268ae,
         type: 3}
@@ -1364,6 +1379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Hp
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714473, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1960120344931714475, guid: 8212b436d7b58f44ab053a64e66268ae,
         type: 3}
@@ -2052,6 +2072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Hp
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714473, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1960120344931714475, guid: 8212b436d7b58f44ab053a64e66268ae,
         type: 3}
@@ -3264,6 +3289,21 @@ PrefabInstance:
         type: 3}
       propertyPath: Hp
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714473, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714474, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960120344931714474, guid: 8212b436d7b58f44ab053a64e66268ae,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1960120344931714475, guid: 8212b436d7b58f44ab053a64e66268ae,
         type: 3}
