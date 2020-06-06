@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -24,9 +22,14 @@ public class Player : MonoBehaviour
     public float FireRate;
     // 受傷計時器
     public float Timer2;
-    //受傷間隔
+    // 受傷間隔
     public float TimeDamage;
+    // 跳躍計時器
+    public float Timer3;
+    // 跳躍偵測時間
+    public float JumpTime;
     public int Hp;
+    public CanvasGroup GameOverScreen;
 
     [Header("移動速度")]
     //public float SpeedV;
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
     public float SpeedF;
     [Header("跳躍高度")]
     public float JumpH;
+    public float JumpH2;
     float v;
     // public GameObject[] Ground;
     [Header("弓箭物件")]
@@ -99,7 +103,19 @@ public class Player : MonoBehaviour
         if (On_GroundAll && Input.GetKeyDown("z"))
         {
             rig.AddForce(new Vector2(0, JumpH));
+            Timer3 = 0;
         }
+
+
+        if (Timer3 < JumpTime && Input.GetKey("z"))
+        {
+            rig.AddForce(new Vector2(0, JumpH2) * Time.deltaTime * 60);
+
+        }
+
+
+
+
     }
 
 
@@ -145,7 +161,6 @@ public class Player : MonoBehaviour
                     break;
 
 
-
                 case 1:
 
 
@@ -169,14 +184,23 @@ public class Player : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.red;
 
             Timer2 = 0;
-
+           
+            
+           
             
 
 
 
             if(Hp<=0)
             {
-                Destroy(gameObject);
+                SpeedF = 0;
+                JumpH = 0;
+                JumpH2 = 0;
+
+                GameOverScreen.alpha = 1;
+                GameOverScreen.blocksRaycasts = true ;
+                GameOverScreen.interactable = true ;
+
             }
 
 
@@ -240,18 +264,19 @@ public class Player : MonoBehaviour
 
 
 
-
     #region 事件
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        GameOverScreen = GameObject.Find("GameOverScreen").GetComponent<CanvasGroup>();
 
         // Ground = GameObject.FindGameObjectsWithTag("Ground") ;
         // OnGround = new bool[Ground.Length];
 
         Timer = 10;
         Timer2 = 10;
+        Timer3 = 10;
 
 
 
@@ -288,6 +313,7 @@ public class Player : MonoBehaviour
 
         Timer += Time.deltaTime;
         Timer2 += Time.deltaTime;
+        Timer3 += Time.deltaTime;
 
         ani.SetFloat("DamageTimer", Timer2);
        
