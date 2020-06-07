@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 0
-  JumpH: 900
-  SpeedForce: 400
+  JumpH: 600
+  SpeedForce: 500
   Hp: 50
   player1: {fileID: 0}
   ATK: 15

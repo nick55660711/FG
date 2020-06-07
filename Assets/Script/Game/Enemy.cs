@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
 
     public void move()
     {
+
         float v = 0 ;
 
        // if (GameObject.Find("Player 1"))
@@ -59,7 +60,7 @@ public class Enemy : MonoBehaviour
             }
 
 
-        if(Timer > 1.5f)
+        if(Timer > 1f + Random.Range(0.1f,0.5f))
         {
 
 

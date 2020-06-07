@@ -8,6 +8,13 @@ public class CameraControll : MonoBehaviour
     private float X;
     private float Y;
 
+    private void Start()
+    {
+
+        player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+
     private void Update()
     {
         // X = Mathf.Clamp(X, player1.transform.localPosition.x, player1.transform.localPosition.x);

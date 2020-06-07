@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     [Header("進入的場景名稱")]
     public string SceneName;
-
+    [Header("當前場景名稱")]
+    public Scene SceneNow;
     
 
 
@@ -27,6 +28,17 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    public void ReStart()
+    {
+        SceneManager.LoadScene(SceneNow.name);
+
+    }
+
+
+
+
+
 
     /*
     private void OnTriggerStay2D(Collider2D other)
@@ -85,6 +97,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        SceneNow = SceneManager.GetActiveScene() ;
+
     }
 
 
