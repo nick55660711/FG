@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
             }
 
 
-        if(Timer > 1f + Random.Range(0.1f,0.5f))
+        if(Timer > 1f + Random.Range(0.1f,0.5f)&& Mathf.Abs(player1.transform.position.x - transform.position.x) < 10)
         {
 
 
