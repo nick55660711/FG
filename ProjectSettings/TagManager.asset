@@ -9,6 +9,7 @@ TagManager:
   - Transport
   - Enemy
   - EnemyTrigger
+  - Crystal
   layers:
   - Default
   - TransparentFX

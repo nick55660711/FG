@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public Text HpText;
     public Animator ani;
     public CanvasGroup GameOverScreen;
+    
 
 
     public enum Weapon
@@ -78,6 +79,8 @@ public class Player : MonoBehaviour
     public GameObject[] ArrowAll;
     public bool GetBow = true;
 
+    [Header("全部水晶")]
+    public GameObject[] CrystalAll;
 
 
 
@@ -226,20 +229,7 @@ public class Player : MonoBehaviour
         }
 
     }
-    /*
-    
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
-            damage(collision.gameObject.GetComponent<Enemy>().ATK);
-        
-        }
-
-
-    }
-
-    */
+   
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -249,6 +239,16 @@ public class Player : MonoBehaviour
             damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
 
         }
+
+
+        //  拿到水晶
+        if (collision.gameObject.tag == "Crystal")
+        {
+            print(collision.name);
+            collision.gameObject.GetComponent<Crystal>().GetItem() ;
+
+        }
+
 
     }
 
@@ -314,6 +314,7 @@ public class Player : MonoBehaviour
         Timer2 = 10;
         Timer3 = 10;
 
+        CrystalAll = GameObject.FindGameObjectsWithTag("Crystal");
 
 
 

@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         rig =  GetComponent<Rigidbody2D>();
-        player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player1 = FindObjectOfType<Player>();
         ani = GetComponent<Animator>();
         Timer2 = 10;
 
