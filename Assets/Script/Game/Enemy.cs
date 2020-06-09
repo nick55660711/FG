@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     public float Timer2;
     public Animator ani;
 
+    public Collider2D[] BoxCol;
+
 
     #endregion
 
@@ -60,14 +62,18 @@ public class Enemy : MonoBehaviour
             }
 
 
-        if(Timer > 1f + Random.Range(0.1f,0.5f)&& Mathf.Abs(player1.transform.position.x - transform.position.x) < 10)
+        if(Timer > 1.3f + Random.Range(0.1f,0.5f) && Mathf.Abs(player1.transform.position.x - transform.position.x) < 9.2)
         {
 
 
             rig.AddForce(transform.right * SpeedForce * v * rig.mass  + new Vector3(0, JumpH * rig.mass, 0 ));
             Timer = 0;
 
+        }
 
+        if (rig.velocity.y == 0)
+        {
+            rig.velocity = new Vector2(0,0);
         }
 
 
@@ -98,6 +104,9 @@ public class Enemy : MonoBehaviour
         ani = GetComponent<Animator>();
         Timer2 = 10;
 
+        BoxCol = GetComponents<BoxCollider2D>();
+
+
     }
 
 
@@ -112,6 +121,7 @@ public class Enemy : MonoBehaviour
         Timer2 += Time.deltaTime;
         ani.SetFloat("DamageTimer", Timer2);
 
+        
 
 
 

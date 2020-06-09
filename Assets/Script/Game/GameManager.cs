@@ -99,12 +99,16 @@ public class GameManager : MonoBehaviour
         player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         SceneNow = SceneManager.GetActiveScene() ;
 
+        // enemy Layer不互相碰撞
+        Physics2D.IgnoreLayerCollision(8, 8);
+        Physics2D.IgnoreLayerCollision(8, 9);
     }
 
 
 
     private void Update()
     {
+        if (Input.GetKeyDown("t")) { SceneManager.LoadScene(SceneNow.name); }
        
     }
 

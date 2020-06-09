@@ -9,7 +9,7 @@ public class Test : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("r")) { transform.position = Respwan.transform.position; }
-        if (Input.GetKeyDown("t")) { SceneManager.LoadScene("Map0"); }
+        // if (Input.GetKeyDown("t")) { SceneManager.LoadScene("Map0"); }
 
 
         if (transform.localPosition.y < -10)

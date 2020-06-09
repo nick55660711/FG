@@ -48,6 +48,12 @@ public class Bullet : MonoBehaviour
     }
 
 
+
+    void Move()
+    {
+        rig.velocity = transform.right * speedF ;
+    }
+
     /*
      void OnCollisionEnter2D(Collision2D other)
     {
@@ -63,6 +69,8 @@ public class Bullet : MonoBehaviour
     }
 
     */
+
+
     #endregion 
 
 
@@ -80,37 +88,41 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-       
-         rig.velocity = transform.right * speedF ;
+
         //transform.Translate(Vector2.right * speed );
 
-        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x)>10 ) { Destroy(gameObject); }
+
+        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 8.4 ) { Destroy(gameObject); }
 
 
 
     }
 
-
-   
-
-
-        /*
-        if (other.tag == "Player" && gameObject.tag == "EnemyBullet")
-        {
-            //動態生成爆炸特效
-
-            Instantiate(Effect, other.transform.position, other.transform.rotation);
-
-            //爆炸音效
-            EffectAudio.Play();
+    private void FixedUpdate()
+    {
+        Move();
+    }
 
 
-            other.GetComponent<Player>().HurtPlayer(atk);
-            //子彈物件消滅
-            Destroy(gameObject);
-        }
-        */
-    #endregion 
+
+
+    /*
+    if (other.tag == "Player" && gameObject.tag == "EnemyBullet")
+    {
+        //動態生成爆炸特效
+
+        Instantiate(Effect, other.transform.position, other.transform.rotation);
+
+        //爆炸音效
+        EffectAudio.Play();
+
+
+        other.GetComponent<Player>().HurtPlayer(atk);
+        //子彈物件消滅
+        Destroy(gameObject);
+    }
+    */
+    #endregion
 }
 
 

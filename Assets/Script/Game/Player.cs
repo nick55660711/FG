@@ -10,26 +10,42 @@ public class Player : MonoBehaviour
     public Weapon AttackType;
     public Text HpText;
     public Animator ani;
+    public CanvasGroup GameOverScreen;
+
+
     public enum Weapon
     {
         弓箭 , 劍
     }
 
+    [Header("可射擊弓箭數量")]
+    public int ShootArrow;
 
-    // 射擊計時器
-    public float Timer;
+    [Header("射擊間隔時間")]
     // 射擊間隔
     public float FireRate;
-    // 受傷計時器
-    public float Timer2;
+    /// <summary>
+    /// 射擊計時器
+    /// </summary>
+    public float Timer;
+    [Header("受傷間隔時間")]
     // 受傷間隔
     public float TimeDamage;
-    // 跳躍計時器
-    public float Timer3;
+    /// <summary>
+    /// 受傷計時器
+    /// </summary>
+    public float Timer2;
+
+    [Header("跳躍判定間隔時間")]
     // 跳躍偵測時間
     public float JumpTime;
+    /// <summary>
+    /// 跳躍計時器
+    /// </summary>
+    public float Timer3;
+
+    [Header("血量")]
     public int Hp;
-    public CanvasGroup GameOverScreen;
 
     [Header("移動速度")]
     //public float SpeedV;
@@ -40,7 +56,6 @@ public class Player : MonoBehaviour
     [Header("跳躍高度")]
     public float JumpH;
     public float JumpH2;
-    float v;
     // public GameObject[] Ground;
     [Header("弓箭物件")]
     public GameObject Arrow;
@@ -51,6 +66,7 @@ public class Player : MonoBehaviour
         get => On_GroundAll ;
     }
 
+    float v;
 
 
      RaycastHit2D hit1;
@@ -126,9 +142,12 @@ public class Player : MonoBehaviour
 
         // 抓取所有有Arrow標籤的物件
         ArrowAll = GameObject.FindGameObjectsWithTag("Arrow");
-        
+
+
+        // && ArrowAll[0].GetComponent<Rigidbody2D>().velocity.x == 0
+
         // 若有兩個以上Arrow物件，則摧毀最早的Arrow
-        if(ArrowAll.Length > 2)
+        if (ArrowAll.Length > ShootArrow)
         {
             Destroy(ArrowAll[0]);
         }
@@ -148,7 +167,7 @@ public class Player : MonoBehaviour
                 case 0: //弓
                     if (GetBow) //如果已取得弓
                     {
-                        if (Timer > FireRate)
+                        if (Timer * ShootArrow / 2 > FireRate)
                         {
 
                             CreateBullet();
@@ -207,7 +226,8 @@ public class Player : MonoBehaviour
         }
 
     }
-
+    /*
+    
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Enemy")
@@ -218,6 +238,22 @@ public class Player : MonoBehaviour
 
 
     }
+
+    */
+   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "EnemyTrigger")
+        {
+            damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
+
+        }
+
+    }
+
+
+
 
     private void OnGround()
     {
@@ -324,5 +360,19 @@ public class Player : MonoBehaviour
     #endregion 
 
 
+
+
+    public float StopDistance;
+
+    private void OnDrawGizmos()
+    {
+        //圖示.顏色 = 顏色(R,G,B,A)
+
+
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+
+        // 圖示.繪製線條(起點,終點)
+        Gizmos.DrawLine(transform.position, transform.position + transform.right * StopDistance);
+    }
 
 }

@@ -8,6 +8,7 @@ public class CameraControll : MonoBehaviour
     private float X;
     private float Y;
 
+
     private void Start()
     {
 
@@ -24,7 +25,7 @@ public class CameraControll : MonoBehaviour
 
         if (player1.transform.position.y > 7f)
         {
-            Y = player1.transform.position.y-2.5f ;
+            Y = player1.transform.position.y - 2.5f ;
         }
 
         else if(player1.transform.position.y < 5.5f)
@@ -37,6 +38,7 @@ public class CameraControll : MonoBehaviour
 
     }
 
+   
 
 
 }

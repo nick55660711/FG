@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7409306003188740976}
   - component: {fileID: 4927312192351495108}
   - component: {fileID: 6637943546008312383}
-  m_Layer: 0
-  m_Name: Player 1 1
+  m_Layer: 9
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,14 +150,15 @@ MonoBehaviour:
   AttackType: 0
   HpText: {fileID: 0}
   ani: {fileID: 0}
-  Timer: 0
-  FireRate: 0.3
-  Timer2: 0
-  TimeDamage: 0.8
-  Timer3: 0
-  JumpTime: 0.2
-  Hp: 100
   GameOverScreen: {fileID: 0}
+  ShootArrow: 1
+  FireRate: 0.3
+  Timer: 0
+  TimeDamage: 0.8
+  Timer2: 0
+  JumpTime: 0.2
+  Timer3: 0
+  Hp: 100
   SpeedF: 10
   JumpH: 400
   JumpH2: 40
@@ -165,6 +166,7 @@ MonoBehaviour:
   CreateObject: {fileID: 6203213968407042450}
   ArrowAll: []
   GetBow: 1
+  StopDistance: 0
 --- !u!114 &4927312192351495108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,9 +208,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6203213968407042450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
