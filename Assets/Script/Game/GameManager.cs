@@ -8,12 +8,21 @@ public class GameManager : MonoBehaviour
 {
     #region 欄位
     public Player player1;
+    public float HP_MAX;
+    public Image HP_Bar;
+    public float Crystal_No;
+    public Text HpText;
+    public Text CrystalText;
+
+
 
     [Header("進入的場景名稱")]
     public string SceneName;
     [Header("當前場景名稱")]
     public Scene SceneNow;
     
+
+
 
 
     #endregion
@@ -35,8 +44,25 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void HpUpdate()
+    {
+        HpText.text = "Hp：" + player1.Hp;
+        HP_Bar.fillAmount = player1.Hp / HP_MAX;
+    }
 
+    public void GetItem(GameObject item) 
+    {
+        Crystal_No += 1;
+        CrystalText.text = " : " + Crystal_No ;
 
+        // 編號為0的水晶沒有對話，直接摧毀
+       
+        if (item.GetComponent<Crystal>().ID == 0) 
+        {
+            Destroy(item);
+        }
+        
+    }
 
 
 
@@ -102,14 +128,15 @@ public class GameManager : MonoBehaviour
         // enemy Layer不互相碰撞
         Physics2D.IgnoreLayerCollision(8, 8);
         Physics2D.IgnoreLayerCollision(8, 9);
+        HP_MAX = player1.Hp;
+
     }
 
 
 
     private void Update()
     {
-        if (Input.GetKeyDown("t")) { SceneManager.LoadScene(SceneNow.name); }
-       
+        if (Input.GetKeyDown("t")) { ReStart(); }
     }
 
     #endregion

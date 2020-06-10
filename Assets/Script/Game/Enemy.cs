@@ -7,8 +7,7 @@ public class Enemy : MonoBehaviour
 
 
     #region 欄位
-    public float Timer;
-    public float JumpH;
+   
     /// <summary>
     /// 以Add.Force控制速度
     /// </summary>
@@ -17,11 +16,11 @@ public class Enemy : MonoBehaviour
     public Player player1;
     public int ATK;
 
-    Rigidbody2D rig;
+    protected Rigidbody2D rig;
+    [Header("受傷計時器")]
     public float Timer2;
     public Animator ani;
 
-    public Collider2D[] BoxCol;
 
 
     #endregion
@@ -41,44 +40,29 @@ public class Enemy : MonoBehaviour
     }
    
 
-
-    public void move()
+    public virtual void move()
     {
 
-        float v = 0 ;
 
-       // if (GameObject.Find("Player 1"))
-            
+       
+
         if (player1.transform.position.x < transform.position.x)
-            {
-                v = -1;
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
 
-            }
-            
         if (player1.transform.position.x > transform.position.x)
-            {
-                v = 1;
-
-            }
-
-
-        if(Timer > 1.3f + Random.Range(0.1f,0.5f) && Mathf.Abs(player1.transform.position.x - transform.position.x) < 9.2)
         {
-
-
-            rig.AddForce(transform.right * SpeedForce * v * rig.mass  + new Vector3(0, JumpH * rig.mass, 0 ));
-            Timer = 0;
-
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
-        if (rig.velocity.y == 0)
-        {
-            rig.velocity = new Vector2(0,0);
-        }
 
+        if ( Mathf.Abs(player1.transform.position.x - transform.position.x) < 9.2)
+        {
+            rig.AddForce(transform.right * -1 * SpeedForce  * rig.mass );
+        }
 
     }
-
 
 
     #endregion
@@ -97,35 +81,28 @@ public class Enemy : MonoBehaviour
 
     #region 事件
 
-    private void Start()
+    protected virtual void Start()
     {
         rig =  GetComponent<Rigidbody2D>();
         player1 = FindObjectOfType<Player>();
         ani = GetComponent<Animator>();
         Timer2 = 10;
 
-        BoxCol = GetComponents<BoxCollider2D>();
 
 
     }
 
 
-    void Update()
+    protected virtual void Update()
     {
-
-
-        Timer += Time.deltaTime;
-        move();
 
 
         Timer2 += Time.deltaTime;
         ani.SetFloat("DamageTimer", Timer2);
 
-        
-
-
-
     }
+
+    
 
     #endregion
 
