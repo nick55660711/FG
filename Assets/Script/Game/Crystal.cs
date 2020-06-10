@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +10,12 @@ public class Crystal : MonoBehaviour
     public int ID;
     public CanvasGroup DialogueScreen;
     public Player player1;
-    string[] Dialogue = new string[] { "少女：\n" + "    這是第一句話", "" };
-    public int DialogueID ;
+    public bool DialogueON;
 
+    /*
+    string[] Dialogue = new string[] { "少女：\n" + "    這是第一句話"};
+    public int DialogueID ;
+    */
 
 
 
@@ -22,7 +26,7 @@ public class Crystal : MonoBehaviour
 
     public void GetItem()
     {
-        CallCrystal(ID);
+        
     }
 
 
@@ -32,6 +36,7 @@ public class Crystal : MonoBehaviour
         DialogueScreen.blocksRaycasts = true;
         DialogueScreen.interactable = true;
         Time.timeScale = 0;
+        DialogueON =  true;
     }
     public void CloseDialogue()
     {
@@ -39,10 +44,19 @@ public class Crystal : MonoBehaviour
         DialogueScreen.blocksRaycasts = false;
         DialogueScreen.interactable = false;
         Time.timeScale = 1;
+        DialogueON =  false;
     }
-
-    public void CallCrystal(int ID) 
+    
+    /*
+    public void CallDialogue(int ID) 
     {
+
+        if (DialogueON && Input.GetKeyDown("z"))
+        {
+
+        }
+
+        int dialogueID = 0 ;
        switch (ID)
         {
             // 水晶編號為0(一般水晶)，則回覆血量
@@ -53,7 +67,9 @@ public class Crystal : MonoBehaviour
 
             case 1:
                 OpenDialogue();
-                DialogueScreen.GetComponentInChildren<Text>().text = Dialogue[DialogueID];
+                string[] dialogue1 = { };
+
+                DialogueScreen.GetComponentInChildren<Text>().text = dialogue1[dialogueID];
 
                 
                 break;
@@ -61,13 +77,19 @@ public class Crystal : MonoBehaviour
             
             
             case 2:
+                OpenDialogue();
+                int dialogueID2 = 0;
+                string[] dialogue2 = { };
+
+                DialogueScreen.GetComponentInChildren<Text>().text = dialogue2[dialogueID2];
+
 
                 break;
 
         }
 
     }
-
+    */
 
 
     #endregion
@@ -81,7 +103,9 @@ public class Crystal : MonoBehaviour
     }
     private void Update()
     {
-        
+       
+
+
     }
 
     #endregion
