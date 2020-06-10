@@ -8,6 +8,7 @@ public class CameraControll : MonoBehaviour
     private float X;
     private float Y;
 
+    
 
     private void Start()
     {
@@ -18,10 +19,11 @@ public class CameraControll : MonoBehaviour
 
     private void Update()
     {
+        
         // X = Mathf.Clamp(X, player1.transform.localPosition.x, player1.transform.localPosition.x);
 
         // Y = Mathf.Clamp(Y, player1.transform.localPosition.y - 3, player1.transform.localPosition.y + 4);
-        
+
 
         if (player1.transform.position.y > 7f)
         {
@@ -33,7 +35,19 @@ public class CameraControll : MonoBehaviour
             Y = 4.5f;
         }
 
-            transform.position = new Vector3(player1.transform.position.x, Y, -10);
+        /*
+        if(  player1.transform.position.x - transform.position.x > 2 )
+        {
+            X = player1.transform.position.x - 2;
+        }
+        else if(  player1.transform.position.x - transform.position.x < -2 )
+        {
+            X = player1.transform.position.x + 2;
+        }
+        */
+
+
+            transform.position = new Vector3(player1.transform.position.x , Y, -10);
     
 
     }

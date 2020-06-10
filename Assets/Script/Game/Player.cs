@@ -8,10 +8,13 @@ public class Player : MonoBehaviour
     //public float Speed = 10;
     public Rigidbody2D rig;
     public Weapon AttackType;
-    public Text HpText;
     public Animator ani;
     public CanvasGroup GameOverScreen;
-    
+    GameManager GM;
+    public float F1;
+    public float T1;
+    public float F2;
+    public float T2;
 
 
     public enum Weapon
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
     public int Hp;
 
     [Header("移動速度")]
-    //public float SpeedV;
+    public float SpeedV;
     /// <summary>
     /// 以velocity控制速度
     /// </summary>
@@ -79,8 +82,6 @@ public class Player : MonoBehaviour
     public GameObject[] ArrowAll;
     public bool GetBow = true;
 
-    [Header("全部水晶")]
-    public GameObject[] CrystalAll;
 
 
 
@@ -104,14 +105,13 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3  (0, 180, 0);
         }
 
-        //   transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
-        rig.velocity = new Vector2( SpeedF * v , rig.velocity.y);
-        /*
-        if (Mathf.Abs(rig.velocity.x)<9)
-        {
-            rig.AddForce(new Vector2(SpeedV * v, 0));
-        }
-        */
+        rig.velocity = new Vector2( SpeedV * v , rig.velocity.y);
+
+        // transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
+        
+        
+        // rig.AddForce(new Vector2(SpeedF * v  , 0));
+        
 
     }
 
@@ -196,26 +196,17 @@ public class Player : MonoBehaviour
 
     public void damage(int ATK)
     {
-        if(Timer2 > TimeDamage)
-        {
+        
 
             Hp -= ATK ;
 
 
-            HpText.text = "Hp：" + Hp ;
-            GetComponent<SpriteRenderer>().color = Color.red;
-
             Timer2 = 0;
-           
-            
-           
-            
-
-
 
             if(Hp<=0)
             {
                 SpeedF = 0;
+                SpeedV = 0;
                 JumpH = 0;
                 JumpH2 = 0;
 
@@ -226,26 +217,35 @@ public class Player : MonoBehaviour
             }
 
 
-        }
 
     }
-   
-   
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.gameObject.tag == "EnemyTrigger")
         {
-            damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
-
+            float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
+            if (Timer2 > TimeDamage)
+            {
+                damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
+                transform.Translate(v * T1, T2, 0);
+                rig.AddForce(new Vector2(v * F1, F2));
+                GM.HpUpdate();
+            }
+        
         }
+        
+    }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
         //  拿到水晶
         if (collision.gameObject.tag == "Crystal")
         {
             print(collision.name);
-            collision.gameObject.GetComponent<Crystal>().GetItem() ;
+            GM.GetItem(collision.gameObject);
 
         }
 
@@ -306,6 +306,7 @@ public class Player : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         GameOverScreen = GameObject.Find("GameOverScreen").GetComponent<CanvasGroup>();
+        GM = FindObjectOfType<GameManager>();
 
         // Ground = GameObject.FindGameObjectsWithTag("Ground") ;
         // OnGround = new bool[Ground.Length];
@@ -313,9 +314,6 @@ public class Player : MonoBehaviour
         Timer = 10;
         Timer2 = 10;
         Timer3 = 10;
-
-        CrystalAll = GameObject.FindGameObjectsWithTag("Crystal");
-
 
 
     }
@@ -343,7 +341,6 @@ public class Player : MonoBehaviour
 
 
 
-        move();
         OnGround();
         jump();
         Attack();
@@ -356,6 +353,13 @@ public class Player : MonoBehaviour
        
 
     }
+
+    private void FixedUpdate()
+    {
+        move();
+        
+    }
+
 
 
     #endregion 
