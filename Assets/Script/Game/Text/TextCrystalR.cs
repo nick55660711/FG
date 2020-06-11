@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextCrystal1 : Dialogue
+public class TextCrystalR : Dialogue
 {
 
     string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話", "少女：\n" + "    這是第二句話" };
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,8 +22,6 @@ public class TextCrystal1 : Dialogue
     protected override void Start()
     {
         base.Start();
-        //水晶編號設為1
-        GetComponent<Crystal>().ID = 1;
     }
 
 
@@ -34,14 +33,14 @@ public class TextCrystal1 : Dialogue
 
             if (DialogueID  > DialogueText.Length -1 )
             {
-                print(DialogueID + "" + DialogueText.Length + "if");
+                //關閉提示訊息
+                DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
                 CloseDialogue();
                 Destroy(gameObject);
             }
 
             else 
             {
-                print(DialogueID+ "" + DialogueText.Length + "else" );
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
 
@@ -50,6 +49,7 @@ public class TextCrystal1 : Dialogue
 
         if (DialogueON && Input.GetKeyDown("s"))
         {
+            //關閉提示訊息
             DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
             CloseDialogue();
             Destroy(gameObject);
