@@ -33,8 +33,7 @@ public class TextCrystalR : Dialogue
 
             if (DialogueID  > DialogueText.Length -1 )
             {
-                //關閉提示訊息
-                DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
+               
                 CloseDialogue();
                 Destroy(gameObject);
             }
@@ -49,8 +48,6 @@ public class TextCrystalR : Dialogue
 
         if (DialogueON && Input.GetKeyDown("s"))
         {
-            //關閉提示訊息
-            DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
             CloseDialogue();
             Destroy(gameObject);
         }

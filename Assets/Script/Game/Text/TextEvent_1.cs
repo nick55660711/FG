@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Text_1 : Dialogue
+public class TextEvent_1 : Dialogue
 {
 
     string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話" , "少女：\n" + "    這是第二句話" };
@@ -33,6 +33,8 @@ protected override void Start()
             if (DialogueID > DialogueText.Length - 1)
             {
                 CloseDialogue();
+                //關閉提示訊息
+                DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
                 Destroy(gameObject);
             }
 
@@ -46,6 +48,8 @@ protected override void Start()
         if (DialogueON && Input.GetKeyDown("s"))
         {
             CloseDialogue();
+            //關閉提示訊息
+            DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
             Destroy(gameObject);
         }
 
