@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     public float Timer3;
 
     [Header("血量")]
-    public int Hp;
+    public float HP;
 
     [Header("移動速度")]
     public float SpeedV;
@@ -194,16 +194,16 @@ public class Player : MonoBehaviour
 
     }
 
-    public void damage(int ATK)
+    public void damage(float ATK)
     {
         
 
-            Hp -= ATK ;
+            HP -= ATK ;
 
 
             Timer2 = 0;
 
-            if(Hp<=0)
+            if(HP<=0)
             {
                 SpeedF = 0;
                 SpeedV = 0;

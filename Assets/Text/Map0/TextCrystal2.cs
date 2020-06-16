@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TextCrystal2 : Dialogue
 {
-
+    public GameObject Trans0;
     string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話", "少女：\n" + "    這是第二句話" };
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +25,13 @@ public class TextCrystal2 : Dialogue
         GetComponent<Crystal>().ID = 1;
     }
 
+    private void finishDialogue()
+    {
+        CloseDialogue();
+        Trans0.GetComponent<Trans>().enabled = true ;
+        Destroy(gameObject);
+    }
+
 
     private void Update()
     {
@@ -34,14 +41,11 @@ public class TextCrystal2 : Dialogue
 
             if (DialogueID  > DialogueText.Length -1 )
             {
-                print(DialogueID + "" + DialogueText.Length + "if");
-                CloseDialogue();
-                Destroy(gameObject);
+                finishDialogue();
             }
 
             else 
             {
-                print(DialogueID+ "" + DialogueText.Length + "else" );
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
 
@@ -50,8 +54,7 @@ public class TextCrystal2 : Dialogue
 
         if (DialogueON && Input.GetKeyDown("s"))
         {
-            CloseDialogue();
-            Destroy(gameObject);
+            finishDialogue();
         }
 
 

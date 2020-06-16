@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1247747786524694313}
   - component: {fileID: 1247747786524694314}
-  - component: {fileID: 1247747786524694312}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -45,19 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
+  HP_MAX: 100
+  HP_Bar: {fileID: 0}
+  Crystal_No: 0
+  HpText: {fileID: 0}
+  CrystalText: {fileID: 0}
   SceneName: 
   SceneNow:
     m_Handle: 0
---- !u!114 &1247747786524694312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247747786524694315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e006e149bf00a844e95b5fa46efc854a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Respwan: {fileID: 0}

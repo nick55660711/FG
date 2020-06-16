@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 標題畫面控制
+/// </summary>
 public class Title : MonoBehaviour
 {
     #region 欄位

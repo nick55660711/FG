@@ -13,7 +13,7 @@ private void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.tag == "Player")
     {
-        OpenDialogue();
+        Invoke("OpenDialogue", 0.5f);
         DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
     }
 

@@ -12,9 +12,9 @@ public class Enemy : MonoBehaviour
     /// 以Add.Force控制速度
     /// </summary>
     public float SpeedForce;
-    public int Hp;
+    public float Hp;
     public Player player1;
-    public int ATK;
+    public float ATK;
 
     protected Rigidbody2D rig;
     [Header("受傷計時器")]
@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     #region 方法
 
-    public void damage(int ATK)
+    public void damage(float ATK)
     {
         Hp -= ATK ;
         Timer2 = 0;

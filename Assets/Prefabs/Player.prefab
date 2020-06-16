@@ -150,12 +150,14 @@ MonoBehaviour:
   AttackType: 0
   ani: {fileID: 0}
   GameOverScreen: {fileID: 0}
-  F1: 1400
-  F2: 400
+  F1: 3000
+  T1: 0
+  F2: 0
+  T2: 0.4
   ShootArrow: 1
   FireRate: 0.3
   Timer: 0
-  TimeDamage: 0.8
+  TimeDamage: 1
   Timer2: 0
   JumpTime: 0.2
   Timer3: 0
@@ -168,7 +170,7 @@ MonoBehaviour:
   CreateObject: {fileID: 6203213968407042450}
   ArrowAll: []
   GetBow: 1
-  StopDistance: 8.12
+  StopDistance: 0
 --- !u!114 &4927312192351495108
 MonoBehaviour:
   m_ObjectHideFlags: 0

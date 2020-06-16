@@ -13,7 +13,7 @@ public class CreateEnemy : MonoBehaviour
     {
         if (!SpwanON && other.tag == "Player")
         {
-            createEnemy();
+            createEnemy(other.transform);
             SpwanON = true;
         }
         
@@ -21,9 +21,9 @@ public class CreateEnemy : MonoBehaviour
     
 
 
-    public void createEnemy()
+    public void createEnemy(Transform collider)
     {
-        Instantiate(Enemy, Spawn1.position, Spawn1.rotation);
+        Instantiate(Enemy, collider.position, Quaternion.identity);
 
     }
 
