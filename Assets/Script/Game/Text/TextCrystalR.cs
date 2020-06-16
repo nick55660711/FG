@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextCrystal1 : Dialogue
+public class TextCrystalR : Dialogue
 {
 
     string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話", "少女：\n" + "    這是第二句話" };
@@ -22,7 +22,6 @@ public class TextCrystal1 : Dialogue
     protected override void Start()
     {
         base.Start();
-        GetComponent<Crystal>().ID = 1;
     }
 
 
@@ -34,21 +33,26 @@ public class TextCrystal1 : Dialogue
 
             if (DialogueID  > DialogueText.Length -1 )
             {
-                print(DialogueID + "" + DialogueText.Length + "if");
+               
                 CloseDialogue();
                 Destroy(gameObject);
             }
 
             else 
             {
-                print(DialogueID+ "" + DialogueText.Length + "else" );
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
 
 
         }
 
-       
+        if (DialogueON && Input.GetKeyDown("s"))
+        {
+            CloseDialogue();
+            Destroy(gameObject);
+        }
+
+
 
 
     }

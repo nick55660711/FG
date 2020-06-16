@@ -46,6 +46,11 @@ public class Dialogue : MonoBehaviour
     #endregion
 
     #region 事件
+
+
+    /// <summary>
+    /// 呼叫成員，重置對話編號
+    /// </summary>
     protected virtual void Start()
     {
         DialogueScreen = GameObject.Find("DialogueScreen").GetComponent<CanvasGroup>();
