@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextCrystal2 : Dialogue
+public class TextEx : Dialogue
 {
-    public GameObject Trans0;
     string[] DialogueText = new string[] {
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "一間小屋…，總覺得好像(按↑鍵進入)",
-        };
-        
-    
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "示範用～",
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "示範用～～"
+                                            };
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,21 +19,17 @@ public class TextCrystal2 : Dialogue
             OpenDialogue();
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
-        
+
     }
 
     protected override void Start()
     {
         base.Start();
-        //水晶編號設為1
-        GetComponent<Crystal>().ID = 1;
     }
 
     private void finishDialogue()
     {
         CloseDialogue();
-        //小屋傳送點開啟
-        Trans0.GetComponent<Trans>().enabled = true ;
         Destroy(gameObject);
     }
 
@@ -42,14 +38,14 @@ public class TextCrystal2 : Dialogue
     {
         if (DialogueON && Input.GetKeyDown("c"))
         {
-                DialogueID += 1;
+            DialogueID += 1;
 
-            if (DialogueID  > DialogueText.Length -1 )
+            if (DialogueID > DialogueText.Length - 1)
             {
                 finishDialogue();
             }
 
-            else 
+            else
             {
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
@@ -62,12 +58,6 @@ public class TextCrystal2 : Dialogue
             finishDialogue();
         }
 
-
-
-
     }
-
-
-
 
 }

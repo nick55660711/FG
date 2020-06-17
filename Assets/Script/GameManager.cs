@@ -31,12 +31,13 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat("HP",player1.HP);
         PlayerPrefs.SetFloat("Crystal_No", Crystal_No);
-        
-       
         SceneManager.LoadScene(SceneName);
 
 
     }
+
+
+
 
     
 
@@ -84,7 +85,6 @@ public class GameManager : MonoBehaviour
         HP_Bar = GameObject.Find("HP_Bar").GetComponent<Image>();
         HpText = GameObject.Find("HP_Text").GetComponent<Text>();
         CrystalText = GameObject.Find("Crystal_No_Text").GetComponent<Text>();
-
 
 
 

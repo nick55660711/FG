@@ -244,7 +244,6 @@ public class Player : MonoBehaviour
         //  拿到水晶
         if (collision.gameObject.tag == "Crystal")
         {
-            print(collision.name);
             GM.GetItem(collision.gameObject);
 
         }

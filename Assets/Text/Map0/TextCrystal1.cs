@@ -34,14 +34,12 @@ public class TextCrystal1 : Dialogue
 
             if (DialogueID  > DialogueText.Length -1 )
             {
-                print(DialogueID + "" + DialogueText.Length + "if");
                 CloseDialogue();
                 Destroy(gameObject);
             }
 
             else 
             {
-                print(DialogueID+ "" + DialogueText.Length + "else" );
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
 
