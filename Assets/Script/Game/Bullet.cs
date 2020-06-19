@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     #region 方法
     void OnTriggerEnter2D(Collider2D other)
     {
+        // 擊中目標為敵人(實體)時，傷害他
         if (other.tag == "Enemy" )
         {
 

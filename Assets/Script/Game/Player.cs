@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public Animator ani;
     public CanvasGroup GameOverScreen;
     GameManager GM;
+
+
+    [Header("受傷力道")]
     public float F1;
     public float T1;
     public float F2;
@@ -63,14 +66,6 @@ public class Player : MonoBehaviour
     // public GameObject[] Ground;
     [Header("弓箭物件")]
     public GameObject Arrow;
-    //public bool[] OnGround;
-    private bool On_GroundAll;
-    public bool OnGroundAll
-    {
-        get => On_GroundAll ;
-    }
-
-    float v;
 
 
      RaycastHit2D hit1;
@@ -83,6 +78,14 @@ public class Player : MonoBehaviour
     public bool GetBow = true;
 
 
+    [Header("落地")]
+    private bool On_GroundAll;
+    public bool OnGroundAll
+    {
+        get => On_GroundAll ;
+    }
+
+    float v;
 
 
 
@@ -196,7 +199,6 @@ public class Player : MonoBehaviour
 
     public void damage(float ATK)
     {
-        
 
             HP -= ATK ;
 
@@ -216,10 +218,12 @@ public class Player : MonoBehaviour
 
             }
 
-
-
     }
 
+    /// <summary>
+    /// 被敵人碰撞
+    /// </summary>
+    /// <param name="collision">敵人傷害判定</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyTrigger")
@@ -232,23 +236,17 @@ public class Player : MonoBehaviour
                 rig.AddForce(new Vector2(v * F1, F2));
                 GM.HpUpdate();
             }
-        
         }
-        
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         //  拿到水晶
         if (collision.gameObject.tag == "Crystal")
         {
             GM.GetItem(collision.gameObject);
-
         }
-
-
     }
 
 
@@ -356,10 +354,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         move();
-        
     }
-
-
 
     #endregion 
 
