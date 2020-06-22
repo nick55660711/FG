@@ -9,25 +9,21 @@ public class Map0_Load : MonoBehaviour
 {
     public CanvasGroup DialogueScreen;
     public GameManager GM;
-    public Map0_Save GMSave;
+    public Save GMSave;
     Scene scene;
     public Player player1;
     public GameObject Trans0;
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            GMSave.SaveData();
-        }
-    }
+
+    
+
 
 
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
-        GMSave = GM.GetComponent<Map0_Save>();
+        GMSave = GM.GetComponent<Save>();
         player1 = FindObjectOfType<Player>();
         DialogueScreen = GameObject.Find("DialogueScreen").GetComponent<CanvasGroup>();
         scene = SceneManager.GetActiveScene();
@@ -51,18 +47,7 @@ public class Map0_Load : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if(Input.GetKeyDown("w"))
-        {
-            for (int i = 0; i < GMSave.Map0SaveResult.Length; i++)
-            {
-                PlayerPrefs.SetInt(scene.name + i, 0);
-                GMSave.Map0SaveResult[i] = 0;
-            }
-        }
-    }
-
+   
 
 
 

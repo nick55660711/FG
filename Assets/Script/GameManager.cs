@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat("HP",player1.HP);
         PlayerPrefs.SetFloat("Crystal_No", Crystal_No);
+        /// <summary>
+        /// 呼叫資料儲存方法
+        /// </summary>
+        GetComponent<Save>().SaveData();
         SceneManager.LoadScene(SceneName);
 
     }

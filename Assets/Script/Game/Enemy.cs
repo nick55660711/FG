@@ -33,12 +33,25 @@ public class Enemy : MonoBehaviour
         Timer2 = 0;
         if (Hp <= 0)
         {
-            Destroy(gameObject);
+            ani.SetTrigger("Dead");
+            SpeedForce = 0;
+            Invoke("dead", 0.25f);
+            GetComponent<Enemy>().enabled = false;
         }
 
 
     }
+    
+    public void dead()
+    {
+       
+            Destroy(gameObject);
+      
+    }
    
+
+
+
 
     public virtual void move()
     {

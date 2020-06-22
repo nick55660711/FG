@@ -19,29 +19,15 @@ public class Map0_Save : MonoBehaviour
     C3; //水晶
     */
     [Header("水晶1：0 ～ 事件1：1 ～ 水晶2：2 ～ 紅水晶：3 ～ 水晶3：4")]
-    public int[] Map0SaveResult = new int[5];
     public int index;
-    Map0_Save GM;
+    Save GM;
 
 
-    private void Awake()
-    {
-        GM = FindObjectOfType<GameManager>().GetComponent<Map0_Save>();
-        Map0SaveResult = new int[5];
-        scene = SceneManager.GetActiveScene();
-        for (int i = 0; i < Map0SaveResult.Length; i++)
-        {
-            Map0SaveResult[i] = PlayerPrefs.GetInt(scene.name + i);
-        }
 
-        if (gameObject.name !="GM" && PlayerPrefs.GetInt(scene.name + index) == 1)
-        {
-            Destroy(gameObject);
-        }
-
-    }
-
-   
+   /// <summary>
+   /// 觸碰後設定為已觸發
+   /// </summary>
+   /// <param name="collision"></param>
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,19 +36,24 @@ public class Map0_Save : MonoBehaviour
         {
             GM.Map0SaveResult[index] = 1;
         }
-        
 
     }
 
-    public void SaveData() 
+    private void Awake()
     {
-        for (int i = 0; i < Map0SaveResult.Length; i++)
+        GM = FindObjectOfType<GameManager>().GetComponent<Save>();
+        scene = SceneManager.GetActiveScene();
+
+
+       
+        // 如果已觸發則摧毀
+        if ( PlayerPrefs.GetInt(scene.name + index) == 1)
         {
-            PlayerPrefs.SetInt( scene.name + i , GM.Map0SaveResult[i]);
-            print(scene.name + i + PlayerPrefs.GetInt(scene.name + i));
+            Destroy(gameObject);
         }
 
     }
+   
 
 
 }
