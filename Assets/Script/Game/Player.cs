@@ -257,10 +257,10 @@ public class Player : MonoBehaviour
 
         #region 射線貼地判定
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
-        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
+        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f))
 
         {
-            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f);
+            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f);
 
 
             //若目標具有"地面"或"弓箭"標籤的物件 則判定為在地上
@@ -268,14 +268,22 @@ public class Player : MonoBehaviour
             {
                 On_GroundAll = true;
             }
+            else
+            {
+                On_GroundAll = false;
+            }
         }
 
-        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f))
+        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f))
         {
-            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.1f);
+            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f);
             if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow")
             {
                 On_GroundAll = true;
+            }
+            else
+            {
+                On_GroundAll = false;
             }
         }
 

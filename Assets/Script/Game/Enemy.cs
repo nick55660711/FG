@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         {
             ani.SetTrigger("Dead");
             SpeedForce = 0;
-            Invoke("dead", 0.25f);
+            Invoke("dead", 0.4f);
             GetComponent<Enemy>().enabled = false;
         }
 

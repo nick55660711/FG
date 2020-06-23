@@ -20,6 +20,7 @@ public class Save : MonoBehaviour
     R1; //紅水晶 武器：弓
     C3; //水晶
     */
+    public int[] NowSaveResult;
     [Header("Map0儲存引數 水晶1：0 ～ 事件1：1 ～ 水晶2：2 ～ 紅水晶：3 ～ 水晶3：4")]
     public int[] Map0SaveResult = new int[5];
 
@@ -29,6 +30,9 @@ public class Save : MonoBehaviour
 
     public void SaveData()
     {
+        
+
+
         // map0地圖資訊儲存
         for (int i = 0; i < Map0SaveResult.Length; i++)
         {
