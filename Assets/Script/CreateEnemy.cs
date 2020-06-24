@@ -5,29 +5,36 @@ using UnityEngine;
 public class CreateEnemy : MonoBehaviour
 {
     public GameObject Enemy;
-    public Transform Spawn1;
-    public bool SpwanON;
+    public Transform[] Spawn;
+    public bool SpawnON;
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!SpwanON && other.tag == "Player")
+        if (!SpawnON && other.tag == "Player")
         {
-            createEnemy(other.transform);
-            SpwanON = true;
+            createEnemy(Spawn);
+            SpawnON = true;
         }
         
     }
     
 
 
-    public void createEnemy(Transform collider)
+    public void createEnemy(Transform[] collider)
     {
-        Instantiate(Enemy, collider.position, Quaternion.identity);
+        for (int i = 1; i < Spawn.Length ; i++)
+        {
+
+        Instantiate(Enemy, collider[i].position, Quaternion.identity);
+        }
 
     }
 
-
+    private void Start()
+    {
+        Spawn = GetComponentsInChildren<Transform>();
+    }
 
 
 

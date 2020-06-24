@@ -13,7 +13,7 @@ public class SceneTrans : MonoBehaviour
 {
     [Header("移動到哪個場景")]
     public string NextSceneName;
-
+    Scene Scene_Now;
 
     public void NextScene() 
     {
@@ -22,7 +22,12 @@ public class SceneTrans : MonoBehaviour
     
     }
 
-    
+    public void Restart()
+    {
+
+        SceneManager.LoadScene(Scene_Now.name);
+
+    }
 
 
     public void Quit()
@@ -33,6 +38,10 @@ public class SceneTrans : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        Scene_Now = SceneManager.GetActiveScene();
+    }
 
 
 }

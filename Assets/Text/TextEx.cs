@@ -30,7 +30,6 @@ public class TextEx : Dialogue
     private void finishDialogue()
     {
         CloseDialogue();
-        Destroy(gameObject);
     }
 
 

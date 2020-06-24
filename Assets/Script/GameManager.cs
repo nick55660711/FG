@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public float HP_MAX;
     public Image HP_Bar;
     public float Crystal_No;
+    public float Herb_No;
     public Text HpText;
     public Text CrystalText;
 
@@ -50,25 +51,41 @@ public class GameManager : MonoBehaviour
         HP_Bar.fillAmount = player1.HP / HP_MAX;
     }
 
-    public void GetItem(GameObject item) 
+    /// <summary>
+    /// 取得道具
+    /// </summary>
+    /// <param name="itemID">道具ID 0：水晶 － 1：藥草 </param>
+    public void GetItem(int itemID) 
     {
 
-        // 編號為0的水晶沒有對話，直接摧毀
-       
-        if (item.GetComponent<Crystal>().ID == 0) 
+
+        switch (itemID)
         {
-            Destroy(item);
+            case 0:
+                //回血
+                player1.HP += 5;
+                player1.HP = Mathf.Clamp(player1.HP, 0, HP_MAX);
+                HpUpdate();
+
+                //道具+1
+                Crystal_No += 1;
+                CrystalText.text = " : " + Crystal_No;
+
+                break;
+
+            case 1:
+                Herb_No++ ;
+                
+
+                break;
         }
 
-        //回血
-        player1.HP += 5;
-        player1.HP = Mathf.Clamp(player1.HP , 0 , HP_MAX);
-        HpUpdate();
 
-        //道具+1
-        Crystal_No += 1;
-        CrystalText.text = " : " + Crystal_No ;
-    
+
+
+
+
+
     }
 
     

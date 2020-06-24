@@ -5,13 +5,49 @@ using UnityEngine.UI;
 
 public class TextEvent_1 : Dialogue
 {
+    public GameObject Enemy;
+    public bool SpawnON;
+
+
+    
+
+
+    /// <summary>
+    /// 生成怪物在玩家位置
+    /// </summary>
+    /// <param name="collider">玩家</param>
+    public void createEnemy(Transform collider)
+    {
+       
+
+            Instantiate(Enemy, collider.position, Quaternion.identity);
+       
+
+    }
+
+   
+
+
+
+
+
 
     string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話" , "少女：\n" + "    這是第二句話" };
 
 
 private void OnTriggerEnter2D(Collider2D collision)
 {
-    if (collision.tag == "Player")
+        //生成怪物
+
+        if (!SpawnON && collision.tag == "Player")
+        {
+            createEnemy(collision.transform);
+            SpawnON = true;
+        }
+
+
+        //開啟對話
+        if (collision.tag == "Player")
     {
         Invoke("OpenDialogue", 0.5f);
         DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];

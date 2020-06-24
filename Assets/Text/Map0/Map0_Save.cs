@@ -18,7 +18,7 @@ public class Map0_Save : MonoBehaviour
     R1; //紅水晶 武器：弓
     C3; //水晶
     */
-    [Header("水晶1：0 ～ 事件1：1 ～ 水晶2：2 ～ 紅水晶：3 ～ 水晶3：4")]
+    [Header("水晶1：0 ～ 事件1：1 ～ 水晶2：2 ～ 紅水晶：3 ～ 水晶3：4 ")]
     public int index;
     Save GM;
 
@@ -31,7 +31,7 @@ public class Map0_Save : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
         if (collision.tag == "Player")
         {
             GM.Map0SaveResult[index] = 1;

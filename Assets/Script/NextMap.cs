@@ -11,14 +11,17 @@ using UnityEngine.SceneManagement;
 public class NextMap : MonoBehaviour
 {
     public GameManager GM;
+    Scene NowScene;
+    public int PlayerLocate;
     [Header("要移動到的場景")]
-    public string SceneName;
-
+    public string NextSceneName; 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            GM.ChangeScene(SceneName);
+            PlayerPrefs.SetInt(NowScene.name + "PlayerLocate", PlayerLocate);
+            GM.ChangeScene(NextSceneName);
         }
     }
 
@@ -26,6 +29,7 @@ public class NextMap : MonoBehaviour
     private void Start()
     {
        GM =  FindObjectOfType<GameManager>();
+        NowScene = SceneManager.GetActiveScene();
     }
 
 }

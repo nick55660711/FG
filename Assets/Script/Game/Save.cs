@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// Load 腳本 要掛在Canvas上
+/// </summary>
 public class Save : MonoBehaviour
 {
 
@@ -11,7 +13,7 @@ public class Save : MonoBehaviour
     Scene scene;
 
     /// <summary>
-    /// Map0儲存引數 水晶1：0 ～ 事件1：1 對話框 ～ 水晶2：2 傳送點 ～ 紅水晶：3 取得弓 ～ 水晶3：4
+    /// Map0儲存引數 水晶1：0 ～ 事件1：1 對話框 ～ 水晶2：2 傳送點 ～ 紅水晶：3 取得弓 ～ 水晶3：4 ～ 玩家位置：5
     /// </summary>
     /*
     C1; //水晶
@@ -21,17 +23,18 @@ public class Save : MonoBehaviour
     C3; //水晶
     */
     public int[] NowSaveResult;
-    [Header("Map0儲存引數 水晶1：0 ～ 事件1：1 ～ 水晶2：2 ～ 紅水晶：3 ～ 水晶3：4")]
-    public int[] Map0SaveResult = new int[5];
+    [Header("Map0儲存引數 水晶1：0 ～ 事件1：1 ～ 水晶2：2 ～ 紅水晶：3 ～ 水晶3：4 ")]
+    public int[] Map0SaveResult = new int[6];
 
     #endregion
 
 
+    /// <summary>
+    /// 切換場景時由GM呼叫儲存方法
+    /// </summary>
 
     public void SaveData()
     {
-        
-
 
         // map0地圖資訊儲存
         for (int i = 0; i < Map0SaveResult.Length; i++)
@@ -42,9 +45,14 @@ public class Save : MonoBehaviour
 
     }
     
+    /// <summary>
+    /// 由Canvas呼叫讀取方法
+    /// </summary>
+
+        // 讀取儲存的地圖資訊
     public void LoadData()
     {
-        // 讀取儲存的地圖資訊
+        // map0地圖資訊讀取
         for (int i = 0; i < Map0SaveResult.Length; i++)
         {
             Map0SaveResult[i] = PlayerPrefs.GetInt("Map0" + i);
@@ -57,7 +65,7 @@ public class Save : MonoBehaviour
     private void Awake()
     {
         scene = SceneManager.GetActiveScene();
-        Map0SaveResult = new int[5];
+        Map0SaveResult = new int[6];
         LoadData();
 
     }
@@ -77,6 +85,7 @@ public class Save : MonoBehaviour
                 PlayerPrefs.SetInt("Map0" + i, 0);
                 Map0SaveResult[i] = 0;
             }
+                PlayerPrefs.SetInt("Map0PlayerLocate", 0);
         }
     }
   

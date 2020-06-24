@@ -240,13 +240,13 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        //  拿到水晶
-        if (collision.gameObject.tag == "Crystal")
-        {
-            GM.GetItem(collision.gameObject);
-        }
+
+        //如果此道具可取得 取得他
+        if (other.GetComponent<ICollect>() != null) other.GetComponent<ICollect>().Get();
+
+
     }
 
 
@@ -264,7 +264,7 @@ public class Player : MonoBehaviour
 
 
             //若目標具有"地面"或"弓箭"標籤的物件 則判定為在地上
-            if (hit1.collider.tag == "Ground" || hit1.collider.tag == "Arrow")
+            if (hit1.collider.tag == "Ground" || hit1.collider.tag == "Arrow" || hit1.collider.tag == "Platform")
             {
                 On_GroundAll = true;
             }
@@ -277,7 +277,7 @@ public class Player : MonoBehaviour
         else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f))
         {
             hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f);
-            if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow")
+            if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow" || hit2.collider.tag == "Platform")
             {
                 On_GroundAll = true;
             }

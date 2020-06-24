@@ -15,12 +15,11 @@ public class Enemy : MonoBehaviour
     public float Hp;
     public Player player1;
     public float ATK;
-
     protected Rigidbody2D rig;
     [Header("受傷計時器")]
     public float Timer2;
     public Animator ani;
-
+    public bool track;
 
 
     #endregion
@@ -34,8 +33,9 @@ public class Enemy : MonoBehaviour
         if (Hp <= 0)
         {
             ani.SetTrigger("Dead");
-            SpeedForce = 0;
+            rig.velocity = Vector3.zero;
             Invoke("dead", 0.4f);
+            GetComponentsInChildren<BoxCollider2D>()[1].size = Vector2.zero;
             GetComponent<Enemy>().enabled = false;
         }
 
@@ -70,11 +70,18 @@ public class Enemy : MonoBehaviour
         }
 
 
-        if ( Mathf.Abs(player1.transform.position.x - transform.position.x) < 9.2)
+        if (Mathf.Abs(player1.transform.position.x - transform.position.x) < 9.2)
         {
-            rig.AddForce(transform.right * -1 * SpeedForce  * rig.mass );
+            track = true;
         }
 
+        if (Mathf.Abs(player1.transform.position.x - transform.position.x) > 20)
+        {
+            track = false;
+        }
+
+
+        if (track) rig.AddForce(transform.right * -1 * SpeedForce  * rig.mass );
     }
 
 
