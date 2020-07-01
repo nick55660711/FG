@@ -12,7 +12,7 @@ public class NextMap : MonoBehaviour
 {
     public GameManager GM;
     Scene NowScene;
-    public int PlayerLocate;
+    public int PlayerLocate; //紀錄位置
     [Header("要移動到的場景")]
     public string NextSceneName; 
     

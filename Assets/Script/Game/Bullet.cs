@@ -93,7 +93,7 @@ public class Bullet : MonoBehaviour
         //transform.Translate(Vector2.right * speed );
 
 
-        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 8.4 ) { Destroy(gameObject); }
+        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 8.8 ) { Destroy(gameObject); }
 
 
 

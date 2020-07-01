@@ -14,7 +14,6 @@ public class Herb : MonoBehaviour, ICollect
 
             Destroy(gameObject);
 
-
     }
 
     private void Start()

@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
     public float Herb_No;
     public Text HpText;
     public Text CrystalText;
+    public delegate void GMdelegate();
+    public GMdelegate onChangeScene;
 
-
-
+    int PauseTime;
     
     
     
@@ -41,7 +42,17 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void GamePause() 
+    {
+        Time.timeScale = 0;
+        PauseTime++;
+    }
+    public void GameContinue() 
+    {
+        PauseTime-- ;
+        if(PauseTime == 0) Time.timeScale = 1;
 
+    }
 
     
 
@@ -121,7 +132,7 @@ public class GameManager : MonoBehaviour
         HP_Bar.fillAmount = player1.HP / HP_MAX;
         CrystalText.text = " : " + Crystal_No;
 
-
+        PauseTime = 0;
 
     }
 

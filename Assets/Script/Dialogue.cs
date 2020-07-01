@@ -11,7 +11,7 @@ public class Dialogue : MonoBehaviour
     
     public int DialogueID;
     public bool DialogueON;
-
+    GameManager GM;
 
 
 
@@ -19,14 +19,14 @@ public class Dialogue : MonoBehaviour
 
     #region 方法
 
-    
+
 
     public void OpenDialogue()
     {
         DialogueScreen.alpha = 1;
         DialogueScreen.blocksRaycasts = true;
         DialogueScreen.interactable = true;
-        Time.timeScale = 0;
+        GM.GamePause();
         DialogueON = true;
     }
     public void CloseDialogue()
@@ -34,7 +34,7 @@ public class Dialogue : MonoBehaviour
         DialogueScreen.alpha = 0;
         DialogueScreen.blocksRaycasts = false;
         DialogueScreen.interactable = false;
-        Time.timeScale = 1;
+        GM.GameContinue();
         DialogueON = false;
 
     }
@@ -53,6 +53,7 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     protected virtual void Start()
     {
+        GM = FindObjectOfType<GameManager>();
         DialogueScreen = GameObject.Find("DialogueScreen").GetComponent<CanvasGroup>();
         player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         DialogueID = 0;
