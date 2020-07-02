@@ -9,14 +9,18 @@ using UnityEngine.SceneManagement;
 public class SaveEvent : SaveState
 {
     public CanvasGroup DialogueScreen;
-    protected override void Awake()
+    protected override void Start()
     {
-        print("01");
+        print("00");
+        print(PlayerPrefs.GetInt(scene.name + gameObject.name));
         scene = SceneManager.GetActiveScene();
+
 
         // 如果已觸發則摧毀
         if (PlayerPrefs.GetInt(scene.name + gameObject.name) == 1)
         {
+            print("01");
+            print(PlayerPrefs.GetInt(scene.name + gameObject.name));
             DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
             Destroy(gameObject);
         }

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class SaveEvent1 : SaveState
 {
     public GameObject Trans0;
-    protected override void Awake()
+    protected override void Start()
     {
         scene = SceneManager.GetActiveScene();
 

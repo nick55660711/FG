@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Save : MonoBehaviour
 {
 
+    public bool ClearData;
 
     #region map0_Save
     Scene scene;
@@ -64,9 +65,18 @@ public class Save : MonoBehaviour
 
     private void Awake()
     {
+
         scene = SceneManager.GetActiveScene();
-        Map0SaveResult = new int[6];
-        LoadData();
+        if (PlayerPrefs.GetInt("ClaerData") == 1)
+        {
+            PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
+            foreach (var item in FindObjectsOfType<SaveState>())
+            {
+                print(item.name);
+                item.ClearData();
+                PlayerPrefs.SetInt(scene.name + item.name, 0);
+            }
+        }
 
     }
 
@@ -81,8 +91,20 @@ public class Save : MonoBehaviour
         if (Input.GetKeyDown("w"))
         {
 
+                ClearData = !ClearData;
+            if (ClearData) 
+            { 
+                PlayerPrefs.SetInt("ClaerData", 1);
+            }
 
+            if (!ClearData) 
+            { 
+                PlayerPrefs.SetInt("ClaerData", 0);
+            }
+
+                print(ClearData);
                 PlayerPrefs.SetInt("Map0PlayerLocate", 0);
+
 
             
         }

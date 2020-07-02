@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class Player : MonoBehaviour
     public Animator ani;
     public CanvasGroup GameOverScreen;
     GameManager GM;
-
+    Transform PlayerStart;
+    Scene scene;
 
     [Header("受傷力道")]
     public float F1;
@@ -312,6 +314,12 @@ public class Player : MonoBehaviour
         ani = GetComponent<Animator>();
         GameOverScreen = GameObject.Find("GameOverScreen").GetComponent<CanvasGroup>();
         GM = FindObjectOfType<GameManager>();
+        scene = SceneManager.GetActiveScene();
+
+
+        transform.position = GameObject.Find(PlayerPrefs.GetString(scene.name + "PlayerLocate")).transform.position;
+
+
 
         // Ground = GameObject.FindGameObjectsWithTag("Ground") ;
         // OnGround = new bool[Ground.Length];

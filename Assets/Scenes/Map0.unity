@@ -1759,7 +1759,6 @@ GameObject:
   - component: {fileID: 741039455}
   - component: {fileID: 741039454}
   - component: {fileID: 741039458}
-  - component: {fileID: 741039459}
   - component: {fileID: 741039460}
   m_Layer: 0
   m_Name: Memory Crystal_2
@@ -1889,20 +1888,6 @@ MonoBehaviour:
   DialogueID: 0
   DialogueON: 0
   Trans0: {fileID: 449940584}
---- !u!114 &741039459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741039453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7115325fff26db4ba1cb00f9e62849d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene:
-    m_Handle: 0
 --- !u!114 &741039460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,6 +1921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d1846fdacb2aa40afc55f1adca368b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClearData: 0
   NowSaveResult: 
   Map0SaveResult: 0000000000000000000000000000000000000000
 --- !u!1 &772738108
@@ -3357,6 +3343,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1301508109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1301508110}
+  m_Layer: 0
+  m_Name: Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1301508110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301508109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.31, y: 1.2, z: -9.661471}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 36
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1326031036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,7 +3624,6 @@ GameObject:
   - component: {fileID: 1407388352}
   - component: {fileID: 1407388351}
   - component: {fileID: 1407388355}
-  - component: {fileID: 1407388354}
   - component: {fileID: 1407388356}
   m_Layer: 0
   m_Name: EnemyCreate Event1
@@ -3708,20 +3723,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1407388354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1407388350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7115325fff26db4ba1cb00f9e62849d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene:
-    m_Handle: 0
 --- !u!114 &1407388355
 MonoBehaviour:
   m_ObjectHideFlags: 0

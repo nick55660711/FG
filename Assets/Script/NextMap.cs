@@ -13,6 +13,7 @@ public class NextMap : MonoBehaviour
     public GameManager GM;
     Scene NowScene;
     public int PlayerLocate; //紀錄位置
+    
     [Header("要移動到的場景")]
     public string NextSceneName; 
     
@@ -21,6 +22,7 @@ public class NextMap : MonoBehaviour
         if(collision.tag == "Player")
         {
             PlayerPrefs.SetInt(NowScene.name + "PlayerLocate", PlayerLocate);
+            PlayerPrefs.SetString(NowScene.name + "PlayerLocate", this.name);
             GM.ChangeScene(NextSceneName);
         }
     }

@@ -27,35 +27,26 @@ public class SaveState : MonoBehaviour, IClearData
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
         if (collision.CompareTag("Player"))
         {
             PlayerPrefs.SetInt(scene.name + gameObject.name, 1);
         }
-
+        
     }
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         scene = SceneManager.GetActiveScene();
-        print("00");
 
         // 如果已觸發則摧毀
+        
         if (PlayerPrefs.GetInt(scene.name + gameObject.name) == 1)
         {
-
-            ClearData(); // 測試用 之後必須移除
             Destroy(gameObject);
         }
-
+        
     }
 
-    protected void Update()
-    {
-        if (Input.GetKeyDown("w"))
-        {
-            ClearData();
-        }
 
-    }
 }

@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
         /// <summary>
         /// 呼叫資料儲存方法
         /// </summary>
-        GetComponent<Save>().SaveData();
         SceneManager.LoadScene(SceneName);
 
     }

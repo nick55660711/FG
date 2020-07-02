@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class SaveEvent2 : SaveState
 {
     public Player player1;
-    protected override void Awake()
+    protected override void Start()
     {
         scene = SceneManager.GetActiveScene();
 
