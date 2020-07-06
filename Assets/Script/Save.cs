@@ -69,10 +69,12 @@ public class Save : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         if (PlayerPrefs.GetInt("ClaerData") == 1)
         {
+            //重置玩家出生位置
             PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
+
             foreach (var item in FindObjectsOfType<SaveState>())
             {
-                print(item.name);
+
                 item.ClearData();
                 PlayerPrefs.SetInt(scene.name + item.name, 0);
             }
@@ -103,7 +105,6 @@ public class Save : MonoBehaviour
             }
 
                 print(ClearData);
-                PlayerPrefs.SetInt("Map0PlayerLocate", 0);
 
 
             
