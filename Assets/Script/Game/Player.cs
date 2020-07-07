@@ -319,6 +319,7 @@ public class Player : MonoBehaviour
         
         print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));
         print(GameObject.Find(PlayerPrefs.GetString(scene.name + "PlayerLocate")).transform.GetChild(0).name);
+        if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null) PlayerPrefs.SetString(scene.name + "PlayerLocate","Start");
         transform.position = GameObject.Find(PlayerPrefs.GetString(scene.name + "PlayerLocate")).transform.GetChild(0).position;
 
 
