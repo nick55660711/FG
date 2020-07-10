@@ -77,7 +77,9 @@ public class Player : MonoBehaviour
     public Transform CreateObject;
     [Header("全部弓箭")]
     public GameObject[] ArrowAll;
-    public bool GetBow = true;
+    /*public bool GetBow = true;
+    [Header("弓箭音效")]
+    public AudioSource bowaudio;*/
 
 
     [Header("落地")]
@@ -150,6 +152,7 @@ public class Player : MonoBehaviour
 
         // 抓取所有有Arrow標籤的物件
         ArrowAll = GameObject.FindGameObjectsWithTag("Arrow");
+        //bowaudio.Play();
 
 
         // && ArrowAll[0].GetComponent<Rigidbody2D>().velocity.x == 0
