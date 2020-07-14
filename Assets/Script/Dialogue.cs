@@ -11,7 +11,7 @@ public class Dialogue : MonoBehaviour
     
     public int DialogueID;
     public bool DialogueON;
-    GameManager GM;
+    public GameManager GM;
 
 
 
@@ -55,7 +55,7 @@ public class Dialogue : MonoBehaviour
     {
         GM = FindObjectOfType<GameManager>();
         DialogueScreen = GameObject.Find("DialogueScreen").GetComponent<CanvasGroup>();
-        player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player1 = FindObjectOfType<Player>();
         DialogueID = 0;
     }
    

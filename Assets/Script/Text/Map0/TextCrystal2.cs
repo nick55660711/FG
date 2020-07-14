@@ -8,7 +8,8 @@ public class TextCrystal2 : Dialogue
     //傳送點
     public GameObject Trans0;
     string[] DialogueText = new string[] {
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "一間小屋…，總覺得好像(按↑鍵進入)",
+       // "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "一間小屋…，總覺得好像(按↑鍵進入)",
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "按↑鍵進入小木屋"
         };
         
     

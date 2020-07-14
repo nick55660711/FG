@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class TextCrystal1 : Dialogue
 {
 
-    string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話", "少女：\n" + "    這是第二句話" };
+    string[] DialogueText = new string[] { "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "方向鍵移動、Z跳躍、M叫出選單", };
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag( "Player"))
         {
             OpenDialogue();
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];

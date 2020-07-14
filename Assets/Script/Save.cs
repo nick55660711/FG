@@ -34,16 +34,16 @@ public class Save : MonoBehaviour
     /// 切換場景時由GM呼叫儲存方法
     /// </summary>
 
-    public void SaveData()
+    public void SaveMapData()
     {
-
-        // map0地圖資訊儲存
-        for (int i = 0; i < Map0SaveResult.Length; i++)
+        foreach (var item in FindObjectsOfType<SaveState>())
         {
-            PlayerPrefs.SetInt("Map0" + i, Map0SaveResult[i]);
-            print(scene.name + i + PlayerPrefs.GetInt("Map0" + i));
+            int i = 0;
+            PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name) ;
+            PlayerPrefs.SetInt(scene.name + item.name + "temp" , PlayerPrefs.GetInt(scene.name + item.name) ) ;
+            i++;
         }
-
+        PlayerPrefs.SetInt(scene.buildIndex.ToString() + "Length", FindObjectsOfType<SaveState>().Length);
     }
     
     /// <summary>
@@ -53,11 +53,9 @@ public class Save : MonoBehaviour
         // 讀取儲存的地圖資訊
     public void LoadData()
     {
-        // map0地圖資訊讀取
-        for (int i = 0; i < Map0SaveResult.Length; i++)
-        {
-            Map0SaveResult[i] = PlayerPrefs.GetInt("Map0" + i);
-        }
+       
+
+
     }
 
 
@@ -65,20 +63,30 @@ public class Save : MonoBehaviour
 
     private void Awake()
     {
-
+        
         scene = SceneManager.GetActiveScene();
+        /*
         if (PlayerPrefs.GetInt("ClaerData") == 1)
         {
-            //重置玩家出生位置
-            PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
-
+            //重置玩家出生位置與道具生成狀態
             foreach (var item in FindObjectsOfType<SaveState>())
             {
-
                 item.ClearData();
                 PlayerPrefs.SetInt(scene.name + item.name, 0);
             }
         }
+        */
+        if (PlayerPrefs.GetInt("Reset") == 1)
+        {
+
+            foreach (var item in FindObjectsOfType<SaveState>())
+            {
+                item.ClearData();
+                PlayerPrefs.SetInt(scene.name + item.name, 0);
+            }
+            PlayerPrefs.SetInt("Reset", 0);
+        }
+
 
     }
 
@@ -92,7 +100,7 @@ public class Save : MonoBehaviour
     {
         if (Input.GetKeyDown("w"))
         {
-
+            PlayerPrefs.SetInt("Reset", 1);
                 ClearData = !ClearData;
             if (ClearData) 
             { 
@@ -104,7 +112,9 @@ public class Save : MonoBehaviour
                 PlayerPrefs.SetInt("ClaerData", 0);
             }
 
-                print(ClearData);
+            PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
+
+            print("ClearData" + ClearData + PlayerPrefs.GetInt("ClaerData"));
 
 
             

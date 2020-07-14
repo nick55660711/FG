@@ -13,7 +13,7 @@ public class Trans : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player") 
+        if (collision.CompareTag ("Player")) 
         {
             Enter = true;
         }
@@ -22,7 +22,7 @@ public class Trans : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             Enter = false;
         }
@@ -34,7 +34,7 @@ public class Trans : MonoBehaviour
 
     private void Start()
     {
-        player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player1 = FindObjectOfType<Player>();
     }
 
     private void Update()

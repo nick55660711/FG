@@ -805,6 +805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 796726558}
   - component: {fileID: 796726559}
+  - component: {fileID: 796726560}
   m_Layer: 0
   m_Name: Script
   m_TagString: Untagged
@@ -845,6 +846,18 @@ MonoBehaviour:
   SoundButtonImage: {fileID: 1409262742}
   SoundOpenSprite: {fileID: 21300000, guid: 69c3e4fa1c42dda48aa1a280ecfbf101, type: 3}
   SoundCloseSprie: {fileID: 21300000, guid: 055cf70d8e147e3489fcf0bfa47393d7, type: 3}
+--- !u!114 &796726560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796726557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e529e6e117ac9489c8780ccbc2b21d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &952041087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,6 +1492,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 796726560}
+        m_MethodName: NewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1237752682}
         m_MethodName: NextScene
         m_Mode: 1
@@ -2247,7 +2271,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1847541697}
   m_OnClick:
     m_PersistentCalls:

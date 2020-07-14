@@ -25,7 +25,7 @@ public class Map0_Load : MonoBehaviour
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
-        GMSave = GM.GetComponent<Save>();
+        GMSave = FindObjectOfType<Save>();
         player1 = FindObjectOfType<Player>();
         DialogueScreen = GameObject.Find("DialogueScreen").GetComponent<CanvasGroup>();
         scene = SceneManager.GetActiveScene();

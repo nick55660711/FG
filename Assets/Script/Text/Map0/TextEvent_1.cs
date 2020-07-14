@@ -32,7 +32,7 @@ public class TextEvent_1 : Dialogue
 
 
 
-    string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話" , "少女：\n" + "    這是第二句話" };
+    string[] DialogueText = new string[] { "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "好痛" };
 
 
 private void OnTriggerEnter2D(Collider2D collision)

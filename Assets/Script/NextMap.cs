@@ -19,7 +19,7 @@ public class NextMap : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.CompareTag( "Player"))
         {
             PlayerPrefs.SetInt(NowScene.name + "PlayerLocate", PlayerLocate);
             PlayerPrefs.SetString(NowScene.name + "PlayerLocate", this.name);

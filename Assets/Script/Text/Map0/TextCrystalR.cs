@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class TextCrystalR : Dialogue
 {
 
-    string[] DialogueText = new string[] { "少女：\n" + "    這是第一句話", "少女：\n" + "    這是第二句話" };
+    string[] DialogueText = new string[] { "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "X射出弓箭，可以站在箭上" };
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             OpenDialogue();
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
@@ -24,21 +24,26 @@ public class TextCrystalR : Dialogue
         base.Start();
     }
 
+    private void finishDialogue()
+    {
+        player1.GetBow = true;
+        CloseDialogue();
+        Destroy(gameObject);
+    }
+
 
     private void Update()
     {
         if (DialogueON && Input.GetKeyDown("c"))
         {
-                DialogueID += 1;
+            DialogueID += 1;
 
-            if (DialogueID  > DialogueText.Length -1 )
+            if (DialogueID > DialogueText.Length - 1)
             {
-               
-                CloseDialogue();
-                Destroy(gameObject);
+                finishDialogue();
             }
 
-            else 
+            else
             {
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
@@ -48,16 +53,10 @@ public class TextCrystalR : Dialogue
 
         if (DialogueON && Input.GetKeyDown("s"))
         {
-            CloseDialogue();
-            Destroy(gameObject);
+            finishDialogue();
         }
 
-
-
-
     }
-
-
 
 
 }

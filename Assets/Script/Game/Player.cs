@@ -77,9 +77,9 @@ public class Player : MonoBehaviour
     public Transform CreateObject;
     [Header("全部弓箭")]
     public GameObject[] ArrowAll;
-    /*public bool GetBow = true;
+    public bool GetBow = true;
     [Header("弓箭音效")]
-    public AudioSource bowaudio;*/
+    public AudioSource bowaudio;
 
 
     [Header("落地")]
@@ -147,12 +147,12 @@ public class Player : MonoBehaviour
 
     void CreateBullet()
     {
+        bowaudio.Play();
         //產生箭
         Instantiate(Arrow, CreateObject.position, CreateObject.rotation);
 
         // 抓取所有有Arrow標籤的物件
         ArrowAll = GameObject.FindGameObjectsWithTag("Arrow");
-        //bowaudio.Play();
 
 
         // && ArrowAll[0].GetComponent<Rigidbody2D>().velocity.x == 0
@@ -209,6 +209,7 @@ public class Player : MonoBehaviour
 
 
             Timer2 = 0;
+
 
             if(HP<=0)
             {
@@ -321,8 +322,10 @@ public class Player : MonoBehaviour
 
         
         print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));
-        print(GameObject.Find(PlayerPrefs.GetString(scene.name + "PlayerLocate")).transform.GetChild(0).name);
-        if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null) PlayerPrefs.SetString(scene.name + "PlayerLocate","Start");
+        if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null || PlayerPrefs.GetString(scene.name + "PlayerLocate") =="" )
+        {
+            PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
+        }
         transform.position = GameObject.Find(PlayerPrefs.GetString(scene.name + "PlayerLocate")).transform.GetChild(0).position;
 
 

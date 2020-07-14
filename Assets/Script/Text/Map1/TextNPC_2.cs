@@ -2,22 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class TextNPC_1 : Dialogue
+public class TextNPC_2 : Dialogue
 {
     public GameObject HerbImage;
 
 
     string[] DialogueText = new string[] {
         "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "請蒐集3份藥草",
-    
                                             };
+    
+    
+
 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && this.enabled)
+        if (collision.tag == "Player"&& this.enabled)
         {
+            if(GM.Herb_No == 3) {
+                DialogueText = new string[] {
+                    "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "已完成，後面沒路了",
+                                            };
+
+            }
+            else
+            {
+                DialogueText = new string[] {
+                        "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "數量不足",
+                                            };
+            }
+
             OpenDialogue();
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
@@ -31,10 +46,9 @@ public class TextNPC_1 : Dialogue
 
     private void finishDialogue()
     {
-        HerbImage.SetActive(true);
         CloseDialogue();
-        GetComponent<TextNPC_2>().enabled = true;
-        this.enabled = false;
+        if (GM.Herb_No == 3) { HerbImage.SetActive(false); this.enabled = false; }
+        else { DialogueID = 0; }
     }
 
 

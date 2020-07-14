@@ -31,6 +31,14 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
 
         } 
+            if (other.CompareTag("Fire"))
+        {
+
+            gameObject.tag = "Fire";
+
+
+
+        } 
 
           
         
@@ -93,7 +101,7 @@ public class Bullet : MonoBehaviour
         //transform.Translate(Vector2.right * speed );
 
 
-        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 8.8 ) { Destroy(gameObject); }
+        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 9 ) { Destroy(gameObject); }
 
 
 

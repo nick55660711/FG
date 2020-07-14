@@ -43,6 +43,8 @@ public class Test : MonoBehaviour
 
         if (transform.localPosition.y < -10)
         {
+
+            GetComponent<Player>().damage(100);
             transform.localPosition = new Vector3(-5, 2, 0);
         }
     }

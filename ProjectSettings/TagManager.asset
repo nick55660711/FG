@@ -11,6 +11,7 @@ TagManager:
   - EnemyTrigger
   - Crystal
   - Platform
+  - Fire
   layers:
   - Default
   - TransparentFX

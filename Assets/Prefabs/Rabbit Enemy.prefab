@@ -222,10 +222,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedForce: 450
-  Hp: 40
+  Hp: 25
   player1: {fileID: 0}
   ATK: 15
   Timer2: 0
   ani: {fileID: 0}
+  track: 0
   JumpH: 600
   Timer: 0

@@ -45,8 +45,8 @@ public class Crystal : MonoBehaviour , ICollect
     #region 事件
     private void Start()
     {
-      
-        player1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        player1 = FindObjectOfType<Player>();
         GM = FindObjectOfType<GameManager>();
 
     }
