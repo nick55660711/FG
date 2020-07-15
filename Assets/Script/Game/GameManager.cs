@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
 
             case 1:
                 Herb_No++ ;
-                HerbText = GameObject.Find("Herb_No_Text").GetComponent<Text>();
+                
                 HerbText.text = " : " + Herb_No;
 
                 break;
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
         CrystalText = GameObject.Find("Crystal_No_Text").GetComponent<Text>();
         scene = SceneManager.GetActiveScene(); 
         itemNo = FindObjectsOfType<SaveState>().Length;
-
+        HerbText = GameObject.Find("Herb_No_Text").GetComponent<Text>();
         PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
         print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
             int i = 0;
@@ -192,6 +192,7 @@ public class GameManager : MonoBehaviour
         HpText.text = "Hp : " + player1.HP;
         HP_Bar.fillAmount = player1.HP / HP_MAX;
         CrystalText.text = " : " + Crystal_No;
+        HerbText.text = " : " + Herb_No;
 
         PauseTime = 0;
 

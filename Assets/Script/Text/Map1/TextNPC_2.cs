@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TextNPC_2 : Dialogue
 {
     public GameObject HerbImage;
+    public GameObject Trans;
 
 
     string[] DialogueText = new string[] {
@@ -47,10 +48,10 @@ public class TextNPC_2 : Dialogue
     private void finishDialogue()
     {
         CloseDialogue();
-        if (GM.Herb_No == 3) { HerbImage.SetActive(false); this.enabled = false; }
+        if (GM.Herb_No == 3) { HerbImage.GetComponent<CanvasGroup>().alpha = 0; Trans.SetActive(true) ; this.enabled = false; }
         else { DialogueID = 0; }
     }
-
+     
 
     private void Update()
     {
