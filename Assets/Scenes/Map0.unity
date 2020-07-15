@@ -451,7 +451,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.27, y: -1.07, z: 0}
   m_LocalScale: {x: 0.96857595, y: 1.50264, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1640350556}
   m_Father: {fileID: 1961472096}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -512,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_Handle: 0
+  GM: {fileID: 0}
   player1: {fileID: 4237204392312193168}
 --- !u!1 &183422468
 GameObject:
@@ -749,7 +751,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1961472096}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &240939341
 PrefabInstance:
@@ -2349,6 +2351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_Handle: 0
+  GM: {fileID: 0}
   Trans0: {fileID: 449940584}
 --- !u!1 &766257367 stripped
 GameObject:
@@ -3522,7 +3525,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1961472096}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &994301833
 GameObject:
@@ -4568,7 +4571,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1961472096}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1343024613
 GameObject:
@@ -4872,6 +4875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_Handle: 0
+  GM: {fileID: 0}
   DialogueScreen: {fileID: 497881349}
 --- !u!1 &1417652309
 GameObject:
@@ -5150,11 +5154,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640350554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.464386, y: -1.0374522, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.2655797, y: 0.021660432, z: 0}
+  m_LocalScale: {x: 1.0324435, y: 0.6654954, z: 1}
   m_Children: []
-  m_Father: {fileID: 1961472096}
-  m_RootOrder: 11
+  m_Father: {fileID: 169764565}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1718942050
 GameObject:
@@ -5188,6 +5192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 4237204392312193168}
+  speed: 30
   SetON: 0
 --- !u!81 &1718942052
 AudioListener:
@@ -5254,26 +5259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1719938110 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5806436973733365294, guid: ed37721387a8b4a40a64f5a95e85d90b,
-    type: 3}
-  m_PrefabInstance: {fileID: 5628733952920583707}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1719938111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719938110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7115325fff26db4ba1cb00f9e62849d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene:
-    m_Handle: 0
 --- !u!1 &1723513647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5434,12 +5419,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1247747786058871148}
-        m_MethodName: Save
+        m_MethodName: SaveAllData
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5636,6 +5621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_Handle: 0
+  GM: {fileID: 0}
 --- !u!1 &1902784846
 GameObject:
   m_ObjectHideFlags: 0
@@ -5802,7 +5788,6 @@ Transform:
   - {fileID: 801299310}
   - {fileID: 726073442}
   - {fileID: 517508455}
-  - {fileID: 1640350556}
   - {fileID: 930492015}
   - {fileID: 238475286}
   - {fileID: 1326031038}
@@ -6086,7 +6071,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

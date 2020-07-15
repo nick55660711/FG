@@ -9,13 +9,13 @@ using UnityEngine.SceneManagement;
 public class SaveState : MonoBehaviour, IClearData
 {
     public Scene scene;
-
+    public GameManager GM;
 
 
 
     public void ClearData()
     {
-        PlayerPrefs.SetInt(scene.name + gameObject.name, 0);
+        PlayerPrefs.SetInt(scene.name + gameObject.name + 0, 0);
     }
 
 
@@ -27,26 +27,34 @@ public class SaveState : MonoBehaviour, IClearData
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.CompareTag("Player"))
         {
-            PlayerPrefs.SetInt(scene.name + gameObject.name, 1);
+            PlayerPrefs.SetInt(scene.name + gameObject.name + 1, 1);
         }
-        
+
+    }
+
+    public virtual void destory()
+    {
+        if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     protected virtual void Start()
     {
         scene = SceneManager.GetActiveScene();
-
+        GM = FindObjectOfType<GameManager>();
+       
+        print(gameObject.name + PlayerPrefs.GetInt(scene.name + gameObject.name + 1));
         // 如果已觸發則摧毀
-        
-        if (PlayerPrefs.GetInt(scene.name + gameObject.name) == 1)
-        {
-            Destroy(gameObject);
-        }
-        
+        destory();
+         
     }
-
-
 }
+
+
+

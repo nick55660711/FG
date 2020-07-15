@@ -9,15 +9,18 @@ using UnityEngine.SceneManagement;
 public class SaveEvent1 : SaveState
 {
     public GameObject Trans0;
-    protected override void Start()
-    {
-        scene = SceneManager.GetActiveScene();
 
-        // 如果已觸發則摧毀
-        if (PlayerPrefs.GetInt(scene.name + gameObject.name) == 1)
+    public override void destory()
+    {
+        if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
             Trans0.GetComponent<Trans>().enabled = true;
             Destroy(gameObject);
         }
+
     }
+ 
+
+
+
 }

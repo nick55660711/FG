@@ -20,8 +20,12 @@ public class GameManager : MonoBehaviour
     public GMdelegate onChangeScene;
     Scene scene;
     int PauseTime;
-    
-    
+    /// <summary>
+    /// 暫時紀錄狀態 0：初始 1：暫時 2 : 轉場 
+    /// </summary>
+    public int temp = 1;
+    public int itemNo;
+    public List<string> itemname;
     
 
 
@@ -32,42 +36,50 @@ public class GameManager : MonoBehaviour
     #region 方法
     public void Restart()
     {
-        PlayerPrefs.SetFloat("HP",100);
-        /// <summary>
-        /// 呼叫資料儲存方法
-        /// </summary>
-        PlayerPrefs.SetFloat("Crystal_No", Crystal_No);
-        PlayerPrefs.SetFloat("Herb_No", Herb_No);
+ 
         SceneManager.LoadScene(scene.name);
     }
 
     public void ChangeScene(string SceneName)
     {
-        PlayerPrefs.SetFloat("HP",player1.HP);
-        PlayerPrefs.SetFloat("Crystal_No", Crystal_No);
-        PlayerPrefs.SetFloat("Herb_No", Herb_No);
         /// <summary>
-        /// 呼叫資料儲存方法
+        /// 暫時儲存資料
         /// </summary>
+        temp = 1;
+        PlayerPrefs.SetFloat("HP" + temp, player1.HP);
+        PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
+        PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
+        SaveMapData();
+
+     
+
         SceneManager.LoadScene(SceneName);
-    } 
+    }
 
-    public void Save(int saveID)
+    public void SaveAllData(int SaveID)
     {
+        /// <summary>
+        /// 永久儲存資料
+        /// </summary>
+        temp = SaveID;
+        PlayerPrefs.SetFloat("HP" + temp, player1.HP);
+        PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
+        PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
+        PlayerPrefs.SetInt("SceneSave", scene.buildIndex);
+        SaveMapData();
 
-        PlayerPrefs.SetFloat(saveID + "HP", player1.HP);
-        PlayerPrefs.SetFloat(saveID + "Crystal_No", Crystal_No);
-        for (int i = 0; i < SceneManager.sceneCount; i++)
+    }
+
+
+    public void SaveMapData()
+    {
+        
+        for (int i = 0; i < itemNo; i++)
         {
-            for (int j = 0; j < PlayerPrefs.GetInt(i + "Length"); j++)
-            {
-                PlayerPrefs.SetInt(PlayerPrefs.GetString(i.ToString() + j) + saveID, PlayerPrefs.GetInt(PlayerPrefs.GetString(i + j + "temp")));
-
-
-
-            }
+            string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);
+            int tempSave = PlayerPrefs.GetInt(SaveName + 1);
+            PlayerPrefs.SetInt(SaveName + temp, tempSave);
         }
-
     }
 
 
@@ -87,6 +99,8 @@ public class GameManager : MonoBehaviour
 
     public void HpUpdate()
     {
+            PlayerPrefs.SetFloat("HP" + 1 , player1.HP);
+
         HpText.text = "Hp : " + player1.HP;
         HP_Bar.fillAmount = player1.HP / HP_MAX;
     }
@@ -118,7 +132,6 @@ public class GameManager : MonoBehaviour
                 HerbText = GameObject.Find("Herb_No_Text").GetComponent<Text>();
                 HerbText.text = " : " + Herb_No;
 
-
                 break;
         }
 
@@ -130,17 +143,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
 
 
 
-    
+
+
 
     #endregion
 
     #region 事件
 
-    private void Start()
+    private void Awake()
     {
         //抓取物件
         player1 = FindObjectOfType<Player>(); //不能使用FindTag.GetComponent
@@ -148,12 +161,29 @@ public class GameManager : MonoBehaviour
         HpText = GameObject.Find("HP_Text").GetComponent<Text>();
         CrystalText = GameObject.Find("Crystal_No_Text").GetComponent<Text>();
         scene = SceneManager.GetActiveScene(); 
+        itemNo = FindObjectsOfType<SaveState>().Length;
+
+        PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
+        print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
+            int i = 0;
+        foreach (var item in FindObjectsOfType<SaveState>())
+        {
+            PlayerPrefs.SetInt(scene.name + item.name + 0 ,0);
+            //紀錄存檔物件名稱
+            PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
+            print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
+            i++;
+        }
+         
+    }
+
+    private void Start()
+    {
 
         //讀取血量與碎片量
-        player1.HP = PlayerPrefs.GetFloat("HP");
-        Crystal_No = PlayerPrefs.GetFloat("Crystal_No");
-        Herb_No = PlayerPrefs.GetFloat("Herb_No");
-
+        player1.HP = PlayerPrefs.GetFloat("HP" + 1);
+        Crystal_No = PlayerPrefs.GetFloat("Crystal_No" + 1);
+        Herb_No = PlayerPrefs.GetFloat("Herb_No" + 1);
         // enemy Layer不互相碰撞
         Physics2D.IgnoreLayerCollision(8, 8);
         Physics2D.IgnoreLayerCollision(8, 9);

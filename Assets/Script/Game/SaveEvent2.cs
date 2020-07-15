@@ -11,17 +11,15 @@ using UnityEngine.SceneManagement;
 public class SaveEvent2 : SaveState
 {
     public Player player1;
-    protected override void Start()
-    {
-        scene = SceneManager.GetActiveScene();
 
-        // 如果已觸發則摧毀
-        if (PlayerPrefs.GetInt(scene.name + gameObject.name) == 1)
+    public override void destory()
+    {
+        if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
             player1.GetBow = true;
             Destroy(gameObject);
         }
     }
-
+ 
 
 }

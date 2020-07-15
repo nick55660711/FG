@@ -46,6 +46,8 @@ public class Save : MonoBehaviour
         PlayerPrefs.SetInt(scene.buildIndex.ToString() + "Length", FindObjectsOfType<SaveState>().Length);
     }
     
+
+
     /// <summary>
     /// 由Canvas呼叫讀取方法
     /// </summary>
@@ -82,7 +84,6 @@ public class Save : MonoBehaviour
             foreach (var item in FindObjectsOfType<SaveState>())
             {
                 item.ClearData();
-                PlayerPrefs.SetInt(scene.name + item.name, 0);
             }
             PlayerPrefs.SetInt("Reset", 0);
         }

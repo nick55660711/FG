@@ -17,8 +17,8 @@ public class SceneTrans : MonoBehaviour
 
     public void NextScene() 
     {
-    
-    SceneManager.LoadScene(NextSceneName);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(NextSceneName);
     
     }
 
