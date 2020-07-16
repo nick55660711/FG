@@ -101,6 +101,7 @@ MonoBehaviour:
   speedF: 25
   atk: 15
   rig: {fileID: 0}
+  FireArrow: {fileID: 21300000, guid: 85b7a06dba702ea4189124d1be4dde46, type: 3}
 --- !u!50 &991319020809015498
 Rigidbody2D:
   serializedVersion: 4

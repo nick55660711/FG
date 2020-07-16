@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     [Header("攻擊力")]
     public int atk;
     public Rigidbody2D rig;
+    public Sprite FireArrow;
     #endregion 
 
 
@@ -31,17 +32,27 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
 
         } 
+
             if (other.CompareTag("Fire"))
         {
-
+            GetComponent<SpriteRenderer>().sprite = FireArrow;
             gameObject.tag = "Fire";
 
-
-
-        } 
-
-          
+        }
         
+        if (other.CompareTag("Boss") && gameObject.tag == "Fire")
+        {
+            other.GetComponent<Boss>().damage(atk);
+        }
+
+        if (other.CompareTag("Tower"))
+        {
+            Destroy(gameObject);
+
+        }
+
+
+
         // 擊中目標為地面時，停止並固定，開啟碰撞判定(可以被玩家踩)
         if (other.gameObject.tag == "Ground" )
         {

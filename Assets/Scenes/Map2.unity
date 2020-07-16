@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
-  speed: 0
+  speed: 30
   SetON: 0
 --- !u!81 &226241462
 AudioListener:

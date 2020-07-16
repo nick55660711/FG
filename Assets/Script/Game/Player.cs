@@ -149,7 +149,8 @@ public class Player : MonoBehaviour
     {
         bowaudio.Play();
         //產生箭
-        Instantiate(Arrow, CreateObject.position, CreateObject.rotation);
+        GameObject ArrowTemp = Instantiate(Arrow, CreateObject.position, CreateObject.rotation);
+        ArrowTemp.transform.localScale = ArrowTemp.transform.localScale * CreateObject.parent.localScale.x;
 
         // 抓取所有有Arrow標籤的物件
         ArrowAll = GameObject.FindGameObjectsWithTag("Arrow");

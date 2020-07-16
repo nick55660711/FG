@@ -12,6 +12,8 @@ TagManager:
   - Crystal
   - Platform
   - Fire
+  - Tower
+  - Boss
   layers:
   - Default
   - TransparentFX
