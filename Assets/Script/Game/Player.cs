@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public float T2;
 
 
+    public bool Stop;
     public enum Weapon
     {
         弓箭 , 劍
@@ -235,10 +236,33 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyTrigger")
         {
-            float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
             if (Timer2 > TimeDamage)
             {
+                float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
                 damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
+                transform.Translate(v * T1, T2, 0);
+                rig.AddForce(new Vector2(v * F1, F2));
+                GM.HpUpdate();
+            }
+        }
+
+
+        if (collision.CompareTag("Boss")){
+            if (Timer2 > TimeDamage)
+            {
+                float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
+                damage(collision.gameObject.GetComponentInParent<Boss>().ATK);
+                transform.Translate(v * T1, T2, 0);
+                rig.AddForce(new Vector2(v * F1, F2));
+                GM.HpUpdate();
+            }
+        }
+
+        if (collision.CompareTag("Draba")){
+            if (Timer2 > TimeDamage)
+            {
+                float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
+                damage(collision.gameObject.GetComponentInParent<Draba_G>().ATK);
                 transform.Translate(v * T1, T2, 0);
                 rig.AddForce(new Vector2(v * F1, F2));
                 GM.HpUpdate();
@@ -264,8 +288,8 @@ public class Player : MonoBehaviour
 
         #region 射線貼地判定
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
-        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f))
-
+        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f) )
+          
         {
             hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f);
 
@@ -365,8 +389,11 @@ public class Player : MonoBehaviour
 
 
         OnGround();
-        jump();
         Attack();
+        if (!Stop)
+        {
+        jump();
+        }
 
         Timer += Time.deltaTime;
         Timer2 += Time.deltaTime;
@@ -379,7 +406,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!Stop)
+        {
         move();
+        }
     }
 
     #endregion 

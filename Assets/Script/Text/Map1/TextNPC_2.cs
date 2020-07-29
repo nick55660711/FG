@@ -48,7 +48,7 @@ public class TextNPC_2 : Dialogue
     private void finishDialogue()
     {
         CloseDialogue();
-        if (GM.Herb_No == 3) { HerbImage.GetComponent<CanvasGroup>().alpha = 0; Trans.SetActive(true) ; this.enabled = false; }
+        if (GM.Herb_No == 3) { GM.Herb_No = 0; Trans.SetActive(true) ; this.enabled = false; }
         else { DialogueID = 0; }
     }
      

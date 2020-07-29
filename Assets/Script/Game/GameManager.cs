@@ -45,10 +45,7 @@ public class GameManager : MonoBehaviour
         /// <summary>
         /// 暫時儲存資料
         /// </summary>
-        temp = 1;
-        PlayerPrefs.SetFloat("HP" + temp, player1.HP);
-        PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
-        PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
+      
         SaveMapData();
 
      
@@ -73,7 +70,10 @@ public class GameManager : MonoBehaviour
 
     public void SaveMapData()
     {
-        
+        temp = 1;
+        PlayerPrefs.SetFloat("HP" + temp, player1.HP);
+        PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
+        PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
         for (int i = 0; i < itemNo; i++)
         {
             string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);

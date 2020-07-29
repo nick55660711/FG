@@ -14,6 +14,8 @@ TagManager:
   - Fire
   - Tower
   - Boss
+  - Draba
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - 
   - Enemy
   - Player
-  - 
+  - Ground
   - 
   - 
   - 

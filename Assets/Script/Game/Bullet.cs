@@ -42,7 +42,13 @@ public class Bullet : MonoBehaviour
         
         if (other.CompareTag("Boss") && gameObject.tag == "Fire")
         {
-            other.GetComponent<Boss>().damage(atk);
+            other.transform.parent.GetComponent<Boss>().damage(atk);
+        }
+
+
+        if (other.CompareTag("Boss") )
+        {
+            Destroy(gameObject); 
         }
 
         if (other.CompareTag("Tower"))
