@@ -11,33 +11,39 @@ public class TextNPC_2 : Dialogue
     string[] DialogueText = new string[] {
         "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "請蒐集3份藥草",
                                             };
-    
-    
 
 
 
 
+
+    bool Re;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player"&& this.enabled)
+        if (!Re|| GM.Herb_No == 3)
         {
-            if(GM.Herb_No == 3) {
-                DialogueText = new string[] {
+
+            if (collision.tag == "Player" && this.enabled)
+            {
+                if (GM.Herb_No == 3)
+                {
+                    DialogueText = new string[] {
                     "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "已完成，後面沒路了",
                                             };
 
-            }
-            else
-            {
-                DialogueText = new string[] {
+                }
+                else
+                {
+                    DialogueText = new string[] {
                         "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "數量不足",
                                             };
+                    Re = true;
+                }
+
+                OpenDialogue();
+                DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
             }
 
-            OpenDialogue();
-            DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
-
     }
 
     protected override void Start()
@@ -48,7 +54,7 @@ public class TextNPC_2 : Dialogue
     private void finishDialogue()
     {
         CloseDialogue();
-        if (GM.Herb_No == 3) { GM.Herb_No = 0; Trans.SetActive(true) ; this.enabled = false; }
+        if (GM.Herb_No == 3) { Trans.SetActive(true) ; this.enabled = false; }
         else { DialogueID = 0; }
     }
      

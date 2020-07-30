@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     public int temp = 1;
     public int itemNo;
     public List<string> itemname;
-    
 
+    public CanvasGroup Blackout;
 
 
 
@@ -48,9 +48,36 @@ public class GameManager : MonoBehaviour
       
         SaveMapData();
 
-     
+        StartCoroutine(BlackScreen(1, SceneName));
+
+    }
+
+    WaitForSecondsRealtime WAS = new WaitForSecondsRealtime(0.01f);
+    WaitForSecondsRealtime WAS2 = new WaitForSecondsRealtime(1);
+
+    IEnumerator BlackScreen(int A)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+
+            Blackout.alpha += 0.1f * A;
+            yield return WAS;
+        }
+
+    }
+    IEnumerator BlackScreen(int A, string SceneName)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+
+            Blackout.alpha += 0.1f * A;
+        yield return WAS;
+        }
 
         SceneManager.LoadScene(SceneName);
+
+
+
     }
 
     public void SaveAllData(int SaveID)
@@ -156,6 +183,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //抓取物件
+        Blackout.alpha = 1;
+        StartCoroutine(BlackScreen(-1));
         player1 = FindObjectOfType<Player>(); //不能使用FindTag.GetComponent
         HP_Bar = GameObject.Find("HP_Bar").GetComponent<Image>();
         HpText = GameObject.Find("HP_Text").GetComponent<Text>();
@@ -187,6 +216,12 @@ public class GameManager : MonoBehaviour
         // enemy Layer不互相碰撞
         Physics2D.IgnoreLayerCollision(8, 8);
         Physics2D.IgnoreLayerCollision(8, 9);
+
+        for (int i = 0; i < 11; i++)
+        {
+            if (i == 8) continue ;
+                Physics2D.IgnoreLayerCollision(i, 11);
+        }
 
         //更新UI
         HpText.text = "Hp : " + player1.HP;

@@ -122,7 +122,35 @@ public class Player : MonoBehaviour
         
 
     }
+    public bool GetSword;
+    void change()
+    {
+        if (GetSword)
+        {
 
+            if (Input.GetKeyDown("a"))
+            {
+                print(AttackType);
+
+                if ((int)AttackType == 0)
+                {
+                    AttackType = Weapon.劍;
+                    Sword.SetActive(true);
+                }
+
+                else if ((int)AttackType == 1)
+                {
+
+                    Sword.SetActive(false);
+                    AttackType = Weapon.弓箭;
+                }
+
+
+            }
+
+        }
+
+    }
 
 
     public void jump() 
@@ -168,6 +196,7 @@ public class Player : MonoBehaviour
     }
 
 
+    public GameObject Sword;
 
     public void Attack()
     {
@@ -194,7 +223,7 @@ public class Player : MonoBehaviour
 
 
                 case 1:
-
+                    Sword.GetComponent<Sword>().Slash();
 
                     break;
 
@@ -213,18 +242,18 @@ public class Player : MonoBehaviour
             Timer2 = 0;
 
 
-            if(HP<=0)
-            {
-                SpeedF = 0;
-                SpeedV = 0;
-                JumpH = 0;
-                JumpH2 = 0;
+        if (HP <= 0)
+        {
+            SpeedF = 0;
+            SpeedV = 0;
+            JumpH = 0;
+            JumpH2 = 0;
+            GetComponent<BoxCollider2D>().enabled = false;
+            GameOverScreen.alpha = 1;
+            GameOverScreen.blocksRaycasts = true;
+            GameOverScreen.interactable = true;
 
-                GameOverScreen.alpha = 1;
-                GameOverScreen.blocksRaycasts = true ;
-                GameOverScreen.interactable = true ;
-
-            }
+        }
 
     }
 
@@ -234,40 +263,42 @@ public class Player : MonoBehaviour
     /// <param name="collision">敵人傷害判定</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "EnemyTrigger")
-        {
-            if (Timer2 > TimeDamage)
-            {
-                float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
-                damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
-                transform.Translate(v * T1, T2, 0);
-                rig.AddForce(new Vector2(v * F1, F2));
-                GM.HpUpdate();
-            }
-        }
 
-
-        if (collision.CompareTag("Boss")){
-            if (Timer2 > TimeDamage)
+            if (collision.gameObject.tag == "EnemyTrigger")
             {
-                float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
-                damage(collision.gameObject.GetComponentInParent<Boss>().ATK);
-                transform.Translate(v * T1, T2, 0);
-                rig.AddForce(new Vector2(v * F1, F2));
-                GM.HpUpdate();
+                if (Timer2 > TimeDamage)
+                {
+                    float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
+                    damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
+                    transform.Translate(v * T1, T2, 0);
+                    rig.AddForce(new Vector2(v * F1, F2));
+                    GM.HpUpdate();
+                }
             }
-        }
 
-        if (collision.CompareTag("Draba")){
-            if (Timer2 > TimeDamage)
-            {
-                float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
-                damage(collision.gameObject.GetComponentInParent<Draba_G>().ATK);
-                transform.Translate(v * T1, T2, 0);
-                rig.AddForce(new Vector2(v * F1, F2));
-                GM.HpUpdate();
+           
+
+            if (collision.CompareTag("Boss")) {
+                if (Timer2 > TimeDamage)
+                {
+                    float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
+                    damage(collision.gameObject.GetComponentInParent<Boss>().ATK);
+                    transform.Translate(v * T1, T2, 0);
+                    rig.AddForce(new Vector2(v * F1, F2));
+                    GM.HpUpdate();
+                }
             }
-        }
+           
+            if (collision.CompareTag("Draba")) {
+                if (Timer2 > TimeDamage)
+                {
+                    float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
+                    damage(collision.gameObject.GetComponentInParent<Draba_G>().ATK);
+                    transform.Translate(v * T1, T2, 0);
+                    rig.AddForce(new Vector2(v * F1, F2));
+                    GM.HpUpdate();
+                }
+            }
     }
 
 
@@ -288,10 +319,10 @@ public class Player : MonoBehaviour
 
         #region 射線貼地判定
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
-        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f) )
+        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")) )
           
         {
-            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f);
+            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
 
 
             //若目標具有"地面"或"弓箭"標籤的物件 則判定為在地上
@@ -305,9 +336,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f))
+        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")))
         {
-            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f);
+            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
             if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow" || hit2.collider.tag == "Platform")
             {
                 On_GroundAll = true;
@@ -389,10 +420,11 @@ public class Player : MonoBehaviour
 
 
         OnGround();
-        Attack();
         if (!Stop)
         {
+        Attack();
         jump();
+        change();
         }
 
         Timer += Time.deltaTime;

@@ -21,6 +21,7 @@ public class CameraControll : MonoBehaviour
 
     }
 
+
     public void CancelSet()
     {
 

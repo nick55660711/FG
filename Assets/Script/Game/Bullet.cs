@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour
 
 
         // 擊中目標為地面時，停止並固定，開啟碰撞判定(可以被玩家踩)
-        if (other.gameObject.tag == "Ground" )
+        if (other.CompareTag("Ground"))
         {
 
             //  rig.velocity = new Vector2(0, 0);
@@ -118,7 +118,7 @@ public class Bullet : MonoBehaviour
         //transform.Translate(Vector2.right * speed );
 
 
-        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 9 ) { Destroy(gameObject); }
+        if (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 8.8f ) { Destroy(gameObject); }
 
 
 

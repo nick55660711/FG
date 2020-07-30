@@ -9,6 +9,7 @@ public class Draba : Draba_G
     SpriteRenderer SP;
     public float SPEEDV;
     BoxCollider2D BC;
+    public BoxCollider2D parent;
     IEnumerator Grow_G()
     {
 
@@ -18,15 +19,18 @@ public class Draba : Draba_G
             
             if (transform.GetChild(0).localPosition.x> 0.1f) V = -1;
             if (transform.GetChild(0).localPosition.x < -0.4f) V = 1;
-            transform.GetChild(0).Translate(new Vector2(1, 0) * SPEEDV * V);
+            transform.GetChild(0).Translate(new Vector2(1, 0)*0.1f * SPEEDV * V);
             transform.GetChild(0).Translate(new Vector2(0, 1) * 0.1f);
             BC.size += new Vector2(0, 1) * 0.1f;
             BC.offset += new Vector2(0, 1) * 0.05f;
+            parent.size = BC.size;
+            parent.offset = BC.offset;
             SP.size += new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
         StartCoroutine(Grow_G_Fall());
     }
+
     IEnumerator Grow_G_Fall()
     {
         int V = -1;
@@ -35,10 +39,15 @@ public class Draba : Draba_G
         {
             if (transform.GetChild(0).localPosition.x > 0.1f) V = -1;
             if (transform.GetChild(0).localPosition.x < -0.4f) V = 1;
-            transform.GetChild(0).Translate(new Vector2(1, 0) * SPEEDV * V);
+            if (GetComponentInChildren<Rigidbody2D>().gravityScale == 0)
+            {
+            transform.GetChild(0).Translate(new Vector2(1, 0) * 0.1f * SPEEDV * V);
             transform.GetChild(0).Translate(new Vector2(0, 1) * -0.1f);
+            }
             BC.size -= new Vector2(0, 1) * 0.1f;
             BC.offset -= new Vector2(0, 1) * 0.05f;
+            parent.size = BC.size;
+            parent.offset = BC.offset;
             SP.size -= new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
@@ -46,10 +55,17 @@ public class Draba : Draba_G
         Destroy(gameObject);
     }
 
-    public void HIT()
+    public override void HIT()
     {
         StopAllCoroutines();
+        GetComponentInChildren<Rigidbody2D>().gravityScale = 4;
+        BC.offset -= new Vector2(0, 2);
+        foreach (var item in GetComponentsInChildren<BoxCollider2D>())
+        {
+            item.enabled = false;
+        }
         WAS2 = new WaitForSeconds(0.1f);
+        WAS3 = new WaitForSeconds((0.0001f));
         StartCoroutine(Grow_G_Fall());
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,7 +80,17 @@ public class Draba : Draba_G
     {
         SP = GetComponent<SpriteRenderer>();
         BC = GetComponent<BoxCollider2D>();
-        
+        B = GetComponentInParent<Boss>();
+        parent = transform.GetChild(1).GetComponent<BoxCollider2D>();
         StartCoroutine(Grow_G());
     }
+    
+    private void Update()
+    {
+        if (B.Hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
 }

@@ -27,9 +27,12 @@ public class Boss : MonoBehaviour
     public SpriteRenderer Draba_T;
     public SpriteRenderer Draba_T1;
 
-    public Camera MC;
+    public CameraControll MC;
     public BoxCollider2D Wall;
     public BoxCollider2D Wall1;
+
+    public delegate void KillDelegate();
+    public  KillDelegate OnKill;
     #endregion
 
     #region 方法
@@ -54,6 +57,7 @@ public class Boss : MonoBehaviour
             if (Hp <= 0)
             {
                 Kill = true;
+               
                 StartCoroutine(Grow_T_Fall());
                 StartCoroutine(Grow_G_FALL());
 
@@ -62,6 +66,24 @@ public class Boss : MonoBehaviour
 
 
     }
+    WaitForSeconds WAS4 = new WaitForSeconds(7);
+    IEnumerator Grow_V()
+    {
+        while (Hp > 0)
+        {
+
+            yield return WAS2;
+
+        
+
+            Vector2 RandomPox = new Vector2( Random.Range(-29.58f, 1.01f),0);
+            GameObject tmp = Instantiate(Draba[1], RandomPox, Quaternion.Euler(0, 0, 0));
+            tmp.transform.SetParent(transform);
+        }
+    }
+
+
+
 
     public void dead()
     {
@@ -118,6 +140,8 @@ public class Boss : MonoBehaviour
         StartCoroutine(Grow());
     }
 
+    public GameObject[] Torch = new GameObject[5];
+    int ID = 0;
     IEnumerator Grow_T_Fall()
     {
 
@@ -129,14 +153,23 @@ public class Boss : MonoBehaviour
             yield return WAS3;
         }
         Right = !Right;
-        if (!Kill) StartCoroutine(Grow_T());
+        if (!Kill) {
+            Vector2 RandomPox = new Vector2(Torch[ID].transform.position.x, -2);
+            GameObject tmp = Instantiate(Draba[2], RandomPox, Quaternion.Euler(0, 0, 0));
+
+            ID++;
+            Torch[ID].GetComponent<Torch>().FireUP();
+        } StartCoroutine(Grow_T());
+        
     }
 
-
+ 
     WaitForSeconds WAS2 = new WaitForSeconds(5);
 
     IEnumerator Grow()
     {
+
+
         while (CanBeHit) {
             yield return WAS2;
 
@@ -158,13 +191,15 @@ public class Boss : MonoBehaviour
             Vector2 RandomPox = new Vector2(A, Random.Range(MinValue.y, MaxValue.y));
            GameObject tmp = Instantiate(Draba[1], RandomPox, Quaternion.Euler(0, 0, B));
             tmp.transform.SetParent(tmp_T.transform);
+
+
         }
     }
 
     #endregion
 
 
-    WaitForSeconds WAS3 = new WaitForSeconds(0.001f);
+    WaitForSeconds WAS3 = new WaitForSeconds(0.0007f);
 
 
 
@@ -173,40 +208,66 @@ public class Boss : MonoBehaviour
     {
         Wall.enabled = true;
         Wall1.enabled = true;
+        player1.Stop = true;
+        float V = 1;
+        MC.SetON = true;
+
+        int T = 0;
+        while (T <200)
+        {
+            if (MC.transform.position.y > 5f) V = -1;
+            if (MC.transform.position.y < 4.36f) V = 1;
+            MC.transform.Translate(new Vector2(0, 1) * V * 0.09f);
+            T++;
+            yield return WAS3;
+        }
 
         while (Draba_T.size.y < 3)
         {
             Draba_T.size += new Vector2(0, 1) * 0.1f;
             Draba_T1.size += new Vector2(0, 1) * 0.1f;
+            if (MC.transform.position.y > 5f) V = -1;
+            if (MC.transform.position.y < 4.36f) V = 1;
+            MC.transform.Translate(new Vector2(0, 1) * V * 0.05f);
             yield return WAS3;
         }
 
-        while (Draba_G.size.x<52f)
+        if (player1.transform.position.y < 1.2f)
         {
-        Draba_G.size += new Vector2(1,0)*0.2f;
-        Draba_G.GetComponent<BoxCollider2D>().offset -= new Vector2(1,0)*0.2f;
-        yield return WAS3;
+            player1.rig.AddForce(new Vector2(0, 600));
+        }
+
+        while (Draba_G.size.x < 52f)
+        {
+            
+            if (MC.transform.position.y > 5f) V = -1;
+            if (MC.transform.position.y < 4.36f) V = 1;
+            MC.transform.Translate(new Vector2(0, 1) * V * 0.05f);
+            Draba_G.size += new Vector2(1, 0) * 0.2f;
+            Draba_G.GetComponent<BoxCollider2D>().offset -= new Vector2(1, 0) * 0.2f;
+            yield return WAS3;
         }
 
         Wall.enabled = false;
         Wall1.enabled = false;
+        player1.Stop = false;
+        MC.SetON = false;
+        Torch[0].GetComponent<Torch>().FireUP();
+        GetComponent<Boss_V>().enabled = true;
         StartCoroutine(Grow_T());
+        
     }
 
     public GameObject Crystal;
+    public GameObject Step;
     public Transform Crystal_T;
+
+    public SpriteRenderer Draba_B;
     IEnumerator Grow_G_FALL()
     {
-
-        while (Draba_T.size.y > 0.1f)
-        {
-            Draba_T.size -= new Vector2(0, 1) * 0.1f;
-            Draba_T1.size -= new Vector2(0, 1) * 0.1f;
-            yield return WAS3;
-        }
+        GetComponent<Boss_V>().enabled = false;
+        Draba_G.GetComponent<BoxCollider2D>().isTrigger = false;
          
-        Tower[0].GetComponent<BoxCollider2D>().enabled = false;
-        Tower[1].GetComponent<BoxCollider2D>().enabled = false;
 
         while (Draba_G.size.x > 0.1f)
         {
@@ -215,9 +276,27 @@ public class Boss : MonoBehaviour
             yield return WAS3;
         }
 
-        Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
+        while (Draba_T.size.y > 0.1f)
+        {
+            Draba_T.size -= new Vector2(0, 1) * 0.1f;
+            Draba_T1.size -= new Vector2(0, 1) * 0.1f;
+            yield return WAS3;
+        }
+       
+        Tower[0].GetComponent<BoxCollider2D>().enabled = false;
+        Tower[1].GetComponent<BoxCollider2D>().enabled = false;
 
         yield return WAS2;
+        Destroy(Draba_G);
+        Destroy(Draba_TB_R);
+        Destroy(Draba_TB_L);
+        Destroy(Draba_T);
+        Destroy(Draba_T1);
+        Destroy(Draba_B);
+        Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
+        Step.SetActive(true);
+        Crystal.transform.position = Crystal_T.position;
+
         Destroy(gameObject);
 
     }
