@@ -378,6 +378,7 @@ public class Player : MonoBehaviour
         Stop = false;
         CanBeHit = true;
         scene = SceneManager.GetActiveScene();
+        SoundManager = FindObjectOfType<AudioSource>();
         print(scene.name);
         print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));
         if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null || PlayerPrefs.GetString(scene.name + "PlayerLocate") == "")

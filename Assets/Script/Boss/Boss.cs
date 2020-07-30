@@ -294,7 +294,7 @@ public class Boss : MonoBehaviour
         Destroy(Draba_T);
         Destroy(Draba_T1);
         Destroy(Draba_B);
-        Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
+       // Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
         Step.SetActive(true);
        // Crystal.transform.position = Crystal_T.position;
 
