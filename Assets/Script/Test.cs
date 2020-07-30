@@ -11,7 +11,7 @@ public class Test : MonoBehaviour
 
     private void Start()
     {
-        Respwan = GameObject.Find("Respwan");
+        Respwan = GameObject.Find("Start");
         SceneNow = SceneManager.GetActiveScene();
     }
 

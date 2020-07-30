@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     #region 方法
     public void Restart()
     {
- 
+        PlayerPrefs.SetFloat("HP" + 1, 100);
         SceneManager.LoadScene(scene.name);
     }
 
@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
         SaveMapData();
 
         StartCoroutine(BlackScreen(1, SceneName));
+        StartScene();
+
 
     }
 
@@ -75,7 +77,6 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(SceneName);
-
 
 
     }
@@ -178,20 +179,64 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region 事件
-
-    private void Awake()
+    void StartScene()
     {
         //抓取物件
         Blackout.alpha = 1;
         StartCoroutine(BlackScreen(-1));
+        scene = SceneManager.GetActiveScene(); //轉換場景需要重新抓取
+        itemNo = FindObjectsOfType<SaveState>().Length; //轉換場景需要重新抓取
+        PlayerPrefs.SetInt(scene.buildIndex + "itemNO", itemNo);
+        print(scene.buildIndex + "itemNO" + PlayerPrefs.GetInt(scene.name + "itemNO"));
+        int i = 0;
+        foreach (var item in FindObjectsOfType<SaveState>())
+        {
+            PlayerPrefs.SetInt(scene.name + item.name + 0, 0);
+            //紀錄存檔物件名稱
+            PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
+            print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
+            i++;
+        }
+         //讀取血量與碎片量
+        player1.HP = PlayerPrefs.GetFloat("HP" + 1);
+        Crystal_No = PlayerPrefs.GetFloat("Crystal_No" + 1);
+        Herb_No = PlayerPrefs.GetFloat("Herb_No" + 1);
+        // enemy Layer不互相碰撞
+        Physics2D.IgnoreLayerCollision(8, 8);
+        Physics2D.IgnoreLayerCollision(8, 9);
+
+        for (int k = 0; k < 11; k++)
+        {
+            if (k == 8) continue ;
+                Physics2D.IgnoreLayerCollision(k, 11);
+        }
+
+        //更新UI
+        HpText.text = "Hp : " + player1.HP;
+        HP_Bar.fillAmount = player1.HP / HP_MAX;
+        CrystalText.text = " : " + Crystal_No;
+        HerbText.text = " : " + Herb_No;
+
+        PauseTime = 0;
+
+    }
+
+    #region 事件
+
+    Button RestartButton;
+    private void Awake()
+    {
+        //抓取物件
         player1 = FindObjectOfType<Player>(); //不能使用FindTag.GetComponent
         HP_Bar = GameObject.Find("HP_Bar").GetComponent<Image>();
         HpText = GameObject.Find("HP_Text").GetComponent<Text>();
         CrystalText = GameObject.Find("Crystal_No_Text").GetComponent<Text>();
+        Blackout = GameObject.Find("BlackScreen").GetComponent<CanvasGroup>();
         scene = SceneManager.GetActiveScene(); 
         itemNo = FindObjectsOfType<SaveState>().Length;
         HerbText = GameObject.Find("Herb_No_Text").GetComponent<Text>();
+        RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
+        RestartButton.onClick.AddListener(() => { Restart(); });
         PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
         print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
             int i = 0;
@@ -208,6 +253,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Blackout.alpha = 1;
+        StartCoroutine(BlackScreen(-1));
 
         //讀取血量與碎片量
         player1.HP = PlayerPrefs.GetFloat("HP" + 1);
@@ -216,6 +263,7 @@ public class GameManager : MonoBehaviour
         // enemy Layer不互相碰撞
         Physics2D.IgnoreLayerCollision(8, 8);
         Physics2D.IgnoreLayerCollision(8, 9);
+
 
         for (int i = 0; i < 11; i++)
         {

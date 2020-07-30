@@ -29,7 +29,10 @@ public class Map0_Load : MonoBehaviour
         player1 = FindObjectOfType<Player>();
         DialogueScreen = GameObject.Find("DialogueScreen").GetComponent<CanvasGroup>();
         scene = SceneManager.GetActiveScene();
-
+        if(scene.name != "Map0")
+        {
+            this.enabled = false;
+        }
         
         /*
         switch (PlayerPrefs.GetInt("Map0PlayerLocate"))

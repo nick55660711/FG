@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
     public GameObject[] ArrowAll;
     public bool GetBow = true;
     [Header("弓箭音效")]
-    public AudioSource bowaudio;
+    public AudioSource SoundManager;
 
 
     [Header("落地")]
@@ -173,10 +173,10 @@ public class Player : MonoBehaviour
 
     }
 
-
+    public AudioClip ArrowShoot;
     void CreateBullet()
     {
-        bowaudio.Play();
+        SoundManager.PlayOneShot(ArrowShoot);
         //產生箭
         GameObject ArrowTemp = Instantiate(Arrow, CreateObject.position, CreateObject.rotation);
         ArrowTemp.transform.localScale = ArrowTemp.transform.localScale * CreateObject.parent.localScale.x;
