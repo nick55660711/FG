@@ -31,7 +31,7 @@ public class TextNPC_1 : Dialogue
 
     private void finishDialogue()
     {
-        HerbImage.GetComponent<CanvasGroup>().alpha = 1;
+        //sHerbImage.GetComponent<CanvasGroup>().alpha = 1;
         CloseDialogue();
         GetComponent<TextNPC_2>().enabled = true;
         this.enabled = false;

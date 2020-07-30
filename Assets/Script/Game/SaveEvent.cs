@@ -14,7 +14,6 @@ public class SaveEvent : SaveState
     {
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
-            DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

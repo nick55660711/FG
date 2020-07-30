@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int temp = 1;
     public int itemNo;
     public List<string> itemname;
-
+    public CameraControll camera1;
     public CanvasGroup Blackout;
 
 
@@ -36,8 +36,10 @@ public class GameManager : MonoBehaviour
     #region 方法
     public void Restart()
     {
+        print(scene.name);
         PlayerPrefs.SetFloat("HP" + 1, 100);
-        SceneManager.LoadScene(scene.name);
+        StartCoroutine(BlackScreen(1, scene.name));
+
     }
 
     public void ChangeScene(string SceneName)
@@ -45,17 +47,14 @@ public class GameManager : MonoBehaviour
         /// <summary>
         /// 暫時儲存資料
         /// </summary>
-      
-        SaveMapData();
 
+        SaveMapData();
         StartCoroutine(BlackScreen(1, SceneName));
-        StartScene();
 
 
     }
 
     WaitForSecondsRealtime WAS = new WaitForSecondsRealtime(0.01f);
-    WaitForSecondsRealtime WAS2 = new WaitForSecondsRealtime(1);
 
     IEnumerator BlackScreen(int A)
     {
@@ -67,32 +66,64 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    WaitForSecondsRealtime WAS2 = new WaitForSecondsRealtime(0.3f);
     IEnumerator BlackScreen(int A, string SceneName)
     {
         for (int i = 0; i < 10; i++)
         {
 
             Blackout.alpha += 0.1f * A;
-        yield return WAS;
+            yield return WAS;
         }
 
+        player1.transform.position = Vector2.up * 100;
         SceneManager.LoadScene(SceneName);
 
-
+        yield return WAS2;
+        StartScene();
+        player1.StartScene();
     }
 
+        /*
+        PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
+        print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
+            int i = 0;
+        foreach (var item in FindObjectsOfType<SaveState>())
+        {
+            PlayerPrefs.SetInt(scene.name + item.name + 0 ,0);
+            //紀錄存檔物件名稱
+            PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
+            print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
+            i++;
+        }
+        */
     public void SaveAllData(int SaveID)
     {
         /// <summary>
         /// 永久儲存資料
         /// </summary>
+       
+        SaveMapData();
         temp = SaveID;
         PlayerPrefs.SetFloat("HP" + temp, player1.HP);
         PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
         PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
-        PlayerPrefs.SetInt("SceneSave", scene.buildIndex);
-        SaveMapData();
+        PlayerPrefs.SetInt("SceneSave" + temp, scene.buildIndex);
+        print("SceneSave:" + PlayerPrefs.GetInt("SceneSave" + temp));
+        for (int j = 1; j < SceneManager.sceneCountInBuildSettings; j++)
+        {
+            print("itemNO.Map"+j+":"+PlayerPrefs.GetInt(j + "itemNO"));
+            for (int i = 0; i < PlayerPrefs.GetInt(j + "itemNO"); i++)
+            {
+                string SaveName = PlayerPrefs.GetString(j.ToString() + i);
+                int tempSave1 = PlayerPrefs.GetInt(SaveName + 3);
+                PlayerPrefs.SetInt(SaveName + temp, tempSave1);
 
+                print(SaveName +"SaveNO"+temp+ " State:"+PlayerPrefs.GetInt(SaveName + temp));
+            }
+        }
+        
+         
     }
 
 
@@ -105,29 +136,52 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < itemNo; i++)
         {
             string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);
-            int tempSave = PlayerPrefs.GetInt(SaveName + 1);
-            PlayerPrefs.SetInt(SaveName + temp, tempSave);
+            int tempSave3 = PlayerPrefs.GetInt(SaveName + 3);
+           // print("tempSave:" + tempSave3);
+            PlayerPrefs.SetInt(SaveName + temp, tempSave3);
+           // print("Name:" + SaveName + temp + ",Get numbers:" + PlayerPrefs.GetInt(SaveName + temp));
+        }
+    }
+    public void Clear()
+    {
+        if (Input.GetKeyDown("w"))
+        {
+            print("Clear");
+            PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
+            PlayerPrefs.SetFloat("HP" + 1, 100);
+            PlayerPrefs.SetFloat("Crystal_No" + 1, 0);
+            PlayerPrefs.SetFloat("Herb_No" + 1, 0);
+            for (int i = 0; i < itemNo; i++)
+            {
+                string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);
+                int tempSave = PlayerPrefs.GetInt(SaveName + 3);
+                PlayerPrefs.SetInt(SaveName + 1, 0);
+            }
+        }
+        if (Input.GetKeyDown("t"))
+        {
+            Restart();
         }
     }
 
 
-    public void GamePause() 
+    public void GamePause()
     {
         Time.timeScale = 0;
         PauseTime++;
     }
-    public void GameContinue() 
+    public void GameContinue()
     {
-        PauseTime-- ;
-        if(PauseTime == 0) Time.timeScale = 1;
+        PauseTime--;
+        if (PauseTime == 0) Time.timeScale = 1;
 
     }
 
-    
+
 
     public void HpUpdate()
     {
-            PlayerPrefs.SetFloat("HP" + 1 , player1.HP);
+        PlayerPrefs.SetFloat("HP" + 1, player1.HP);
 
         HpText.text = "Hp : " + player1.HP;
         HP_Bar.fillAmount = player1.HP / HP_MAX;
@@ -137,7 +191,7 @@ public class GameManager : MonoBehaviour
     /// 取得道具
     /// </summary>
     /// <param name="itemID">道具ID 0：水晶 － 1：藥草 </param>
-    public void GetItem(int itemID) 
+    public void GetItem(int itemID)
     {
 
 
@@ -156,8 +210,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case 1:
-                Herb_No++ ;
-                
+                Herb_No++;
+
                 HerbText.text = " : " + Herb_No;
 
                 break;
@@ -185,6 +239,7 @@ public class GameManager : MonoBehaviour
         Blackout.alpha = 1;
         StartCoroutine(BlackScreen(-1));
         scene = SceneManager.GetActiveScene(); //轉換場景需要重新抓取
+        print(scene.name);
         itemNo = FindObjectsOfType<SaveState>().Length; //轉換場景需要重新抓取
         PlayerPrefs.SetInt(scene.buildIndex + "itemNO", itemNo);
         print(scene.buildIndex + "itemNO" + PlayerPrefs.GetInt(scene.name + "itemNO"));
@@ -197,7 +252,7 @@ public class GameManager : MonoBehaviour
             print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
             i++;
         }
-         //讀取血量與碎片量
+        //讀取血量與碎片量
         player1.HP = PlayerPrefs.GetFloat("HP" + 1);
         Crystal_No = PlayerPrefs.GetFloat("Crystal_No" + 1);
         Herb_No = PlayerPrefs.GetFloat("Herb_No" + 1);
@@ -207,8 +262,8 @@ public class GameManager : MonoBehaviour
 
         for (int k = 0; k < 11; k++)
         {
-            if (k == 8) continue ;
-                Physics2D.IgnoreLayerCollision(k, 11);
+            if (k == 8) continue;
+            Physics2D.IgnoreLayerCollision(k, 11);
         }
 
         //更新UI
@@ -224,6 +279,9 @@ public class GameManager : MonoBehaviour
     #region 事件
 
     Button RestartButton;
+    Button TitleButton;
+    Button SaveButton;
+
     private void Awake()
     {
         //抓取物件
@@ -232,23 +290,35 @@ public class GameManager : MonoBehaviour
         HpText = GameObject.Find("HP_Text").GetComponent<Text>();
         CrystalText = GameObject.Find("Crystal_No_Text").GetComponent<Text>();
         Blackout = GameObject.Find("BlackScreen").GetComponent<CanvasGroup>();
-        scene = SceneManager.GetActiveScene(); 
+        scene = SceneManager.GetActiveScene();
         itemNo = FindObjectsOfType<SaveState>().Length;
         HerbText = GameObject.Find("Herb_No_Text").GetComponent<Text>();
+
+        //按鈕
         RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
+        TitleButton = GameObject.Find("Title_Button").GetComponent<Button>();
+        SaveButton = GameObject.Find("Save_Button").GetComponent<Button>();
         RestartButton.onClick.AddListener(() => { Restart(); });
-        PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
-        print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
-            int i = 0;
+        TitleButton.onClick.AddListener(() => { Restart(); });
+        SaveButton.onClick.AddListener(() => { SaveAllData(6); });
+
+
+
+
+        camera1 = Camera.main.GetComponent<CameraControll>();
+        camera1.CancelSet();
+        PlayerPrefs.SetInt(scene.buildIndex + "itemNO", itemNo);
+        print(scene.buildIndex + "itemNO" + PlayerPrefs.GetInt(scene.name + "itemNO"));
+        int i = 0;
         foreach (var item in FindObjectsOfType<SaveState>())
         {
-            PlayerPrefs.SetInt(scene.name + item.name + 0 ,0);
+            PlayerPrefs.SetInt(scene.name + item.name + 0, 0);
             //紀錄存檔物件名稱
             PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
             print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
             i++;
         }
-         
+
     }
 
     private void Start()
@@ -267,8 +337,8 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 11; i++)
         {
-            if (i == 8) continue ;
-                Physics2D.IgnoreLayerCollision(i, 11);
+            if (i == 8) continue;
+            Physics2D.IgnoreLayerCollision(i, 11);
         }
 
         //更新UI
@@ -283,7 +353,7 @@ public class GameManager : MonoBehaviour
 
 
 
-   
+
 
     #endregion
 

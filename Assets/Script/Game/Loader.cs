@@ -12,25 +12,29 @@ public class Loader : MonoBehaviour
     public GameObject EventSystem;
 
 
-
-    void Start()
+    private void Awake()
     {
-        if(FindObjectOfType<Player>() == null)
+
+        Transform POS = GameObject.Find("Start").transform;
+        if (FindObjectOfType<Player>() == null)
         {
 
-            Instantiate(player1);
+            Instantiate(player1, POS.position, Quaternion.identity);
         }
-        if (GameObject.Find("EventSystem") == null)
+        /*
+        if (GameObject.Find("EventSystem(Clone)") == null)
         {
 
             Instantiate(EventSystem);
         }
-         if(GameObject.Find("Canvas") == null)
+        */
+
+        if (GameObject.Find("Canvas(Clone)") == null)
         {
 
             Instantiate(Canvas);
         }
-        if (GameObject.Find("SoundManager") == null)
+        if (FindObjectOfType<AudioSource>()== null)
         {
 
             Instantiate(SoundManager);
@@ -46,12 +50,7 @@ public class Loader : MonoBehaviour
 
             Instantiate(GameManager_);
         }
-
-
-
-
-
     }
-
+   
     
 }

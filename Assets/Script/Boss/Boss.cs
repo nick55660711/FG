@@ -57,7 +57,7 @@ public class Boss : MonoBehaviour
             if (Hp <= 0)
             {
                 Kill = true;
-               
+                StopAllCoroutines();
                 StartCoroutine(Grow_T_Fall());
                 StartCoroutine(Grow_G_FALL());
 
@@ -65,21 +65,6 @@ public class Boss : MonoBehaviour
         }
 
 
-    }
-    WaitForSeconds WAS4 = new WaitForSeconds(7);
-    IEnumerator Grow_V()
-    {
-        while (Hp > 0)
-        {
-
-            yield return WAS2;
-
-        
-
-            Vector2 RandomPox = new Vector2( Random.Range(-29.58f, 1.01f),0);
-            GameObject tmp = Instantiate(Draba[1], RandomPox, Quaternion.Euler(0, 0, 0));
-            tmp.transform.SetParent(transform);
-        }
     }
 
 
@@ -116,8 +101,11 @@ public class Boss : MonoBehaviour
     */
     public GameObject Draba_TB_R;
     public GameObject Draba_TB_L;
+    bool SHAKE= true;
     IEnumerator Grow_T()
     {
+        float V = 1;
+        MC.SetON = true;
 
         if (Right)
         {
@@ -132,11 +120,20 @@ public class Boss : MonoBehaviour
         while (tmp_T.GetComponent<SpriteRenderer>().size.y < 5.5f)
         {
 
-            tmp_T.GetComponent<BoxCollider2D>().offset += new Vector2(0, 1) * 0.1f;
-            tmp_T.GetComponent<SpriteRenderer>().size += new Vector2(0, 1) * 0.1f;
+            if (SHAKE)
+            {
+                if (MC.transform.position.y > 5f) V = -1;
+                if (MC.transform.position.y < 4.36f) V = 1;
+                MC.transform.Translate(new Vector2(0, 1) * V * 0.04f);
+            }
+             
+            
+            tmp_T.GetComponent<BoxCollider2D>().offset += new Vector2(0, 1) * 0.05f;
+            tmp_T.GetComponent<SpriteRenderer>().size += new Vector2(0, 1) * 0.05f;
             yield return WAS3;
         }
         CanBeHit = true;
+        MC.SetON = false;
         StartCoroutine(Grow());
     }
 
@@ -159,12 +156,16 @@ public class Boss : MonoBehaviour
 
             ID++;
             Torch[ID].GetComponent<Torch>().FireUP();
+            WaitForSeconds WAS2 = new WaitForSeconds(5-ID/2);
+            GetComponent<Boss_V>().Overdrive();
         } StartCoroutine(Grow_T());
         
     }
 
  
-    WaitForSeconds WAS2 = new WaitForSeconds(5);
+    WaitForSeconds WAS2 = new WaitForSeconds(4);
+    WaitForSeconds WAS3 = new WaitForSeconds(0.00003f);
+
 
     IEnumerator Grow()
     {
@@ -199,7 +200,6 @@ public class Boss : MonoBehaviour
     #endregion
 
 
-    WaitForSeconds WAS3 = new WaitForSeconds(0.0007f);
 
 
 
@@ -213,7 +213,7 @@ public class Boss : MonoBehaviour
         MC.SetON = true;
 
         int T = 0;
-        while (T <200)
+        while (T <100)
         {
             if (MC.transform.position.y > 5f) V = -1;
             if (MC.transform.position.y < 4.36f) V = 1;
@@ -228,7 +228,7 @@ public class Boss : MonoBehaviour
             Draba_T1.size += new Vector2(0, 1) * 0.1f;
             if (MC.transform.position.y > 5f) V = -1;
             if (MC.transform.position.y < 4.36f) V = 1;
-            MC.transform.Translate(new Vector2(0, 1) * V * 0.05f);
+            MC.transform.Translate(new Vector2(0, 1) * V * 0.07f);
             yield return WAS3;
         }
 
@@ -240,6 +240,7 @@ public class Boss : MonoBehaviour
         while (Draba_G.size.x < 52f)
         {
             
+
             if (MC.transform.position.y > 5f) V = -1;
             if (MC.transform.position.y < 4.36f) V = 1;
             MC.transform.Translate(new Vector2(0, 1) * V * 0.05f);
@@ -251,7 +252,7 @@ public class Boss : MonoBehaviour
         Wall.enabled = false;
         Wall1.enabled = false;
         player1.Stop = false;
-        MC.SetON = false;
+      
         Torch[0].GetComponent<Torch>().FireUP();
         GetComponent<Boss_V>().enabled = true;
         StartCoroutine(Grow_T());
@@ -295,7 +296,7 @@ public class Boss : MonoBehaviour
         Destroy(Draba_B);
         Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
         Step.SetActive(true);
-        Crystal.transform.position = Crystal_T.position;
+       // Crystal.transform.position = Crystal_T.position;
 
         Destroy(gameObject);
 

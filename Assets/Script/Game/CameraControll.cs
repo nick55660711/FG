@@ -10,7 +10,7 @@ public class CameraControll : MonoBehaviour
     public float speed;
     public bool SetON;
 
-
+    public GameManager GM;
 
 
     public void CameraSet (int Y)
@@ -21,7 +21,10 @@ public class CameraControll : MonoBehaviour
 
     }
 
-
+    public void Shake() {
+        SetON = true;
+        transform.position = new Vector3(player1.transform.position.x, Y, -10);
+    }
     public void CancelSet()
     {
 
@@ -31,7 +34,11 @@ public class CameraControll : MonoBehaviour
 
     private void Start()
     {
+        GM = FindObjectOfType<GameManager>();
         player1 = FindObjectOfType<Player>();
+        player1.OnDead += () => { SetON = true; };
+        CancelSet();
+        GM.onChangeScene += CancelSet;
     }
 
 
@@ -57,10 +64,10 @@ public class CameraControll : MonoBehaviour
             X = transform.position.x;
             X =  Mathf.Lerp(X, player1.transform.position.x, 0.5f * Time.deltaTime * speed );
 
-            if(player1.Timer2<2)
+            //if(player1.Timer2<2)
             transform.position = new Vector3(X, Y, -10);
-            else
-            transform.position = new Vector3(player1.transform.position.x, Y, -10);
+           // else
+            //transform.position = new Vector3(player1.transform.position.x, Y, -10);
         }
 
 

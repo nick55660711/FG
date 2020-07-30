@@ -8,7 +8,8 @@ public class Boss_V : MonoBehaviour
     Boss boss;
     public Transform player1;
 
-    WaitForSecondsRealtime WAS4 = new WaitForSecondsRealtime(6);
+    float Time = 5;
+    WaitForSecondsRealtime WAS4 = new WaitForSecondsRealtime(5);
     IEnumerator Grow_V()
     {
         while (boss.Hp > 0)
@@ -25,6 +26,12 @@ public class Boss_V : MonoBehaviour
        
 
     }
+    public void Overdrive()
+    {
+        Time -= 0.5f;
+        WaitForSecondsRealtime WAS4 = new WaitForSecondsRealtime(Time);
+    }
+
     private void Start()
     {
         boss= GetComponent<Boss>();

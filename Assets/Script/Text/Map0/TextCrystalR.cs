@@ -27,6 +27,7 @@ public class TextCrystalR : Dialogue
     private void finishDialogue()
     {
         player1.GetBow = true;
+        PlayerPrefs.SetInt("Bow", 1);
         CloseDialogue();
         Destroy(gameObject);
     }

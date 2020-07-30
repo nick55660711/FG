@@ -13,6 +13,7 @@ public class TextCrystal1 : Dialogue
         if (collision.CompareTag( "Player"))
         {
             OpenDialogue();
+            DialogueScreen.GetComponentsInChildren<Text>()[1].text = "按下C繼續，按下S跳過對話";
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
 

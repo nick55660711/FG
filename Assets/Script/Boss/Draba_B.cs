@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Draba_B :   Draba_G
 {
-    WaitForSeconds WAS3 = new WaitForSeconds(0.01f);
+    WaitForSeconds WAS3 = new WaitForSeconds(0.005f);
     WaitForSeconds WAS2 = new WaitForSeconds(2);
     SpriteRenderer SP;
     public float SPEEDV;

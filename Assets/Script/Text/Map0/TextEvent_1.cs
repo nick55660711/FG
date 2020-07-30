@@ -50,7 +50,8 @@ private void OnTriggerEnter2D(Collider2D collision)
         if (collision.tag == "Player")
     {
         Invoke("OpenDialogue", 0.5f);
-        DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
+            DialogueScreen.GetComponentsInChildren<Text>()[1].text = "";
+            DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
     }
 
 }
@@ -70,7 +71,6 @@ protected override void Start()
             {
                 CloseDialogue();
                 //關閉提示訊息
-                DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
                 Destroy(gameObject);
             }
 
@@ -85,7 +85,6 @@ protected override void Start()
         {
             CloseDialogue();
             //關閉提示訊息
-            DialogueScreen.GetComponentsInChildren<Text>()[1].gameObject.SetActive(false);
             Destroy(gameObject);
         }
 

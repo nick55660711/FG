@@ -27,12 +27,10 @@ public class SaveState : MonoBehaviour, IClearData
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.CompareTag("Player"))
         {
-            PlayerPrefs.SetInt(scene.name + gameObject.name + 1, 1);
+            PlayerPrefs.SetInt(scene.name + gameObject.name + 3, 1);
         }
-
     }
 
     public virtual void destory()
@@ -49,7 +47,7 @@ public class SaveState : MonoBehaviour, IClearData
         scene = SceneManager.GetActiveScene();
         GM = FindObjectOfType<GameManager>();
        
-        print(gameObject.name + PlayerPrefs.GetInt(scene.name + gameObject.name + 1));
+        print(scene.name+gameObject.name + PlayerPrefs.GetInt(scene.name + gameObject.name + 1));
         // 如果已觸發則摧毀
         destory();
          

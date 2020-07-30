@@ -65,7 +65,7 @@ public class Save : MonoBehaviour
 
     private void Awake()
     {
-        
+        this.enabled = false;
         scene = SceneManager.GetActiveScene();
         /*
         if (PlayerPrefs.GetInt("ClaerData") == 1)

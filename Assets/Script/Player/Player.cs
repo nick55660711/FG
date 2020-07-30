@@ -233,6 +233,10 @@ public class Player : MonoBehaviour
 
     }
 
+    public delegate void DEAD();
+    public DEAD OnDead;
+
+    bool CanBeHit;
     public void damage(float ATK)
     {
 
@@ -244,11 +248,9 @@ public class Player : MonoBehaviour
 
         if (HP <= 0)
         {
-            SpeedF = 0;
-            SpeedV = 0;
-            JumpH = 0;
-            JumpH2 = 0;
-            GetComponent<BoxCollider2D>().enabled = false;
+            Stop = true;
+            OnDead();
+            CanBeHit = false;
             GameOverScreen.alpha = 1;
             GameOverScreen.blocksRaycasts = true;
             GameOverScreen.interactable = true;
@@ -263,6 +265,8 @@ public class Player : MonoBehaviour
     /// <param name="collision">敵人傷害判定</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (CanBeHit)
+        {
 
             if (collision.gameObject.tag == "EnemyTrigger")
             {
@@ -276,9 +280,10 @@ public class Player : MonoBehaviour
                 }
             }
 
-           
 
-            if (collision.CompareTag("Boss")) {
+
+            if (collision.CompareTag("Boss"))
+            {
                 if (Timer2 > TimeDamage)
                 {
                     float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
@@ -288,8 +293,9 @@ public class Player : MonoBehaviour
                     GM.HpUpdate();
                 }
             }
-           
-            if (collision.CompareTag("Draba")) {
+
+            if (collision.CompareTag("Draba"))
+            {
                 if (Timer2 > TimeDamage)
                 {
                     float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
@@ -299,6 +305,7 @@ public class Player : MonoBehaviour
                     GM.HpUpdate();
                 }
             }
+        }
     }
 
 
@@ -363,7 +370,29 @@ public class Player : MonoBehaviour
     #endregion   
 
 
+    public void StartScene()
+    {
+        GameOverScreen.alpha = 0;
+        GameOverScreen.blocksRaycasts = false;
+        GameOverScreen.interactable = false;
+        Stop = false;
+        CanBeHit = true;
+        scene = SceneManager.GetActiveScene();
+        print(scene.name);
+        print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));
+        if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null || PlayerPrefs.GetString(scene.name + "PlayerLocate") == "")
+        {
+            PlayerPrefs.SetString(scene.name + "PlayerLocate", "Start");
+        }
+        transform.position = GameObject.Find(PlayerPrefs.GetString(scene.name + "PlayerLocate")).transform.GetChild(0).position;
 
+
+        Timer = 10;
+        Timer2 = 10;
+        Timer3 = 10;
+
+
+    }
 
 
 
@@ -375,8 +404,21 @@ public class Player : MonoBehaviour
         GameOverScreen = GameObject.Find("GameOverScreen").GetComponent<CanvasGroup>();
         GM = FindObjectOfType<GameManager>();
         scene = SceneManager.GetActiveScene();
-
+        SoundManager = FindObjectOfType<AudioSource>();
+        GameOverScreen.alpha = 0;
+        GameOverScreen.blocksRaycasts = false;
+        GameOverScreen.interactable = false;
+        Stop = false;
+        CanBeHit = true;
+        if (PlayerPrefs.GetInt("Bow")==0)
+        {
+            GetBow = false;
+        }
         
+        if (PlayerPrefs.GetInt("Sword")==0)
+        {
+            GetSword = false;
+        }
         print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));
         if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null || PlayerPrefs.GetString(scene.name + "PlayerLocate") =="" )
         {
@@ -426,7 +468,7 @@ public class Player : MonoBehaviour
         jump();
         change();
         }
-
+        GM.Clear();
         Timer += Time.deltaTime;
         Timer2 += Time.deltaTime;
         Timer3 += Time.deltaTime;

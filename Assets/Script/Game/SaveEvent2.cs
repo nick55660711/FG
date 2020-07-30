@@ -16,7 +16,6 @@ public class SaveEvent2 : SaveState
     {
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
-            player1.GetBow = true;
             Destroy(gameObject);
         }
     }
