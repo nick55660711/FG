@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public CameraControll camera1;
     public CanvasGroup Blackout;
 
-
+    public float TimerSTOP;
 
     #endregion
 
@@ -77,9 +77,18 @@ public class GameManager : MonoBehaviour
         }
 
         player1.transform.position = Vector2.up * 100;
+
+        if (menu_C.OpenScreen)
+        {
+            menu_C.OpenScreen = !menu_C.OpenScreen; menu_C.OptionClose();
+        }
+
         SceneManager.LoadScene(SceneName);
 
+        
         yield return WAS2;
+
+      
         StartScene();
         player1.StartScene();
     }
@@ -109,6 +118,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
         PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
         PlayerPrefs.SetInt("SceneSave" + temp, scene.buildIndex);
+        PlayerPrefs.SetInt("Bow" + temp, PlayerPrefs.GetInt("Bow" +1));
+        PlayerPrefs.SetInt("Sword" + temp, PlayerPrefs.GetInt("Sword" + 1));
+        PlayerPrefs.SetInt("SaveState" + SaveID, 1);
         print("SceneSave:" + PlayerPrefs.GetInt("SceneSave" + temp));
         for (int j = 1; j < SceneManager.sceneCountInBuildSettings; j++)
         {
@@ -169,10 +181,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         PauseTime++;
+        print(" PauseTime:" + PauseTime);
     }
     public void GameContinue()
     {
         PauseTime--;
+        print(" PauseTimeSTOP:" + PauseTime);
         if (PauseTime == 0) Time.timeScale = 1;
 
     }
@@ -236,6 +250,8 @@ public class GameManager : MonoBehaviour
     void StartScene()
     {
         //抓取物件
+        PauseTime = 0;
+
         Blackout.alpha = 1;
         StartCoroutine(BlackScreen(-1));
         scene = SceneManager.GetActiveScene(); //轉換場景需要重新抓取
@@ -272,7 +288,6 @@ public class GameManager : MonoBehaviour
         CrystalText.text = " : " + Crystal_No;
         HerbText.text = " : " + Herb_No;
 
-        PauseTime = 0;
 
     }
 
@@ -281,6 +296,9 @@ public class GameManager : MonoBehaviour
     Button RestartButton;
     Button TitleButton;
     Button SaveButton;
+    Button SaveButton2;
+    Button SaveButton3;
+    Menu menu_C;
 
     private void Awake()
     {
@@ -298,10 +316,14 @@ public class GameManager : MonoBehaviour
         RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         TitleButton = GameObject.Find("Title_Button").GetComponent<Button>();
         SaveButton = GameObject.Find("Save_Button").GetComponent<Button>();
+        SaveButton2 = GameObject.Find("Save_Button2").GetComponent<Button>();
+        SaveButton3 = GameObject.Find("Save_Button3").GetComponent<Button>();
         RestartButton.onClick.AddListener(() => { Restart(); });
         TitleButton.onClick.AddListener(() => { Restart(); });
         SaveButton.onClick.AddListener(() => { SaveAllData(6); });
-
+        SaveButton2.onClick.AddListener(() => { SaveAllData(7); });
+        SaveButton3.onClick.AddListener(() => { SaveAllData(8); });
+        menu_C = FindObjectOfType<Menu>();
 
 
 
@@ -351,8 +373,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
+   
 
 
     #endregion

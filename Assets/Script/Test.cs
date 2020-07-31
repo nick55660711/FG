@@ -33,11 +33,16 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown("e"))
         {
             GetComponent<Player>().HP = 100;
+            GetComponent<Player>().GetBow = true;
+            GetComponent<Player>().GetSword = true;
         }
+        
+        /*
         if (Input.GetKeyDown("t"))
         {
             SceneManager.LoadScene(SceneNow.name);
         }
+        */
         // if (Input.GetKeyDown("t")) { SceneManager.LoadScene("Map0"); }
 
 

@@ -35,8 +35,8 @@ public class Start : MonoBehaviour
                 PlayerPrefs.SetInt(SaveName + 3, 0);
             }
         }
-        PlayerPrefs.SetInt("Bow", 0);
-        PlayerPrefs.SetInt("Sword", 1);
+        PlayerPrefs.SetInt("Bow"+1, 0);
+        PlayerPrefs.SetInt("Sword"+1, 0);
     }
 
     /// <summary>
@@ -63,11 +63,18 @@ public class Start : MonoBehaviour
         PlayerPrefs.SetFloat("HP" + 1, PlayerPrefs.GetFloat("HP" + SaveID));
         PlayerPrefs.SetFloat("Crystal_No" + 1, PlayerPrefs.GetFloat("Crystal_No" + SaveID));
         PlayerPrefs.SetFloat("Herb_No" + 1, PlayerPrefs.GetFloat("Herb_No" + SaveID));
+
+        PlayerPrefs.SetInt("Bow" + 1, PlayerPrefs.GetInt("Bow" + SaveID));
+        PlayerPrefs.SetInt("Sword" + 1, PlayerPrefs.GetInt("Sword" + SaveID));
         print("SceneSave:" + PlayerPrefs.GetInt("SceneSave" + SaveID));
         SceneManager.LoadScene(PlayerPrefs.GetInt("SceneSave" + SaveID));
     }
+
+
     public void Load()
     {
         SceneManager.LoadScene(PlayerPrefs.GetInt("SceneSave"));
     }
+
+
 }

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3286630671692123569}
   - component: {fileID: 3286630671692123574}
-  - component: {fileID: 3286630671692123575}
-  m_Layer: 0
+  - component: {fileID: 5238082836552122906}
+  m_Layer: 10
   m_Name: "\u57CE \u58C1 (1)"
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3286630671692123575
+--- !u!61 &5238082836552122906
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,14 +91,14 @@ BoxCollider2D:
   m_GameObject: {fileID: 3286630671692123572}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: cdc1bca9db7c44041a8793406368181a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 2.88, y: 2.895}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     oldSize: {x: 5.76, y: 5.79}
     newSize: {x: 5.76, y: 5.79}
     adaptiveTilingThreshold: 0.5

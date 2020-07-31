@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Destoyer : MonoBehaviour
 {
+    //public GameObject Run1;
     private void Start()
     {
 
@@ -17,6 +18,13 @@ public class Destoyer : MonoBehaviour
         Destroy(FindObjectOfType<GameManager>().gameObject);
    
         }
+
+      /*
+      if(FindObjectOfType<Run>() == null)
+        {
+            Instantiate(Run1);
+        }
+        */
     }
 
 

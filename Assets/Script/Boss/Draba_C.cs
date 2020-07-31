@@ -11,8 +11,6 @@ public class Draba_C : MonoBehaviour
     BoxCollider2D BC;
     IEnumerator Grow_G()
     {
-        int V = -1;
-        int T = 0;
         /*
         while (T < 100)
         {
@@ -40,7 +38,6 @@ public class Draba_C : MonoBehaviour
 
     IEnumerator Grow_G_Fall()
     {
-        int V = -1;
         while (SP.size.y > 0.1f)
         {   /*
             if (transform.GetChild(0).localPosition.x > 0.1f) V = -1;

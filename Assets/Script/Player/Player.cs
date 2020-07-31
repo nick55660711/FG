@@ -411,12 +411,12 @@ public class Player : MonoBehaviour
         GameOverScreen.interactable = false;
         Stop = false;
         CanBeHit = true;
-        if (PlayerPrefs.GetInt("Bow")==0)
+        if (PlayerPrefs.GetInt("Bow"+1)==0)
         {
             GetBow = false;
         }
         
-        if (PlayerPrefs.GetInt("Sword")==0)
+        if (PlayerPrefs.GetInt("Sword"+1)==0)
         {
             GetSword = false;
         }

@@ -12,7 +12,13 @@ public class DrabaTrigger : MonoBehaviour
         }
     }
 
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GetComponentInParent<Draba_S>().Fall();
+        }
+    }
 
 
 }

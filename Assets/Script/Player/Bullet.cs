@@ -40,9 +40,14 @@ public class Bullet : MonoBehaviour
 
         }
         
-        if (other.CompareTag("Boss") && gameObject.tag == "Fire")
+        if (other.CompareTag("Boss") && gameObject.CompareTag("Fire"))
         {
             other.transform.parent.GetComponent<Boss>().damage(atk);
+        }
+
+        if (other.CompareTag("Draba") && gameObject.CompareTag("Fire"))
+        {
+            other.transform.parent.GetComponent<Draba_S>().Burn();        
         }
 
 
@@ -60,7 +65,7 @@ public class Bullet : MonoBehaviour
 
 
         // 擊中目標為地面時，停止並固定，開啟碰撞判定(可以被玩家踩)
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Ground")&& !gameObject.CompareTag("Fire"))
         {
 
             //  rig.velocity = new Vector2(0, 0);

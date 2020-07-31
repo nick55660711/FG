@@ -15,6 +15,9 @@ public class Empty : MonoBehaviour
     #endregion
 
     #region 事件
-
+    private void Start()
+    {
+        print(PlayerPrefs.GetInt("DD"));
+    }
     #endregion
 }

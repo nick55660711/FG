@@ -53,7 +53,6 @@ public class Boss : MonoBehaviour
 
 
 
-            StartCoroutine(Grow_T_Fall());
             if (Hp <= 0)
             {
                 Kill = true;
@@ -61,6 +60,10 @@ public class Boss : MonoBehaviour
                 StartCoroutine(Grow_T_Fall());
                 StartCoroutine(Grow_G_FALL());
 
+            }
+            else
+            {
+            StartCoroutine(Grow_T_Fall());
             }
         }
 
@@ -158,7 +161,8 @@ public class Boss : MonoBehaviour
             Torch[ID].GetComponent<Torch>().FireUP();
             WaitForSeconds WAS2 = new WaitForSeconds(5-ID/2);
             GetComponent<Boss_V>().Overdrive();
-        } StartCoroutine(Grow_T());
+            StartCoroutine(Grow_T());
+        } 
         
     }
 
@@ -268,14 +272,21 @@ public class Boss : MonoBehaviour
     {
         GetComponent<Boss_V>().enabled = false;
         Draba_G.GetComponent<BoxCollider2D>().isTrigger = false;
-         
 
+        int V = 1;
+        MC.SetON = true;
         while (Draba_G.size.x > 0.1f)
         {
+
+            if (MC.transform.position.y > 5f) V = -1;
+            if (MC.transform.position.y < 4.36f) V = 1;
+            MC.transform.Translate(new Vector2(0, 1) * V * 0.04f);
             Draba_G.size -= new Vector2(1, 0) * 0.2f;
             Draba_G.GetComponent<BoxCollider2D>().offset += new Vector2(1, 0) * 0.2f;
             yield return WAS3;
         }
+
+        MC.SetON = false;
 
         while (Draba_T.size.y > 0.1f)
         {
