@@ -27,7 +27,14 @@ public class Destoyer : MonoBehaviour
         */
     }
 
-
+    private void Update()
+    {
+        if (Input.GetKeyDown("p"))
+        {
+            PlayerPrefs.SetInt("Run", 0);
+        }
+        
+    }
 
 
 }

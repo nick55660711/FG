@@ -37,7 +37,7 @@ public class SaveState : MonoBehaviour, IClearData
     {
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
-            Destroy(gameObject);
+            Destroy(gameObject,0.5f);
         }
 
     }

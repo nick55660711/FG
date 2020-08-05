@@ -17,12 +17,8 @@ public class BossON : MonoBehaviour
     IEnumerator BGMON()
     {
 
-        while (SoundManager.volume < 0.15f)
-        {
 
-            SoundManager.volume += 0.1f * Time.deltaTime;
-            yield return null;
-        }
+        SoundManager.volume = 0.15f;
             SoundManager.Play();
         while (SoundManager.volume < 0.5f)
         {
@@ -30,7 +26,7 @@ public class BossON : MonoBehaviour
             SoundManager.volume += 0.1f * Time.deltaTime;
             yield return null;
         }
-        Destroy(SoundOn_E);
+      //  Destroy(SoundOn_E);
         Destroy(SoundOff_E);
     }
 

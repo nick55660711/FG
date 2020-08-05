@@ -17,7 +17,7 @@ public class SaveEvent_Draba_wall : SaveState
     {
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
-            Destroy(transform.parent.gameObject);
+            Destroy(transform.parent.gameObject,0.5f);
         }
     }
     protected override void Start()

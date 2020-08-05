@@ -9,15 +9,17 @@ public class CameraControll : MonoBehaviour
     private float Y;
     public float speed;
     public bool SetON;
+    public bool Set_height;
+    private float Y_fix;
 
     public GameManager GM;
 
 
-    public void CameraSet (int Y)
+    public void CameraSet (float A)
     {
-
-        transform.position = new Vector3(player1.transform.position.x, Y, -10);
-        SetON = true;
+       // Set_height = true;
+           Y_fix = A;
+       // transform.position = new Vector3(player1.transform.position.x, Y, -10);
 
     }
 
@@ -34,7 +36,8 @@ public class CameraControll : MonoBehaviour
 
     private void Start()
     {
-        GM = FindObjectOfType<GameManager>();
+        Y_fix = 0;
+       GM = FindObjectOfType<GameManager>();
         player1 = FindObjectOfType<Player>();
         player1.OnDead += () => { SetON = true; };
         CancelSet();
@@ -49,16 +52,16 @@ public class CameraControll : MonoBehaviour
     {
        
 
-        if (!SetON)
+        if (!SetON&&!Set_height)
         {
-            if (player1.transform.position.y > 6.5f)
+            if (player1.transform.position.y > 5.5f+ Y_fix)
             {
-                Y = player1.transform.position.y - 2f;
+                Y = player1.transform.position.y - 1f;
             }
 
-            else if (player1.transform.position.y < 5.5f)
+            else if (player1.transform.position.y < 5.5f+ Y_fix)
             {
-                Y = 4.5f;
+                Y = 4.5f+ Y_fix;
             }
 
             X = transform.position.x;
@@ -69,6 +72,7 @@ public class CameraControll : MonoBehaviour
            // else
             //transform.position = new Vector3(player1.transform.position.x, Y, -10);
         }
+
 
 
 

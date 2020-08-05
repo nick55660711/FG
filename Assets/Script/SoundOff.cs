@@ -10,6 +10,17 @@ public class SoundOff : MonoBehaviour
         SoundManager = FindObjectOfType<AudioSource>();
     }
 
+    IEnumerator BGMON()
+    {
+
+        while (SoundManager.volume < 0.5f)
+        {
+
+            SoundManager.volume += 0.7f * Time.deltaTime;
+            yield return null;
+        }
+    }
+
     IEnumerator BGMOFF()
     {
 
@@ -17,21 +28,30 @@ public class SoundOff : MonoBehaviour
         while (SoundManager.volume > 0)
         {
 
-            SoundManager.volume -= 0.1f * Time.deltaTime;
+            SoundManager.volume -= 0.3f * Time.deltaTime;
             yield return null;
         }
 
 
-     
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            StartCoroutine(BGMOFF());
 
             //SoundManager.Stop();
-            StartCoroutine(BGMOFF());
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            StartCoroutine(BGMON());
 
         }
     }

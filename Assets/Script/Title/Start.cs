@@ -1,11 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Start : MonoBehaviour
 {
-
+    public Text itemName;
+    public void item()
+    {
+        for (int j = 1; j < SceneManager.sceneCountInBuildSettings; j++)
+        {
+            print(SceneManager.sceneCountInBuildSettings);
+            for (int i = 0; i < PlayerPrefs.GetInt(j + "itemNO"); i++)
+            {
+                string SaveName = PlayerPrefs.GetString(j + i.ToString());
+                itemName.text += ","+SaveName;
+            }
+        }
+    }
 
 
     public void NewGame()

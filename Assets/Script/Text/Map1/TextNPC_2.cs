@@ -54,7 +54,10 @@ public class TextNPC_2 : Dialogue
     private void finishDialogue()
     {
         CloseDialogue();
-        if (GM.Herb_No == 3) { Trans.SetActive(true) ; this.enabled = false; }
+        if (GM.Herb_No == 3) { Trans.SetActive(true) ;
+            GetComponent<SaveEvent_2_NPC>().
+                finish();
+            this.enabled = false; }
         else { DialogueID = 0; }
     }
      

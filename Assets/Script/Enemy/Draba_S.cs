@@ -71,7 +71,7 @@ public class Draba_S : Draba_G
 
     }
 
-    public void Burn()
+    public override void Burn()
     {
         foreach (var item in GetComponentsInChildren<BoxCollider2D>())
         {

@@ -3066,7 +3066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1407388351
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3438,6 +3438,7 @@ MonoBehaviour:
   player1: {fileID: 0}
   speed: 30
   SetON: 0
+  Set_height: 0
   GM: {fileID: 0}
 --- !u!81 &1718942052
 AudioListener:

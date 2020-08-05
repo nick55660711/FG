@@ -12,4 +12,8 @@ public class Draba_G : MonoBehaviour
     {
     
     }
+    public virtual void Burn()
+    {
+        print("A");
+    }
 }

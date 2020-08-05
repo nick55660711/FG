@@ -16,17 +16,18 @@ public class Draba_B :   Draba_G
         int T = 0;
         while (T < 100)
         {
-        if (transform.GetChild(0).localPosition.x > 0.1f) V = -1;
-        if (transform.GetChild(0).localPosition.x < -0.4f) V = 1;
-        transform.GetChild(0).Translate(new Vector2(1, 0) * 0.1f * SPEEDV * V);
+            if (transform.GetChild(0).localPosition.x > 0.186f) V = -1;
+            if (transform.GetChild(0).localPosition.x < -0.358f) V = 1;
+            transform.GetChild(0).Translate(new Vector2(1, 0) * 0.1f * SPEEDV * V);
             T++;
             yield return WAS3;
         }
-        while (SP.size.y < 6f)
+        transform.GetChild(0).localPosition = new Vector2(0.186f, 1.615f);
+        V = 1;
+        while (SP.size.y < 13f)
         {
-
-            if (transform.GetChild(0).localPosition.x > 0.1f) V = -1;
-            if (transform.GetChild(0).localPosition.x < -0.4f) V = 1;
+            if (transform.GetChild(0).localPosition.x > 0.186f) V = -1;
+            if (transform.GetChild(0).localPosition.x < -0.358f) V = 1;
             transform.GetChild(0).Translate(new Vector2(1, 0) * 0.1f * SPEEDV * V);
             transform.GetChild(0).Translate(new Vector2(0, 1) * 0.1f);
             BC.size += new Vector2(0, 1) * 0.1f;
@@ -36,6 +37,7 @@ public class Draba_B :   Draba_G
             SP.size += new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
+        transform.GetChild(0).localPosition = new Vector2(0.186f, 14.315f);
         StartCoroutine(Grow_G_Fall());
     }
 
@@ -45,8 +47,8 @@ public class Draba_B :   Draba_G
         yield return WAS2;
         while (SP.size.y > 0.1f)
         {
-            if (transform.GetChild(0).localPosition.x > 0.1f) V = -1;
-            if (transform.GetChild(0).localPosition.x < -0.4f) V = 1;
+            if (transform.GetChild(0).localPosition.x > 0.186f) V = -1;
+            if (transform.GetChild(0).localPosition.x < -0.358f) V = 1;
             transform.GetChild(0).Translate(new Vector2(1, 0) * 0.1f * SPEEDV * V);
             transform.GetChild(0).Translate(new Vector2(0, 1) * -0.1f);
             BC.size -= new Vector2(0, 1) * 0.1f;
@@ -89,7 +91,7 @@ public class Draba_B :   Draba_G
         parent = transform.GetChild(1).GetComponent<BoxCollider2D>();
         StartCoroutine(Grow_G());
     }
-    
+    /*
     private void Update()
     {
         if (B.Hp <= 0)
@@ -97,5 +99,5 @@ public class Draba_B :   Draba_G
             Destroy(gameObject);
         }
     }
-    
+    */
 }

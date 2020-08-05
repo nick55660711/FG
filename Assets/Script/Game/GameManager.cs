@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < itemNo; i++)
             {
                 string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);
-                int tempSave = PlayerPrefs.GetInt(SaveName + 3);
                 PlayerPrefs.SetInt(SaveName + 1, 0);
             }
         }

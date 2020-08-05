@@ -193,6 +193,7 @@ public class Player : MonoBehaviour
             Destroy(ArrowAll[0]);
         }
 
+
     }
 
 

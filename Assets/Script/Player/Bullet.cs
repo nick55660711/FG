@@ -47,9 +47,8 @@ public class Bullet : MonoBehaviour
 
         if (other.CompareTag("Draba") && gameObject.CompareTag("Fire"))
         {
-            other.transform.parent.GetComponent<Draba_S>().Burn();        
+            other.transform.GetComponent<Draba_G>().Burn();        
         }
-
 
         if (other.CompareTag("Boss") )
         {
@@ -78,7 +77,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-
+  
 
     void Move()
     {
