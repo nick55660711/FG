@@ -47,9 +47,7 @@ public class Draba_Wall : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            print(i);
             SP[i] = transform.GetChild(i).GetComponent<SpriteRenderer>();
-            print(SP[i].name);
 
         }
 

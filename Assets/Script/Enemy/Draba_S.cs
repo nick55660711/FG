@@ -8,23 +8,37 @@ public class Draba_S : Draba_G
     WaitForSeconds WAS2 = new WaitForSeconds(1.5f);
     public BoxCollider2D parent;
     public float speed;
+    public float Height;
+    public float Low;
     Animator ani;
     public override void HIT()
     {
         GetHit = true;
-        print("Hit");
         StopAllCoroutines();
         foreach (var item in GetComponentsInChildren<BoxCollider2D>())
         {
             item.enabled = false;
         }
-        WAS2 = new WaitForSeconds(0.05f);
         WAS3 = new WaitForSeconds((0.0001f));
-        print("Hit2");
-        StartCoroutine(Grow_G_Fall());
-        print("Hit3");
+        //   StartCoroutine(Grow_G_Fall());
+        SP.color = new Vector4(1, 1, 1, 0.2f);
+        StartCoroutine(vanish());
     }
 
+    IEnumerator vanish()
+    {
+        while (SP.size.y > 0.1)
+        {
+
+            BC.size -= new Vector2(0, 1) * 0.1f;
+            BC.offset -= new Vector2(0, 1) * 0.05f;
+            parent.size = BC.size;
+            parent.offset = BC.offset;
+            SP.size -= new Vector2(0, 1) * 0.1f;
+            yield return WAS3;
+        }
+
+    }
     SpriteRenderer SP;
     public float SPEEDV;
     BoxCollider2D BC;
@@ -33,7 +47,7 @@ public class Draba_S : Draba_G
         if (GetHit) { print("DEAD"); yield break; }
         if (!GetHit)
         {
-            while (SP.size.y < 13f)
+            while (SP.size.y < Height+ Random.Range(0, 3))
             {
 
                 BC.size += new Vector2(0, 1) * 0.1f;
@@ -57,7 +71,7 @@ public class Draba_S : Draba_G
     {
         yield return WAS2;
        
-        while (SP.size.y > 1f)
+        while (SP.size.y > Low+Random.Range(0,3))
         {
            
             BC.size -= new Vector2(0, 1) * 0.1f*speed;
@@ -79,6 +93,7 @@ public class Draba_S : Draba_G
         }
         StopAllCoroutines();
         ani.SetTrigger("Burn");
+        Destroy(gameObject, 2);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

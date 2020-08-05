@@ -10,7 +10,7 @@ public class Run : MonoBehaviour
     Scene scene;
     int itemNo;
     public Text itemName; 
-    WaitForSecondsRealtime WAS = new WaitForSecondsRealtime(0.2f);
+    WaitForSecondsRealtime WAS = new WaitForSecondsRealtime(0.1f);
     IEnumerator Runing()
     {
 

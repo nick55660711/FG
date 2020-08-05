@@ -8,8 +8,7 @@ public class TextCrystal2 : Dialogue
     //傳送點
     public GameObject Trans0;
     string[] DialogueText = new string[] {
-       // "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "一間小屋…，總覺得好像(按↑鍵進入)",
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "按↑鍵進入小木屋"
+       "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "一間小屋，我有些印象，或許能找到有用的東西(按↑鍵進入)",
         };
         
     
@@ -19,6 +18,7 @@ public class TextCrystal2 : Dialogue
         if (collision.tag == "Player")
         {
             OpenDialogue();
+            DialogueScreen.GetComponentsInChildren<Text>()[1].text = "按下C繼續，按下S跳過對話";
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
         
@@ -33,6 +33,7 @@ public class TextCrystal2 : Dialogue
 
     private void finishDialogue()
     {
+        DialogueScreen.GetComponentsInChildren<Text>()[1].text = "";
         CloseDialogue();
         //小屋傳送點開啟
         Trans0.GetComponent<Trans>().enabled = true ;

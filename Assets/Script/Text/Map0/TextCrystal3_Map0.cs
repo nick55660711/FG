@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextCrystalR : Dialogue
+public class TextCrystal3_Map0 : Dialogue
 {
-
     string[] DialogueText = new string[] {
-        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "這是...獵人的記憶！", 
-        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "透過獵人的記憶，我(X：射出弓箭，可以站在插在牆上的箭)",
-    
-    
-    
-    };
+       "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "呼，精神稍微安定下來了，這些水晶到底是？",
+        };
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.tag == "Player")
         {
             OpenDialogue();
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
@@ -28,12 +24,13 @@ public class TextCrystalR : Dialogue
     protected override void Start()
     {
         base.Start();
+        //水晶編號設為1
+        GetComponent<Crystal>().ID = 1;
     }
 
     private void finishDialogue()
     {
-        player1.GetBow = true;
-        PlayerPrefs.SetInt("Bow"+1, 1);
+
         CloseDialogue();
         Destroy(gameObject);
     }
@@ -63,7 +60,8 @@ public class TextCrystalR : Dialogue
             finishDialogue();
         }
 
+
+
+
     }
-
-
 }

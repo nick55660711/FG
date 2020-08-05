@@ -20,10 +20,23 @@ public class Draba_R : Draba_G
         {
             item.enabled = false;
         }
-        StopAllCoroutines();
-        WAS2 = new WaitForSeconds(0.05f);
         WAS3 = new WaitForSeconds((0.0001f));
-        StartCoroutine(Grow_G_Fall());
+        StartCoroutine(vanish());
+    }
+
+    IEnumerator vanish()
+    {
+        while (SP.size.y > 0.1)
+        {
+
+            BC.size -= new Vector2(0, 1) * 0.1f;
+            BC.offset -= new Vector2(0, 1) * 0.05f;
+            parent.size = BC.size;
+            parent.offset = BC.offset;
+            SP.size -= new Vector2(0, 1) * 0.1f;
+            yield return WAS3;
+        }
+
     }
 
     SpriteRenderer SP;
@@ -55,7 +68,7 @@ public class Draba_R : Draba_G
     {
         WaitForSeconds WAS2 = new WaitForSeconds(Random.Range(0.3f,2));
         yield return  WAS2;
-        while (SP.size.y > 0.1f)
+        while (SP.size.y > 1)
         {
 
             BC.size -= new Vector2(0, 1) * 0.1f * speed;

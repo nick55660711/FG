@@ -8,10 +8,14 @@ public class TextNPC_1 : Dialogue
 
 
     string[] DialogueText = new string[] {
-        "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "請蒐集3份藥草",
-    
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "請問要如何才能進入城堡",
+        "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "如果你協助我們，就讓你進入城堡\n"+ "\u00A0\u00A0\u00A0\u00A0"+"希望你收集附近的藥草，對我們家小孩的病情會很有幫助的",
+        "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "請蒐集4份藥草",
                                             };
 
+
+
+   
 
 
     private void OnTriggerEnter2D(Collider2D collision)

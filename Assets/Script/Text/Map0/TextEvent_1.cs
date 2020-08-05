@@ -32,7 +32,12 @@ public class TextEvent_1 : Dialogue
 
 
 
-    string[] DialogueText = new string[] { "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "好痛" };
+    string[] DialogueText = new string[] { 
+        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "嗚啊啊啊啊",
+        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "精神…彷彿…受到了汙染",
+    
+    
+    };
 
 
 private void OnTriggerEnter2D(Collider2D collision)
@@ -50,7 +55,6 @@ private void OnTriggerEnter2D(Collider2D collision)
         if (collision.tag == "Player")
     {
         Invoke("OpenDialogue", 0.5f);
-            DialogueScreen.GetComponentsInChildren<Text>()[1].text = "";
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
     }
 

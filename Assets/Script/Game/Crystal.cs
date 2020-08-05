@@ -23,7 +23,7 @@ public class Crystal : MonoBehaviour , ICollect
 
     public void Get()
     {
-
+        
         GM.GetItem(0);
 
         // 編號為0的水晶沒有對話，直接摧毀

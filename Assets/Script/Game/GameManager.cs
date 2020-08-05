@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
     public void GamePause()
     {
         Time.timeScale = 0;
+        player1.Stop = true;
         PauseTime++;
         print(" PauseTime:" + PauseTime);
     }
@@ -186,7 +187,12 @@ public class GameManager : MonoBehaviour
     {
         PauseTime--;
         print(" PauseTimeSTOP:" + PauseTime);
-        if (PauseTime == 0) Time.timeScale = 1;
+        if (PauseTime == 0)
+        {
+            Time.timeScale = 1;
+
+            player1.Stop = false;
+        }
 
     }
 
