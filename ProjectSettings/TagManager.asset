@@ -16,6 +16,7 @@ TagManager:
   - Boss
   - Draba
   - Sword
+  - Box
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,20 @@ public class Draba_B :   Draba_G
     public float SPEEDV;
     BoxCollider2D BC;
     public BoxCollider2D parent;
+
+    Animator ani;
+
+    public SpriteRenderer SP_child;
+    public override void Burn()
+    {
+        foreach (var item in GetComponentsInChildren<BoxCollider2D>())
+        {
+            item.enabled = false;
+        }
+        StopAllCoroutines();
+        ani.SetTrigger("Burn");
+        Destroy(gameObject, 0.9f);
+    }
     IEnumerator Grow_G()
     {
         int V = -1;
@@ -34,6 +48,7 @@ public class Draba_B :   Draba_G
             BC.offset += new Vector2(0, 1) * 0.05f;
             parent.size = BC.size;
             parent.offset = BC.offset;
+            SP_child.size += new Vector2(0, 1) * 0.1f;
             SP.size += new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
@@ -55,6 +70,7 @@ public class Draba_B :   Draba_G
             BC.offset -= new Vector2(0, 1) * 0.05f;
             parent.size = BC.size;
             parent.offset = BC.offset;
+            SP_child.size -= new Vector2(0, 1) * 0.1f;
             SP.size -= new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
@@ -64,13 +80,13 @@ public class Draba_B :   Draba_G
 
     public override void HIT()
     {
-        StopAllCoroutines();
         GetComponentInChildren<Rigidbody2D>().gravityScale = 4;
         BC.offset -= new Vector2(0, 2);
         foreach (var item in GetComponentsInChildren<BoxCollider2D>())
         {
             item.enabled = false;
         }
+        StopAllCoroutines();
         WAS2 = new WaitForSeconds(0.1f);
         WAS3 = new WaitForSeconds((0.0001f));
         StartCoroutine(Grow_G_Fall());
@@ -85,19 +101,20 @@ public class Draba_B :   Draba_G
 
     private void Start()
     {
+        ani = GetComponent<Animator>();
         SP = GetComponent<SpriteRenderer>();
         BC = GetComponent<BoxCollider2D>();
         B = GetComponentInParent<Boss>();
         parent = transform.GetChild(1).GetComponent<BoxCollider2D>();
         StartCoroutine(Grow_G());
     }
-    /*
+    
     private void Update()
     {
         if (B.Hp <= 0)
         {
-            Destroy(gameObject);
+            Burn();
         }
     }
-    */
+    
 }

@@ -43,7 +43,7 @@ public class Boss : MonoBehaviour
         {
             for (int i = 0; i < tmp_T.transform.childCount; i++)
             {
-                tmp_T.transform.GetChild(i).GetComponent<Draba>().HIT();
+                tmp_T.transform.GetChild(i).GetComponent<Draba>().Burn();
             }
 
             Hp -= ATK;
@@ -73,12 +73,7 @@ public class Boss : MonoBehaviour
 
 
 
-    public void dead()
-    {
-
-        Destroy(gameObject);
-
-    }
+   
 
 
     Transform POS;

@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class TextCrystal_Y : Dialogue
 {
     string[] DialogueText = new string[] {
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "騎士之劍",
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "示範用～～"
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "騎士所使用的劍",
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "",
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "(A切換武器，可以使用劍來砍除藤蔓)"
                                             };
 
 

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 146dda4c238391b439fcf53f50219b52
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Door: {instanceID: 0}
+  - UP_S: {fileID: 21300000, guid: 44b668b12b3bfad4081d36f1ca3af0d1, type: 3}
+  - Down_S: {fileID: 21300000, guid: eb29ed75650e07d46adce0265aada82f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

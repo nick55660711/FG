@@ -31,6 +31,7 @@ public class TextCrystal1 : Dialogue
     IEnumerator Opening()
     {
         player1.Stop = true;
+        FindObjectOfType<Menu>().StopMenu = true;
         player1.transform.eulerAngles = new Vector3(0, 0, 0);
         player1.transform.Rotate(Vector3.forward * -90);
         yield return WAS2;
@@ -40,10 +41,9 @@ public class TextCrystal1 : Dialogue
         player1.rig.AddForce(new Vector2(0, 600));
 
         yield return WAS;
+            player1.rig.velocity = new Vector2(1.3f, 0);
         while (player1.transform.position.x < -10)
         {
-
-            player1.rig.velocity = new Vector2(1.3f, 0);
             yield return WAS3;
         }
 
@@ -60,10 +60,11 @@ public class TextCrystal1 : Dialogue
         }
         CloseDialogue();
 
+            player1.Stop = true;
+            player1.rig.velocity = new Vector2(-3, 0);
         player1.transform.eulerAngles = new Vector3(0, 180, 0);
         while (player1.transform.position.x > -13.4)
         {
-            player1.rig.velocity = new Vector2(-3, 0);
             yield return WAS3;
         }
 
@@ -89,6 +90,7 @@ public class TextCrystal1 : Dialogue
     private void finishDialogue()
     {
         player1.Stop = false;
+        FindObjectOfType<Menu>().StopMenu = false;
         CloseDialogue();
 
         Destroy(gameObject);

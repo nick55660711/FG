@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public delegate void GMdelegate();
     public GMdelegate onChangeScene;
     Scene scene;
-    int PauseTime;
+   public int PauseTime;
     /// <summary>
     /// 暫時紀錄狀態 0：初始 1：暫時 2 : 轉場 
     /// </summary>
@@ -335,14 +335,14 @@ public class GameManager : MonoBehaviour
         camera1 = Camera.main.GetComponent<CameraControll>();
         camera1.CancelSet();
         PlayerPrefs.SetInt(scene.buildIndex + "itemNO", itemNo);
-        print(scene.buildIndex + "itemNO" + PlayerPrefs.GetInt(scene.name + "itemNO"));
+
         int i = 0;
         foreach (var item in FindObjectsOfType<SaveState>())
         {
             PlayerPrefs.SetInt(scene.name + item.name + 0, 0);
             //紀錄存檔物件名稱
             PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
-            print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
+     
             i++;
         }
 

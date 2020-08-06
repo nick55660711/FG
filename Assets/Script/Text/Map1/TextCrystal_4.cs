@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TextCrystal_4 : Dialogue
 {
     string[] DialogueText = new string[] {
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "一間小屋…，總覺得好像(按↑鍵進入)",
+        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "",
         };
 
 

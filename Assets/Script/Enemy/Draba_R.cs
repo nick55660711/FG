@@ -33,6 +33,7 @@ public class Draba_R : Draba_G
             BC.offset -= new Vector2(0, 1) * 0.05f;
             parent.size = BC.size;
             parent.offset = BC.offset;
+            SP_child.size -= new Vector2(0, 1) * 0.1f;
             SP.size -= new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
@@ -55,6 +56,7 @@ public class Draba_R : Draba_G
                 BC.offset += new Vector2(0, 1) * 0.05f;
                 parent.size = BC.size;
                 parent.offset = BC.offset;
+                SP_child.size += new Vector2(0, 1) * 0.1f;
                 SP.size += new Vector2(0, 1) * 0.1f;
                 yield return WAS3;
             }
@@ -75,13 +77,14 @@ public class Draba_R : Draba_G
             BC.offset -= new Vector2(0, 1) * 0.05f * speed;
             parent.size = BC.size;
             parent.offset = BC.offset;
+            SP_child.size -= new Vector2(0, 1) * 0.1f * speed;
             SP.size -= new Vector2(0, 1) * 0.1f * speed;
             yield return WAS3;
         }
         if (GetHit) { Destroy(parent.gameObject); }
         StartCoroutine(Grow_G());
     }
-
+    public SpriteRenderer SP_child;
     public override void Burn()
     {
         foreach (var item in GetComponentsInChildren<BoxCollider2D>())
@@ -90,6 +93,7 @@ public class Draba_R : Draba_G
         }
         StopAllCoroutines();
         ani.SetTrigger("Burn");
+        Destroy(parent.gameObject, 1.7f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

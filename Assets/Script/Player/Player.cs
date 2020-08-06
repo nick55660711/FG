@@ -123,6 +123,12 @@ public class Player : MonoBehaviour
 
     }
     public bool GetSword;
+
+    public GameObject bow;
+    public Sprite stay;
+    public Sprite shooter;
+    
+
     void change()
     {
         if (GetSword)
@@ -136,11 +142,15 @@ public class Player : MonoBehaviour
                 {
                     AttackType = Weapon.劍;
                     Sword.SetActive(true);
+                    bow.SetActive(false);
+                    GetComponent<SpriteRenderer>().sprite = stay;
                 }
 
                 else if ((int)AttackType == 1)
                 {
 
+                    GetComponent<SpriteRenderer>().sprite = shooter;
+                    bow.SetActive(true);
                     Sword.SetActive(false);
                     AttackType = Weapon.弓箭;
                 }
@@ -327,10 +337,10 @@ public class Player : MonoBehaviour
 
         #region 射線貼地判定
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
-        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")) )
+        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")) )
           
         {
-            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
+            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
 
 
             //若目標具有"地面"或"弓箭"標籤的物件 則判定為在地上
@@ -344,9 +354,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")))
+        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")))
         {
-            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
+            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
             if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow" || hit2.collider.tag == "Platform")
             {
                 On_GroundAll = true;
@@ -415,6 +425,8 @@ public class Player : MonoBehaviour
         if (PlayerPrefs.GetInt("Bow"+1)==0)
         {
             GetBow = false;
+            bow.SetActive(false);
+            GetComponent<SpriteRenderer>().sprite = stay;
         }
         
         if (PlayerPrefs.GetInt("Sword"+1)==0)
@@ -499,11 +511,13 @@ public class Player : MonoBehaviour
     {
         //圖示.顏色 = 顏色(R,G,B,A)
 
-
         Gizmos.color = new Color(1, 0, 0, 0.5f);
 
+        Gizmos.DrawLine(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.35f), 
+            new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f));
         // 圖示.繪製線條(起點,終點)
-        Gizmos.DrawLine(transform.position, transform.position + transform.right * StopDistance);
+        Gizmos.DrawLine(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.35f), 
+            new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f));
     }
 
 }

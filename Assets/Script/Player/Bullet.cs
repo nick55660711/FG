@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
 
 
     #region 方法
+    public GameObject fireball;
     void OnTriggerEnter2D(Collider2D other)
     {
         // 擊中目標為敵人(實體)時，傷害他
@@ -42,6 +43,12 @@ public class Bullet : MonoBehaviour
         
         if (other.CompareTag("Boss") && gameObject.CompareTag("Fire"))
         {
+            if (other.transform.parent.GetComponent<Boss>().CanBeHit)
+            {
+                GameObject tmp = Instantiate(fireball, transform.position + transform.right * 0.8f, transform.rotation);
+                tmp.transform.localScale = Vector2.one * 0.5f;
+                Destroy(tmp, 1);
+            }
             other.transform.parent.GetComponent<Boss>().damage(atk);
         }
 

@@ -11,7 +11,7 @@ public class Start : MonoBehaviour
     {
         for (int j = 1; j < SceneManager.sceneCountInBuildSettings; j++)
         {
-            print(SceneManager.sceneCountInBuildSettings);
+
             for (int i = 0; i < PlayerPrefs.GetInt(j + "itemNO"); i++)
             {
                 string SaveName = PlayerPrefs.GetString(j + i.ToString());

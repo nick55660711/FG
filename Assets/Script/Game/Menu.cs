@@ -29,11 +29,11 @@ public class Menu : MonoBehaviour
         GM = FindObjectOfType<GameManager>();
     }
 
-
+    public bool StopMenu;
     private void Update()
     {
 
-        if (Input.GetKeyDown("m"))
+        if (Input.GetKeyDown("m")&& !StopMenu)
         {
             OpenScreen = !OpenScreen;
             if (OpenScreen)  OptionOpen();
