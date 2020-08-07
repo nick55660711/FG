@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hit_call : Call_P
+public class Switch_call : Call_P
 {
-   
-   
-
-
-
-    
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.collider.CompareTag("Arrow")|| collision.collider.CompareTag("Sword")) && !OnTriger)
+        if (collision.CompareTag("Player") && !OnTriger)
         {
             OnTriger = true;
             if (!Open && !switch1)
@@ -42,14 +35,15 @@ public class Hit_call : Call_P
 
         }
 
+
     }
-  
+    protected virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && Autore)
+        {
+            Open = false;
+            SP.sprite = UP_S;
+        }
 
-  
-
-
-
-
-
-
+    }
 }

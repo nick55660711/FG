@@ -13,11 +13,32 @@ public class Moveplate_P : MonoBehaviour
 
     public bool horiz;
     public bool vertic;
+
+    [Header("反向移動")]
     public bool remove;
+    [Header("自動反向移動")]
     public bool revserse;
-    public bool Auto;
-    public bool Goal;
+    public bool AutoStart;
+    public bool Goal = true;
+    public bool detect;
+
+    [Header("自動恢復")]
+    public bool AutoReset;
+    
     WaitForSeconds WAS2 = new WaitForSeconds(2);
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && detect&&Goal)
+        {
+        StartCoroutine(Move());
+        }
+    }
+   
+
+
+
+
     public IEnumerator Move()
     {
         Goal = false;
@@ -45,8 +66,11 @@ public class Moveplate_P : MonoBehaviour
         }
 
         Goal = true;
-        if(remove) speed *= ReSpeed ;
+        if(remove)
+            speed *= ReSpeed ;
+
         
+
 
         if (revserse)
         {
@@ -59,13 +83,13 @@ public class Moveplate_P : MonoBehaviour
 
     private void Start()
     {
-        if (Auto)
+        if (AutoStart)
         {
             StartCoroutine(Move());
         }
     }
 
-
+     
 
 
 

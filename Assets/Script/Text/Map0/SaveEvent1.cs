@@ -15,7 +15,7 @@ public class SaveEvent1 : SaveState
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
             Trans0.GetComponent<Trans>().enabled = true;
-            Destroy(gameObject);
+            Destroy(gameObject, 0.2f);
         }
 
     }

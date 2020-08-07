@@ -58,7 +58,6 @@ public class Boss : MonoBehaviour
                 Kill = true;
                 StopAllCoroutines();
                 StartCoroutine(Grow_T_Fall());
-                StartCoroutine(Grow_G_FALL());
 
             }
             else
@@ -76,12 +75,12 @@ public class Boss : MonoBehaviour
    
 
 
-    Transform POS;
     GameObject tmp_T;
-    WaitForSeconds WAS = new WaitForSeconds(0.5f);
     /*
     IEnumerator Grow_T()
     {
+    Transform POS;
+    WaitForSeconds WAS = new WaitForSeconds(0.5f);
 
         if (Right) POS = Tower[1].transform.GetChild(0);
         else POS = Tower[0].transform.GetChild(0);
@@ -99,7 +98,6 @@ public class Boss : MonoBehaviour
     */
     public GameObject Draba_TB_R;
     public GameObject Draba_TB_L;
-    bool SHAKE= true;
     IEnumerator Grow_T()
     {
         float V = 1;
@@ -118,18 +116,17 @@ public class Boss : MonoBehaviour
         while (tmp_T.GetComponent<SpriteRenderer>().size.y < 5.5f)
         {
 
-            if (SHAKE)
-            {
+           
                 if (MC.transform.position.y > 5f) V = -1;
                 if (MC.transform.position.y < 4.36f) V = 1;
                 MC.transform.Translate(new Vector2(0, 1) * V * 0.04f);
-            }
              
             
             tmp_T.GetComponent<BoxCollider2D>().offset += new Vector2(0, 1) * 0.05f;
             tmp_T.GetComponent<SpriteRenderer>().size += new Vector2(0, 1) * 0.05f;
             yield return WAS3;
         }
+        player1.Stop = false;
         CanBeHit = true;
         MC.SetON = false;
         StartCoroutine(Grow());
@@ -148,17 +145,22 @@ public class Boss : MonoBehaviour
             yield return WAS3;
         }
         Right = !Right;
-        if (!Kill) {
             Vector2 RandomPox = new Vector2(Torch[ID].transform.position.x, -2);
             GameObject tmp = Instantiate(Draba[2], RandomPox, Quaternion.Euler(0, 0, 0));
 
+        if (!Kill) {
             ID++;
             Torch[ID].GetComponent<Torch>().FireUP();
             WaitForSeconds WAS2 = new WaitForSeconds(5-ID/2);
             GetComponent<Boss_V>().Overdrive();
             StartCoroutine(Grow_T());
-        } 
-        
+        }
+        else
+        {
+            GetComponent<Boss_V>().enabled = false;
+            Draba_G.GetComponent<BoxCollider2D>().isTrigger = false;
+            StartCoroutine(Grow_G_FALL());
+        }
     }
 
  
@@ -250,7 +252,7 @@ public class Boss : MonoBehaviour
 
         Wall.enabled = false;
         Wall1.enabled = false;
-        player1.Stop = false;
+       
       
         Torch[0].GetComponent<Torch>().FireUP();
         GetComponent<Boss_V>().enabled = true;
@@ -263,13 +265,29 @@ public class Boss : MonoBehaviour
     public Transform Crystal_T;
 
     public SpriteRenderer Draba_B;
+
+    public SpriteRenderer Draba_G_fire;
+
+    public Animator Draba_back_fire; //高度 7.22f
     IEnumerator Grow_G_FALL()
     {
-        GetComponent<Boss_V>().enabled = false;
-        Draba_G.GetComponent<BoxCollider2D>().isTrigger = false;
+        yield return new WaitForSeconds(1.2f);
+        Draba_back_fire.SetTrigger("Burn");
+        Draba_G.GetComponent<Animator>().SetTrigger("Burn");
 
         int V = 1;
         MC.SetON = true;
+
+        while (Draba_G_fire.size.x < 52f)
+        {
+
+
+            if (MC.transform.position.y > 5f) V = -1;
+            if (MC.transform.position.y < 4.36f) V = 1;
+            MC.transform.Translate(new Vector2(0, 1) * V * 0.05f);
+            yield return WAS3;
+        }
+        /*
         while (Draba_G.size.x > 0.1f)
         {
 
@@ -280,7 +298,7 @@ public class Boss : MonoBehaviour
             Draba_G.GetComponent<BoxCollider2D>().offset += new Vector2(1, 0) * 0.2f;
             yield return WAS3;
         }
-
+        */
         MC.SetON = false;
 
         while (Draba_T.size.y > 0.1f)
@@ -294,15 +312,16 @@ public class Boss : MonoBehaviour
         Tower[1].GetComponent<BoxCollider2D>().enabled = false;
 
         yield return WAS2;
-        Destroy(Draba_G);
+        Destroy(Draba_G.gameObject);
         Destroy(Draba_TB_R);
         Destroy(Draba_TB_L);
-        Destroy(Draba_T);
-        Destroy(Draba_T1);
-        Destroy(Draba_B);
+        Destroy(Draba_T.gameObject);
+        Destroy(Draba_T1.gameObject);
+        Destroy(Draba_B.gameObject);
        // Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
-        Step.SetActive(true);
-       // Crystal.transform.position = Crystal_T.position;
+        //Step.SetActive(true);
+        FindObjectOfType<AudioSource>().Stop();
+        // Crystal.transform.position = Crystal_T.position;
 
         Destroy(gameObject);
 
@@ -311,7 +330,7 @@ public class Boss : MonoBehaviour
 
 
 
-
+    public AudioSource SoundManager;
 
 
     #region 事件

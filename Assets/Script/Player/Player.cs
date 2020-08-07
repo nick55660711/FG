@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     public Animator ani;
     public CanvasGroup GameOverScreen;
     GameManager GM;
-    Transform PlayerStart;
     Scene scene;
 
     [Header("受傷力道")]
@@ -91,6 +90,7 @@ public class Player : MonoBehaviour
     }
 
     float v;
+    float v2;
 
 
 
@@ -106,11 +106,13 @@ public class Player : MonoBehaviour
         v = Input.GetAxis("Horizontal");
         
         if (v>0) { transform.eulerAngles = new Vector3(0, 0, 0);
+            v2 = 0;
         }
 
         else if(v<0)
         {
             transform.eulerAngles = new Vector3  (0, 180, 0);
+            v2 = 1;
         }
 
         rig.velocity = new Vector2( SpeedV * v , rig.velocity.y);
@@ -279,7 +281,7 @@ public class Player : MonoBehaviour
         if (CanBeHit)
         {
 
-            if (collision.gameObject.tag == "EnemyTrigger")
+            if (collision.gameObject.CompareTag ("EnemyTrigger"))
             {
                 if (Timer2 > TimeDamage)
                 {
@@ -331,20 +333,22 @@ public class Player : MonoBehaviour
 
 
 
-
     private void OnGround()
     {
 
         #region 射線貼地判定
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
-        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")) )
+        if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 
+            0.05f, LayerMask.GetMask("Ground")) )
           
         {
-            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
+            hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 
+                0.05f, LayerMask.GetMask("Ground"));
 
-
+            bool OnGround = hit1.collider.CompareTag( "Ground") || hit1.collider.CompareTag( "Arrow") ||
+                hit1.collider.CompareTag( "Platform") || hit1.collider.CompareTag( "Box");
             //若目標具有"地面"或"弓箭"標籤的物件 則判定為在地上
-            if (hit1.collider.tag == "Ground" || hit1.collider.tag == "Arrow" || hit1.collider.tag == "Platform")
+            if (OnGround)
             {
                 On_GroundAll = true;
             }
@@ -354,10 +358,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")))
+        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")))
         {
-            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
-            if (hit2.collider.tag == "Ground" || hit2.collider.tag == "Arrow" || hit2.collider.tag == "Platform")
+            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
+
+            bool OnGround = hit2.collider.CompareTag( "Ground" )|| hit2.collider.CompareTag( "Arrow") ||
+               hit2.collider.CompareTag( "Platform") || hit2.collider.CompareTag ("Box");
+            if (OnGround)
             {
                 On_GroundAll = true;
             }
@@ -390,7 +397,6 @@ public class Player : MonoBehaviour
         CanBeHit = true;
         scene = SceneManager.GetActiveScene();
         SoundManager = FindObjectOfType<AudioSource>();
-        print(scene.name);
         print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));
         if (PlayerPrefs.GetString(scene.name + "PlayerLocate") == null || PlayerPrefs.GetString(scene.name + "PlayerLocate") == "")
         {
@@ -513,11 +519,14 @@ public class Player : MonoBehaviour
 
         Gizmos.color = new Color(1, 0, 0, 0.5f);
 
-        Gizmos.DrawLine(new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.35f), 
-            new Vector2(transform.localPosition.x - 0.1f, transform.localPosition.y - 0.4f));
+        Gizmos.DrawLine(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), 
+            new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.4f));
         // 圖示.繪製線條(起點,終點)
-        Gizmos.DrawLine(new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.35f), 
-            new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y - 0.4f));
+        Gizmos.DrawLine(new Vector2(transform.localPosition.x + 0.15f - 0.05f * v2, transform.localPosition.y - 0.35f), 
+            new Vector2(transform.localPosition.x + 0.15f - 0.05f * v2, transform.localPosition.y - 0.4f));
+
+
+        //0.02582598
     }
 
 }

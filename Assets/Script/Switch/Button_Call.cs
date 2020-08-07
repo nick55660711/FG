@@ -2,77 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button_Call : MonoBehaviour
+public class Button_Call : Call_P
 {
-    public GameObject[] Door;
-    bool Open;
-
-    SpriteRenderer SP;
-    [Header("關閉圖片")]
-    public Sprite UP_S;
-    [Header("啟動圖片")]
-    public Sprite Down_S;
-    public bool OnTriger;
-    [Header("會自動彈回")]
-    public bool re;
-    [Header("反覆開關")]
-    public bool switch1;
-    private void Start()
-    {
-        SP = GetComponent<SpriteRenderer>();
-    }
+   
+   
 
 
-
-    IEnumerator trigerON()
-    {
-        foreach (var item in Door)
-        {
-            yield return new WaitUntil(() => { return item.GetComponent<Moveplate_P>().Goal; }); ;
-        }
-        OnTriger = false;
-    }
+   
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        SP.sprite = Down_S;
 
         if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && !OnTriger)
         {
             OnTriger = true;
             if (!Open && !switch1)
             {
-                SP.sprite = Down_S;
                 Open = true;
+                StartCoroutine(trigerON());
+
             }
 
-            if (switch1)
-            {
-                Open = !Open;
-                if (Open)
-                {
-                    SP.sprite = Down_S;
-                }
-                else
-                {
-                    SP.sprite = UP_S;
-                }
-            }
 
-            foreach (var item in Door)
-            {
-                StartCoroutine(item.GetComponent<Moveplate_P>().Move());
-            }
-            StartCoroutine(trigerON());
         }
 
     }
+
+    bool Ondelay;
+    bool buttonUP;
+    public IEnumerator DelayRe()
+    {
+
+        yield return new WaitForSeconds(delaytime);
+        SP.sprite = UP_S;
+        buttonUP = true;
+        foreach (var item in Door)
+        {
+            StartCoroutine(item.GetComponent<Moveplate_P>().Move());
+        }
+        foreach (var item in Door)
+        {
+            yield return new WaitUntil(() => { return item.GetComponent<Moveplate_P>().Goal; }); ;
+        }
+
+        buttonUP = false;
+        Open = false;
+        Ondelay = false;
+    }
+
+    /*
+    public IEnumerator DelayRe_call()
+    {
+
+    }
+    */
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && re)
+        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && Autore&&!Ondelay)
         {
-            Open = false;
-            SP.sprite = UP_S;
-        }
+            Ondelay = true;
+            StartCoroutine(DelayRe());
+           
+        }  
+
+        if(buttonUP) SP.sprite = UP_S;
 
     }
 

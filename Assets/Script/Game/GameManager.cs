@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     #region 方法
     public void Restart()
     {
-        print(scene.name);
+
         PlayerPrefs.SetFloat("HP" + 1, 100);
         StartCoroutine(BlackScreen(1, scene.name));
 
@@ -273,19 +273,24 @@ public class GameManager : MonoBehaviour
             print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
             i++;
         }
+            print("Boss:"+PlayerPrefs.GetInt("Map3BossTriger1" + 1));
+
         //讀取血量與碎片量
         player1.HP = PlayerPrefs.GetFloat("HP" + 1);
         Crystal_No = PlayerPrefs.GetFloat("Crystal_No" + 1);
         Herb_No = PlayerPrefs.GetFloat("Herb_No" + 1);
+        /*
         // enemy Layer不互相碰撞
         Physics2D.IgnoreLayerCollision(8, 8);
         Physics2D.IgnoreLayerCollision(8, 9);
 
-        for (int k = 0; k < 11; k++)
+        for (int k = 0; k < 13; k++)
         {
             if (k == 8) continue;
+            if (k == 13) continue;
             Physics2D.IgnoreLayerCollision(k, 11);
         }
+        */
 
         //更新UI
         HpText.text = "Hp : " + player1.HP;
@@ -362,10 +367,11 @@ public class GameManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9);
 
 
-        for (int i = 0; i < 11; i++)
+        for (int k = 0; k < 14; k++)
         {
-            if (i == 8) continue;
-            Physics2D.IgnoreLayerCollision(i, 11);
+            if (k == 8|| k == 10|| k == 12) continue;
+           
+            Physics2D.IgnoreLayerCollision(k, 11);
         }
 
         //更新UI

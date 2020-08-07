@@ -15,7 +15,7 @@ public class Torch : MonoBehaviour
     private void Start()
     {
         rota = transform;
-       rig = GetComponent<Rigidbody2D>();
+        rig = GetComponent<Rigidbody2D>();
         BOX = GetComponent<BoxCollider2D>();
         SPR = GetComponent<SpriteRenderer>();
     }
@@ -34,7 +34,7 @@ public class Torch : MonoBehaviour
     public void FireUP()
     {
         StartCoroutine(Grow_G());
-        BOX.enabled = true; 
+        BOX.enabled = true;
     }
 
     public void HitDown()
@@ -42,6 +42,7 @@ public class Torch : MonoBehaviour
         StartCoroutine(Rotate());
     }
 
+    public GameObject FireBall;
     IEnumerator Rotate()
     {
         rig.gravityScale = 5;
@@ -49,12 +50,21 @@ public class Torch : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         float y = rota.localEulerAngles.z;
         float targetY = y + angle;
+        Invoke("Boom", 0.5f);
         while (y < targetY)
         {
-            rota.localEulerAngles += Vector3.forward * Time.deltaTime * speed*10;
-            y -= Time.deltaTime * speed;
+            rota.localEulerAngles += Vector3.forward * Time.deltaTime * speed * 10;
+            y += Time.deltaTime * speed;
             yield return null;
         }
+
+
+
+    }
+
+    void Boom()
+    {
+        Instantiate(FireBall, Vector3.up * 0.6f + Vector3.right * transform.position.x, Quaternion.identity);
     }
 
 

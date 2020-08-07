@@ -14,8 +14,8 @@ public class TextCrystal1 : Dialogue
         "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "想不起來了……",
         "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "奇怪的水晶，在觸碰到的時候好像可以回想起一些事",
         "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "這裡是某座森林，而且我似乎很熟悉這片森林",
-        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "四處探索，找尋更多水晶看看吧" + "(移動：方向鍵、Z：跳躍、M：選單)"
-
+        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "四處探索，找尋更多水晶看看吧(移動：方向鍵\u00A0、\u00A0Z：跳躍\u00A0、\u00A0M：選單)"  ,
+       
     };
 
     private void OnTriggerEnter2D(Collider2D collision)

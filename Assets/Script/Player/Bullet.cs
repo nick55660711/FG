@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // 擊中目標為敵人(實體)時，傷害他
-        if (other.tag == "Enemy" )
+        if (other.CompareTag( "Enemy") )
         {
 
             // Instantiate(Effect, other.transform.position, other.transform.rotation);
@@ -39,6 +39,12 @@ public class Bullet : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = FireArrow;
             gameObject.tag = "Fire";
 
+        } 
+
+        if (other.CompareTag("Box"))
+        {
+            other.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000);
+            Destroy(gameObject);
         }
         
         if (other.CompareTag("Boss") && gameObject.CompareTag("Fire"))

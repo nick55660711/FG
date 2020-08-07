@@ -26,6 +26,11 @@ public class Sword : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy")) collision.GetComponent<Enemy>().damage(Atk); ;
+
+        if (collision.CompareTag("Box"))
+        {
+            collision.GetComponent<Rigidbody2D>().AddForce(transform.right * 4000);
+        }
     }
 
 

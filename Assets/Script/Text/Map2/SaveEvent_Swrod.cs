@@ -11,7 +11,7 @@ public class SaveEvent_Swrod : SaveState
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
             player1.GetSword = true;
-            Destroy(gameObject);
+            Destroy(gameObject, 0.2f);
         }
     }
     protected override void Start()

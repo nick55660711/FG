@@ -5,80 +5,49 @@ using UnityEngine;
 public class Call_P : MonoBehaviour
 {
     public GameObject[] Door;
-    bool Open;
+    public bool Open;
 
-    SpriteRenderer SP;
+    protected SpriteRenderer SP;
     [Header("關閉圖片")]
     public Sprite UP_S;
     [Header("啟動圖片")]
     public Sprite Down_S;
     [Header("會自動彈回")]
-    public bool re;
+    public bool Autore;
     [Header("反覆開關")]
     public bool switch1;
+
+    [Header("延遲彈回時間")]
+    public float delaytime;
+    /*
+    [Header("延遲彈回")]
+    public bool delay;
+    */
     public bool OnTriger;
-    private void Start()
+    protected virtual void Start()
     {
         SP = GetComponent<SpriteRenderer>();
     }
 
 
 
-    IEnumerator trigerON()
+    protected virtual IEnumerator trigerON()
     {
+        foreach (var item in Door)
+        {
+            StartCoroutine(item.GetComponent<Moveplate_P>().Move());
+        }
+
         foreach (var item in Door)
         {
         yield return new WaitUntil(() => { return item.GetComponent<Moveplate_P>().Goal; }); ;
         }
+        //if(!delay)
         OnTriger = false;
     }
+
+
     
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")&&!OnTriger)
-        {
-                OnTriger = true;
-            if (!Open && !switch1)
-            {
-                SP.sprite = Down_S;
-                Open = true;
-            }
-
-            if (switch1)
-            {
-                Open = !Open;
-                if (Open)
-                {
-                    SP.sprite = Down_S;
-                }
-                else
-                {
-                    SP.sprite = UP_S;
-                }
-            }
-
-            foreach (var item in Door)
-            {
-                StartCoroutine(item.GetComponent<Moveplate_P>().Move());
-            }
-            StartCoroutine(trigerON());
-        }
-            
-           
-        
-
-       
-
-    }
-   
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && re)
-        {
-          Open = false;
-            SP.sprite = UP_S;
-        }
-
-    }
+  
 }

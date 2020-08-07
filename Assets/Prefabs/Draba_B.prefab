@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
-  ATK: 0
+  ATK: 15
   B: {fileID: 0}
   GetHit: 0
   SPEEDV: 0.256

@@ -10,7 +10,7 @@ public class SaveState : MonoBehaviour, IClearData
 {
     public Scene scene;
     public GameManager GM;
-
+    public string Save_s;
 
 
     public void ClearData()
@@ -37,6 +37,7 @@ public class SaveState : MonoBehaviour, IClearData
     {
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
+            Destroy(FindObjectOfType<SoundOff>());
             Destroy(gameObject,0.2f);
         }
 
@@ -46,8 +47,9 @@ public class SaveState : MonoBehaviour, IClearData
     {
         scene = SceneManager.GetActiveScene();
         GM = FindObjectOfType<GameManager>();
-       
-        print(scene.name+gameObject.name + PlayerPrefs.GetInt(scene.name + gameObject.name + 1));
+
+        Save_s = scene.name + gameObject.name +"1:"+ PlayerPrefs.GetInt(scene.name + gameObject.name + 1);
+        //print(scene.name + gameObject.name + "1:" + PlayerPrefs.GetInt(scene.name + gameObject.name + 1));
         // 如果已觸發則摧毀
         destory();
          
