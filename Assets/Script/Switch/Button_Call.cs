@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Button_Call : Call_P
 {
-   
-   
+    public static int HitOn;
 
 
-   
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+
         SP.sprite = Down_S;
 
         if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && !OnTriger)
@@ -22,52 +20,23 @@ public class Button_Call : Call_P
                 Open = true;
                 StartCoroutine(trigerON());
 
+                HitOn += 1;
             }
 
 
         }
-
     }
 
-    bool Ondelay;
-    bool buttonUP;
-    public IEnumerator DelayRe()
-    {
 
-        yield return new WaitForSeconds(delaytime);
-        SP.sprite = UP_S;
-        buttonUP = true;
-        foreach (var item in Door)
-        {
-            StartCoroutine(item.GetComponent<Moveplate_P>().Move());
-        }
-        foreach (var item in Door)
-        {
-            yield return new WaitUntil(() => { return item.GetComponent<Moveplate_P>().Goal; }); ;
-        }
-
-        buttonUP = false;
-        Open = false;
-        Ondelay = false;
-    }
-
-    /*
-    public IEnumerator DelayRe_call()
-    {
-
-    }
-    */
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && Autore&&!Ondelay)
+        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && Autore)
         {
-            Ondelay = true;
-            StartCoroutine(DelayRe());
-           
+            HitOn -= 1;
+            SP.sprite = UP_S;
         }  
 
-        if(buttonUP) SP.sprite = UP_S;
 
     }
 
