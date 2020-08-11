@@ -5,36 +5,54 @@ using UnityEngine;
 public class Button_Call : Call_P
 {
     public static int HitOn;
-
-
+    public  int HitOn_1;
+    public int OnThing;
+    public bool MultipleTrigger;
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        SP.sprite = Down_S;
 
-        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && !OnTriger)
+        if ((collision.CompareTag("Player") || collision.CompareTag("Box")))
         {
-            OnTriger = true;
-            if (!Open && !switch1)
+            SP.sprite = Down_S;
+            OnThing++;
+            if (!OnTriger)
             {
-                Open = true;
-                StartCoroutine(trigerON());
 
+                OnTriger = true;
+
+                if (MultipleTrigger)
+                {
                 HitOn += 1;
+                HitOn_1 = HitOn; 
+
+                StartCoroutine(trigerON(HitOn));
+                }
+
+                else
+                StartCoroutine(trigerON());
             }
-
-
-        }
+        } 
     }
 
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) && Autore)
+        if ((collision.CompareTag("Player") || collision.CompareTag("Box")) )
         {
-            HitOn -= 1;
+            OnThing--;
+            if(OnThing == 0)
+            {
+                if (MultipleTrigger)
+                {
+
+                    HitOn -= 1;
+                    HitOn_1 = HitOn;
+                }
             SP.sprite = UP_S;
+            OnTriger = false;
+            }
         }  
 
 

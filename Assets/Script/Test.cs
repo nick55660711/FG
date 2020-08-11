@@ -20,16 +20,16 @@ public class Test : MonoBehaviour
 
     void Update()
     {
-
+        /*
 
         if (Input.GetKeyDown("r")) 
         {
             transform.position = Respwan.transform.position;
             PlayerPrefs.SetFloat("HP",100);
             PlayerPrefs.SetFloat("Crystal_No",0);
-
-
         }
+        */
+
         if (Input.GetKeyDown("e"))
         {
             GetComponent<Player>().HP = 100;
@@ -46,12 +46,6 @@ public class Test : MonoBehaviour
         // if (Input.GetKeyDown("t")) { SceneManager.LoadScene("Map0"); }
 
 
-        if (transform.localPosition.y < -10)
-        {
-
-            GetComponent<Player>().damage(100);
-            transform.localPosition = new Vector3(-5, 2, 0);
-        }
     }
 
 

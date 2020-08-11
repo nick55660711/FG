@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     public Text HpText;
     public Text CrystalText;
     public Text HerbText;
-    public delegate void GMdelegate();
-    public GMdelegate onChangeScene;
+    //public delegate void GMdelegate();
+    //public GMdelegate onChangeScene;
     Scene scene;
    public int PauseTime;
     /// <summary>
@@ -93,19 +93,89 @@ public class GameManager : MonoBehaviour
         player1.StartScene();
     }
 
-        /*
-        PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
-        print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
-            int i = 0;
-        foreach (var item in FindObjectsOfType<SaveState>())
+    IEnumerator BlackScreen()
+    {
+
+        for (int i = 0; i < 10; i++)
         {
-            PlayerPrefs.SetInt(scene.name + item.name + 0 ,0);
-            //紀錄存檔物件名稱
-            PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
-            print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
-            i++;
+
+            Blackout.alpha += 0.1f * 1;
+            yield return WAS;
+        }
+        Time.timeScale = 1;
+
+        if (menu_C.OpenScreen)
+        {
+            menu_C.OpenScreen = !menu_C.OpenScreen; menu_C.OptionClose();
+        }
+
+        SceneManager.LoadScene(0);
+
+
+        yield return WAS2;
+
+
+    }
+
+    WaitForSecondsRealtime WAS3 = new WaitForSecondsRealtime(1.5f);
+    WaitForSecondsRealtime WAS4 = new WaitForSecondsRealtime(0.1f);
+   public IEnumerator GameOver(CanvasGroup GameoverScreen)
+    {
+
+        for (int i = 0; i < 10; i++)
+        {
+
+            GameoverScreen.alpha += 0.1f;
+            yield return WAS4;
+
+        }
+        player1.rig.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        yield return WAS3;
+        for (int i = 1; i < 11; i++)
+        {
+
+            GameoverScreen.GetComponentsInChildren<Image>()[1].color = new Vector4(1,1,1,1)* 0.1f *i ;
+            yield return WAS4;
+
+        }
+        for (int i = 1; i < 11; i++)
+        {
+
+            GameoverScreen.GetComponentsInChildren<Image>()[2].color = new Vector4(1,1,1,1)* 0.1f *i ;
+            yield return WAS4;
+
+        }
+
+        GameoverScreen.blocksRaycasts = true;
+        GameoverScreen.interactable = true;
+
+        /*
+        if (menu_C.OpenScreen)
+        {
+            menu_C.OpenScreen = !menu_C.OpenScreen; menu_C.OptionClose();
         }
         */
+        // SceneManager.LoadScene(0);
+
+
+
+
+    }
+
+    /*
+    PlayerPrefs.SetInt(scene.buildIndex + "itemNO" , itemNo);
+    print(scene.buildIndex + "itemNO" +PlayerPrefs.GetInt(scene.name + "itemNO"));
+        int i = 0;
+    foreach (var item in FindObjectsOfType<SaveState>())
+    {
+        PlayerPrefs.SetInt(scene.name + item.name + 0 ,0);
+        //紀錄存檔物件名稱
+        PlayerPrefs.SetString(scene.buildIndex.ToString() + i, scene.name + item.name);
+        print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
+        i++;
+    }
+    */
     public void SaveAllData(int SaveID)
     {
         /// <summary>
@@ -167,6 +237,7 @@ public class GameManager : MonoBehaviour
             {
                 string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);
                 PlayerPrefs.SetInt(SaveName + 1, 0);
+                PlayerPrefs.SetInt(SaveName + 3, 0);
             }
         }
         if (Input.GetKeyDown("t"))
@@ -273,7 +344,7 @@ public class GameManager : MonoBehaviour
             print(scene.buildIndex.ToString() + i + PlayerPrefs.GetString(scene.buildIndex.ToString() + i));
             i++;
         }
-            print("Boss:"+PlayerPrefs.GetInt("Map3BossTriger1" + 1));
+            print("Boss:"+PlayerPrefs.GetInt("Map3BossTriger1"));
 
         //讀取血量與碎片量
         player1.HP = PlayerPrefs.GetFloat("HP" + 1);
@@ -303,12 +374,20 @@ public class GameManager : MonoBehaviour
 
     #region 事件
 
-    Button RestartButton;
+   // Button RestartButton;
     Button TitleButton;
     Button SaveButton;
     Button SaveButton2;
     Button SaveButton3;
     Menu menu_C;
+    public AudioSource SoundManager;
+    
+    public void SoundPlay(AudioClip sound)
+    {
+        SoundManager.PlayOneShot(sound);
+
+    }
+
 
     private void Awake()
     {
@@ -321,15 +400,15 @@ public class GameManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         itemNo = FindObjectsOfType<SaveState>().Length;
         HerbText = GameObject.Find("Herb_No_Text").GetComponent<Text>();
-
+        SoundManager = FindObjectOfType<AudioSource>();
         //按鈕
-        RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
+       // RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         TitleButton = GameObject.Find("Title_Button").GetComponent<Button>();
         SaveButton = GameObject.Find("Save_Button").GetComponent<Button>();
         SaveButton2 = GameObject.Find("Save_Button2").GetComponent<Button>();
         SaveButton3 = GameObject.Find("Save_Button3").GetComponent<Button>();
-        RestartButton.onClick.AddListener(() => { Restart(); });
-        TitleButton.onClick.AddListener(() => { Restart(); });
+       // RestartButton.onClick.AddListener(() => { Restart(); });
+        TitleButton.onClick.AddListener(() => { StartCoroutine(BlackScreen()); });
         SaveButton.onClick.AddListener(() => { SaveAllData(6); });
         SaveButton2.onClick.AddListener(() => { SaveAllData(7); });
         SaveButton3.onClick.AddListener(() => { SaveAllData(8); });

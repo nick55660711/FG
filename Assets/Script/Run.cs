@@ -32,7 +32,7 @@ public class Run : MonoBehaviour
             }
 
             // if (i == 1) { FindObjectOfType<Player>().GetComponent<Rigidbody2D>().gravityScale = 0; }
-            FindObjectOfType<Loader>().gameObject.SetActive(false);
+           // FindObjectOfType<Loader>().gameObject.SetActive(false);
         }
 
         SceneManager.LoadScene(0);

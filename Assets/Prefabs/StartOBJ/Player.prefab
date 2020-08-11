@@ -358,7 +358,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24900198, y: 0.6866269}
+  m_Size: {x: 0.25, y: 0.6866269}
   m_EdgeRadius: 0
 --- !u!114 &7409306003188740976
 MonoBehaviour:
@@ -404,6 +404,7 @@ MonoBehaviour:
   shooter: {fileID: 21300000, guid: 8b7b52dd1892fcd43811e62c92e26fd0, type: 3}
   ArrowShoot: {fileID: 8300000, guid: 6f8617246f0b7894d97ce8ad1445406f, type: 3}
   Sword: {fileID: 1312897839913508567}
+  hitsound: {fileID: 8300000, guid: 637ce29bc098b0442ac619e169588be2, type: 3}
   StopDistance: 0
 --- !u!114 &4927312192351495108
 MonoBehaviour:

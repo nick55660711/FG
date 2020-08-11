@@ -33,8 +33,8 @@ public class TextEvent_1 : Dialogue
 
 
     string[] DialogueText = new string[] { 
-        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "嗚嗚",
-        "少女：\n" + "\u00A0\u00A0\u00A0\u00A0" + "覺得…意識矇矓",
+        "少女：\n" + "" + "嗚嗚",
+        "少女：\n" + "" + "覺得…意識矇矓",
     
     
     };

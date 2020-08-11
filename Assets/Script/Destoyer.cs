@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Destoyer : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Destoyer : MonoBehaviour
         if (Input.GetKeyDown("p"))
         {
             PlayerPrefs.SetInt("Run", 0);
+            SceneManager.LoadScene(0);
         }
         
     }

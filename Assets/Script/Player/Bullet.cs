@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
             if (other.transform.parent.GetComponent<Boss>().CanBeHit)
             {
                 GameObject tmp = Instantiate(fireball, transform.position + transform.right * 0.8f, transform.rotation);
-                tmp.transform.localScale = Vector2.one * 0.5f;
+                tmp.transform.localScale = Vector2.one * 1.4f;
                 Destroy(tmp, 1);
             }
             other.transform.parent.GetComponent<Boss>().damage(atk);

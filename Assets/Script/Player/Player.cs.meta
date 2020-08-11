@@ -3,7 +3,19 @@ guid: f6abe83e531d47d43b2235b72ff9edd5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rig: {instanceID: 0}
+  - ani: {instanceID: 0}
+  - GameOverScreen: {instanceID: 0}
+  - Arrow: {instanceID: 0}
+  - CreateObject: {instanceID: 0}
+  - SoundManager: {instanceID: 0}
+  - bow: {instanceID: 0}
+  - stay: {instanceID: 0}
+  - shooter: {instanceID: 0}
+  - ArrowShoot: {instanceID: 0}
+  - Sword: {instanceID: 0}
+  - hitsound: {fileID: 8300000, guid: 637ce29bc098b0442ac619e169588be2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

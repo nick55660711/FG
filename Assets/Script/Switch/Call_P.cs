@@ -44,10 +44,23 @@ public class Call_P : MonoBehaviour
         }
         //if(!delay)
         OnTriger = false;
+
+    }
+
+    protected virtual IEnumerator trigerON(int TriggerNO)
+    {
+        foreach (var item in Door)
+        {
+            StartCoroutine(item.GetComponent<Moveplate_P>().Move(TriggerNO));
+        }
+
+        foreach (var item in Door)
+        {
+            yield return new WaitUntil(() => { return item.GetComponent<Moveplate_P>().Goal; }); ;
+        }
+        OnTriger = false;
     }
 
 
-    
 
-  
 }

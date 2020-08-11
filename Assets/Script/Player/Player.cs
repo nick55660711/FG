@@ -264,14 +264,17 @@ public class Player : MonoBehaviour
             Stop = true;
             OnDead();
             CanBeHit = false;
-            GameOverScreen.alpha = 1;
-            GameOverScreen.blocksRaycasts = true;
-            GameOverScreen.interactable = true;
+            rig.constraints = RigidbodyConstraints2D.FreezePositionX;
+            StartCoroutine(GM.GameOver(GameOverScreen));
+           
 
         }
 
+      
+
     }
 
+    public AudioClip hitsound;
     /// <summary>
     /// 被敵人碰撞
     /// </summary>
@@ -288,8 +291,9 @@ public class Player : MonoBehaviour
                     float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
                     damage(collision.gameObject.GetComponentInParent<Enemy>().ATK);
                     transform.Translate(v * T1, T2, 0);
-                    rig.AddForce(new Vector2(v * F1, F2));
+                    rig.AddForce(new Vector2(v * F1, F2)*0.8f);
                     GM.HpUpdate();
+                    SoundManager.PlayOneShot(hitsound,0.7f);
                 }
             }
 
@@ -302,8 +306,9 @@ public class Player : MonoBehaviour
                     float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
                     damage(collision.gameObject.GetComponentInParent<Boss>().ATK);
                     transform.Translate(v * T1, T2, 0);
-                    rig.AddForce(new Vector2(v * F1, F2));
+                    rig.AddForce(new Vector2(v * F1, F2) * 0.8f);
                     GM.HpUpdate();
+                    SoundManager.PlayOneShot(hitsound, 0.7f);
                 }
             }
 
@@ -314,8 +319,9 @@ public class Player : MonoBehaviour
                     float v = Mathf.Abs(transform.position.x - collision.transform.position.x) / (transform.position.x - collision.transform.position.x);
                     damage(collision.gameObject.GetComponentInParent<Draba_G>().ATK);
                     transform.Translate(v * T1, T2, 0);
-                    rig.AddForce(new Vector2(v * F1, F2));
+                    rig.AddForce(new Vector2(v * F1, F2) * 0.8f);
                     GM.HpUpdate();
+                    SoundManager.PlayOneShot(hitsound, 0.7f);
                 }
             }
         }
@@ -390,9 +396,7 @@ public class Player : MonoBehaviour
 
     public void StartScene()
     {
-        GameOverScreen.alpha = 0;
-        GameOverScreen.blocksRaycasts = false;
-        GameOverScreen.interactable = false;
+       
         Stop = false;
         CanBeHit = true;
         scene = SceneManager.GetActiveScene();
@@ -494,8 +498,21 @@ public class Player : MonoBehaviour
         Timer3 += Time.deltaTime;
 
         ani.SetFloat("DamageTimer", Timer2);
-       
 
+        if (transform.localPosition.y < -5)
+        {
+            GetComponent<Player>().damage(100);
+        }
+
+        if (GameOverScreen.interactable == true && Input.GetKeyDown("r"))
+        {
+            GameOverScreen.alpha = 0;
+            GameOverScreen.blocksRaycasts = false;
+            GameOverScreen.interactable = false;
+            GameOverScreen.GetComponentsInChildren<Image>()[1].color = new Vector4(1, 1, 1, 0);
+            GameOverScreen.GetComponentsInChildren<Image>()[2].color = new Vector4(1, 1, 1, 0);
+            GM.Restart();
+        }
     }
 
     private void FixedUpdate()

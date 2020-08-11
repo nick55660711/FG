@@ -9,7 +9,7 @@ public class TextNPC_2 : Dialogue
 
 
     string[] DialogueText = new string[] {
-        "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "請蒐集3份藥草",
+        "???：\n"  + "" + "請蒐集3份藥草",
                                             };
 
 
@@ -28,16 +28,16 @@ public class TextNPC_2 : Dialogue
                 if (GM.Herb_No == 4)
                 {
                     DialogueText = new string[] {
-                    "男：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "感謝你的協助，城堡的門已經打開了",
-                    "女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "順便為你進行治療",
-                    "女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "……希望服用這些藥草後她的病情會好轉",
+                    "男：\n"  + "" + "感謝你的協助，城堡的門已經打開了",
+                    "女：\n"  + "" + "順便為你進行治療",
+                    "女：\n"  + "" + "……希望服用這些藥草後她的病情會好轉",
                                             };
 
                 }
                 else
                 {
                     DialogueText = new string[] {
-                        "???：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "數量不夠，總共需要4份",
+                        "???：\n"  + "" + "數量不夠，總共需要4份",
                                             };
                     Re = true;
                 }

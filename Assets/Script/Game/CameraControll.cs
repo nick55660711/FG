@@ -27,6 +27,7 @@ public class CameraControll : MonoBehaviour
         SetON = true;
         transform.position = new Vector3(player1.transform.position.x, Y, -10);
     }
+
     public void CancelSet()
     {
 
@@ -41,7 +42,7 @@ public class CameraControll : MonoBehaviour
         player1 = FindObjectOfType<Player>();
         player1.OnDead += () => { SetON = true; };
         CancelSet();
-        GM.onChangeScene += CancelSet;
+      //  GM.onChangeScene += CancelSet;
     }
 
 

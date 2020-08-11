@@ -100,6 +100,7 @@ public class Boss : MonoBehaviour
     public GameObject Draba_TB_L;
     IEnumerator Grow_T()
     {
+        SoundEffect.Play();
         float V = 1;
         MC.SetON = true;
 
@@ -129,6 +130,7 @@ public class Boss : MonoBehaviour
         player1.Stop = false;
         CanBeHit = true;
         MC.SetON = false;
+        SoundEffect.Stop();
         StartCoroutine(Grow());
     }
 
@@ -202,7 +204,7 @@ public class Boss : MonoBehaviour
 
 
 
-
+    public AudioClip EarthQuake;
 
 
     IEnumerator Grow_G()
@@ -214,12 +216,14 @@ public class Boss : MonoBehaviour
         MC.SetON = true;
 
         int T = 0;
+            SoundEffect.Play();
         while (T <100)
         {
             if (MC.transform.position.y > 5f) V = -1;
             if (MC.transform.position.y < 4.36f) V = 1;
             MC.transform.Translate(new Vector2(0, 1) * V * 0.09f);
             T++;
+
             yield return WAS3;
         }
 
@@ -274,7 +278,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         Draba_back_fire.SetTrigger("Burn");
         Draba_G.GetComponent<Animator>().SetTrigger("Burn");
-
+        SoundEffect.Play();
         int V = 1;
         MC.SetON = true;
 
@@ -287,6 +291,7 @@ public class Boss : MonoBehaviour
             MC.transform.Translate(new Vector2(0, 1) * V * 0.05f);
             yield return WAS3;
         }
+        Destroy(Draba_G.gameObject);
         /*
         while (Draba_G.size.x > 0.1f)
         {
@@ -310,17 +315,16 @@ public class Boss : MonoBehaviour
        
         Tower[0].GetComponent<BoxCollider2D>().enabled = false;
         Tower[1].GetComponent<BoxCollider2D>().enabled = false;
-
+        SoundEffect.Stop();
         yield return WAS2;
-        Destroy(Draba_G.gameObject);
         Destroy(Draba_TB_R);
         Destroy(Draba_TB_L);
         Destroy(Draba_T.gameObject);
         Destroy(Draba_T1.gameObject);
         Destroy(Draba_B.gameObject);
-       // Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
+        // Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
         //Step.SetActive(true);
-        FindObjectOfType<AudioSource>().Stop();
+        SoundManager.Stop();
         // Crystal.transform.position = Crystal_T.position;
 
         Destroy(gameObject);
@@ -331,6 +335,7 @@ public class Boss : MonoBehaviour
 
 
     public AudioSource SoundManager;
+    public AudioSource SoundEffect;
 
 
     #region 事件
@@ -338,12 +343,15 @@ public class Boss : MonoBehaviour
     protected virtual void Start()
     {
         player1 = FindObjectOfType<Player>();
-        
+        SoundManager = FindObjectOfType<AudioSource>();
         Tower[0].GetComponent<BoxCollider2D>().enabled = true;
         Tower[1].GetComponent<BoxCollider2D>().enabled = true;
         Right = true;
-        StartCoroutine(Grow_G());
 
+        SoundEffect = Instantiate(SoundManager);
+        SoundEffect.clip = EarthQuake;
+        SoundEffect.Stop();
+        StartCoroutine(Grow_G());
     }
 
   

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextCrystal_Map3_P : Dialogue
+public class TextCrystat_Extra : Dialogue
 {
     string[] DialogueText = new string[] {
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + "騎士之劍",
-        "少女：\n"  + "\u00A0\u00A0\u00A0\u00A0" + ""
+        "少女：\n"  + "" + "騎士配備的劍，應該能用這把劍斬斷藤蔓",
+       "少女：\n"  + "" +"弟弟生前的持有物，心好痛…",
+        "少女：\n"  + "" + "(A切換武器，可以使用劍來砍除藤蔓)",
                                             };
 
 
@@ -24,6 +25,7 @@ public class TextCrystal_Map3_P : Dialogue
     protected override void Start()
     {
         base.Start();
+        GetComponent<Crystal>().ID = 1;
     }
 
     private void finishDialogue()

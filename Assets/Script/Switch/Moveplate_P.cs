@@ -21,7 +21,9 @@ public class Moveplate_P : MonoBehaviour
     public bool AutoStart;
     public bool Goal = true;
     public bool detect;
-
+    public AudioSource SoundManager;
+    public AudioClip MoveSound;
+    public float volume;
     [Header("自動恢復")]
     public bool AutoReset;
     
@@ -34,7 +36,47 @@ public class Moveplate_P : MonoBehaviour
         StartCoroutine(Move());
         }
     }
-   
+
+    public bool Open;
+    [Header("需要按下的複數開關數量")]
+    public int OpenNO;
+
+    public IEnumerator Move(int TriggerNO)
+    {
+        if (TriggerNO == OpenNO && !Open)
+        {
+            Open = true;
+            Goal = false;
+            float dis = 0;
+            if (horiz)
+            {
+
+                while (dis < Hor)
+                {
+                    transform.Translate(Vector2.right * Time.deltaTime * speed);
+                    dis += Time.deltaTime * Mathf.Abs(speed);
+                    SoundManager.PlayOneShot(MoveSound, volume);
+                   yield return null;
+                }
+            }
+
+            if (vertic)
+            {
+
+                while (dis < Ver)
+                {
+                    transform.Translate(Vector2.up * Time.deltaTime * speed);
+                    dis += Time.deltaTime * Mathf.Abs(speed);
+                    SoundManager.PlayOneShot(MoveSound, volume);
+                    yield return null;
+                }
+            }
+
+            Goal = true;
+
+        }
+
+    }
 
 
 
@@ -50,6 +92,7 @@ public class Moveplate_P : MonoBehaviour
             {
                 transform.Translate(Vector2.right * Time.deltaTime * speed);
                 dis += Time.deltaTime * Mathf.Abs(speed);
+                SoundManager.PlayOneShot(MoveSound, volume);
                 yield return null;
             }
         }
@@ -61,6 +104,7 @@ public class Moveplate_P : MonoBehaviour
             {
                 transform.Translate(Vector2.up * Time.deltaTime * speed);
                 dis += Time.deltaTime * Mathf.Abs(speed);
+                SoundManager.PlayOneShot(MoveSound, volume);
                 yield return null;
             }
         }
@@ -83,6 +127,7 @@ public class Moveplate_P : MonoBehaviour
 
     private void Start()
     {
+        SoundManager = FindObjectOfType<AudioSource>();
         if (AutoStart)
         {
             StartCoroutine(Move());
