@@ -19,7 +19,7 @@ public class Boss_V : MonoBehaviour
 
 
             float X = player1.position.x;
-            Vector2 RandomPox = new Vector2(Random.Range(X-3, X+3), -0.9f);
+            Vector2 RandomPox = new Vector2(Random.Range(X-3, X+3), -0.3f);
             GameObject tmp = Instantiate(Draba[0], RandomPox, Quaternion.Euler(0, 0, 0));
             tmp.transform.SetParent(transform);
         }

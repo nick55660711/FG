@@ -4948,6 +4948,7 @@ MonoBehaviour:
   GM: {fileID: 0}
   HerbImage: {fileID: 0}
   Trans: {fileID: 582791410}
+  Heal: {fileID: 8300000, guid: 142f3c80fad3694478dc8aaa4dd2bf17, type: 3}
 --- !u!114 &1566146575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6196,7 +6197,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 1812ab30e218ebd4091ca3530d9cc63c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.7176471}
   m_FlipX: 0

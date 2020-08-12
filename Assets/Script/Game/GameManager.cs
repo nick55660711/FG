@@ -117,11 +117,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    WaitForSecondsRealtime WAS3 = new WaitForSecondsRealtime(1.5f);
+    WaitForSecondsRealtime WAS3 = new WaitForSecondsRealtime(1f);
     WaitForSecondsRealtime WAS4 = new WaitForSecondsRealtime(0.1f);
    public IEnumerator GameOver(CanvasGroup GameoverScreen)
     {
-
+        print("GO");
         for (int i = 0; i < 10; i++)
         {
 
@@ -131,18 +131,20 @@ public class GameManager : MonoBehaviour
         }
         player1.rig.constraints = RigidbodyConstraints2D.FreezeRotation;
 
+        print("GameO");
         yield return WAS3;
-        for (int i = 1; i < 11; i++)
+        for (int i = 1; i <6; i++)
         {
 
-            GameoverScreen.GetComponentsInChildren<Image>()[1].color = new Vector4(1,1,1,1)* 0.1f *i ;
+            GameoverScreen.GetComponentsInChildren<Image>()[1].color = new Vector4(1,1,1,1)* 0.2f *i ;
             yield return WAS4;
 
         }
-        for (int i = 1; i < 11; i++)
+        print("Over");
+        for (int i = 1; i < 6; i++)
         {
 
-            GameoverScreen.GetComponentsInChildren<Image>()[2].color = new Vector4(1,1,1,1)* 0.1f *i ;
+            GameoverScreen.GetComponentsInChildren<Image>()[2].color = new Vector4(1,1,1,1)* 0.2f *i ;
             yield return WAS4;
 
         }

@@ -16,7 +16,7 @@ public class Button_Call : Call_P
         {
             SP.sprite = Down_S;
             OnThing++;
-            if (!OnTriger)
+            if (!OnTriger&& OnThing==1)
             {
 
                 OnTriger = true;
@@ -51,7 +51,6 @@ public class Button_Call : Call_P
                     HitOn_1 = HitOn;
                 }
             SP.sprite = UP_S;
-            OnTriger = false;
             }
         }  
 

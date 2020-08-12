@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
 
         if (other.CompareTag("Box"))
         {
-            other.GetComponent<Rigidbody2D>().AddForce(transform.right * 1000);
+            other.GetComponent<Rigidbody2D>().AddForce(transform.right * 2000);
             Destroy(gameObject);
         }
         

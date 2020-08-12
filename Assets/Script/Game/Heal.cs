@@ -11,9 +11,10 @@ public class Heal : MonoBehaviour
 
 
 
-
+    public AudioClip HealSound;
     public void heal()
     {
+        FindObjectOfType<AudioSource>().PlayOneShot(HealSound);
         player1.HP = GM.HP_MAX;
         GM.HpUpdate();
 

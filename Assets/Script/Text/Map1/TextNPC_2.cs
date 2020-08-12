@@ -67,8 +67,8 @@ public class TextNPC_2 : Dialogue
         }
         else { DialogueID = 0; }
     }
-     
 
+    public AudioClip Heal;
     private void Update()
     {
         if (DialogueON && Input.GetKeyDown("c"))
@@ -83,6 +83,7 @@ public class TextNPC_2 : Dialogue
             else
             {
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
+                if (DialogueID == 1) FindObjectOfType<AudioSource>().PlayOneShot(Heal);
             }
 
 

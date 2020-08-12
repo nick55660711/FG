@@ -499,7 +499,7 @@ public class Player : MonoBehaviour
 
         ani.SetFloat("DamageTimer", Timer2);
 
-        if (transform.localPosition.y < -5)
+        if (transform.localPosition.y < -5&& CanBeHit)
         {
             GetComponent<Player>().damage(100);
         }

@@ -21,7 +21,7 @@ public class Moveplate_P : MonoBehaviour
     public bool AutoStart;
     public bool Goal = true;
     public bool detect;
-    public AudioSource SoundManager;
+    //public AudioSource SoundManager;
     public AudioClip MoveSound;
     public float volume;
     [Header("自動恢復")]
@@ -41,8 +41,14 @@ public class Moveplate_P : MonoBehaviour
     [Header("需要按下的複數開關數量")]
     public int OpenNO;
 
+    static AudioSource instance;
+   
+
+    
     public IEnumerator Move(int TriggerNO)
     {
+       
+
         if (TriggerNO == OpenNO && !Open)
         {
             Open = true;
@@ -50,26 +56,28 @@ public class Moveplate_P : MonoBehaviour
             float dis = 0;
             if (horiz)
             {
+                instance.Play();
 
                 while (dis < Hor)
                 {
                     transform.Translate(Vector2.right * Time.deltaTime * speed);
                     dis += Time.deltaTime * Mathf.Abs(speed);
-                    SoundManager.PlayOneShot(MoveSound, volume);
                    yield return null;
                 }
+                instance.Stop();
+
             }
 
             if (vertic)
             {
-
+                instance.Play();
                 while (dis < Ver)
                 {
                     transform.Translate(Vector2.up * Time.deltaTime * speed);
                     dis += Time.deltaTime * Mathf.Abs(speed);
-                    SoundManager.PlayOneShot(MoveSound, volume);
                     yield return null;
                 }
+                instance.Stop();
             }
 
             Goal = true;
@@ -83,30 +91,32 @@ public class Moveplate_P : MonoBehaviour
 
     public IEnumerator Move()
     {
+       
+
         Goal = false;
         float dis = 0;
         if (horiz)
         {
-
+            instance.Play();
             while (dis < Hor)
             {
                 transform.Translate(Vector2.right * Time.deltaTime * speed);
                 dis += Time.deltaTime * Mathf.Abs(speed);
-                SoundManager.PlayOneShot(MoveSound, volume);
                 yield return null;
             }
+            instance.Stop();
         }
 
         if (vertic)
         {
-
+            instance.Play();
             while (dis < Ver)
             {
                 transform.Translate(Vector2.up * Time.deltaTime * speed);
                 dis += Time.deltaTime * Mathf.Abs(speed);
-                SoundManager.PlayOneShot(MoveSound, volume);
                 yield return null;
             }
+            instance.Stop();
         }
 
         Goal = true;
@@ -127,7 +137,17 @@ public class Moveplate_P : MonoBehaviour
 
     private void Start()
     {
-        SoundManager = FindObjectOfType<AudioSource>();
+       // SoundManager = FindObjectOfType<AudioSource>();
+        if (instance == null)
+        {
+            GameObject tmp = new GameObject("SoundEffect");
+            instance = tmp.AddComponent<AudioSource>();
+            instance.clip = MoveSound;
+            instance.loop = true;
+        }
+
+        print(gameObject.name);
+
         if (AutoStart)
         {
             StartCoroutine(Move());
