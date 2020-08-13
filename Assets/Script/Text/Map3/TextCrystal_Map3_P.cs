@@ -40,6 +40,8 @@ public class TextCrystal_Map3_P : Dialogue
             blackscreen.color = new Vector4(0,0, 0, 0.1f * i);
             yield return WAS4;
         }
+        OpenDialogue();
+        DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
 
 
     }
@@ -47,9 +49,8 @@ public class TextCrystal_Map3_P : Dialogue
     {
         if (collision.tag == "Player")
         {
+            Time.timeScale = 0;
             StartCoroutine(end(1,6));
-            OpenDialogue();
-            DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
 
     }

@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     public int atk;
     public Rigidbody2D rig;
     public Sprite FireArrow;
+    public AudioClip FireUp;
     #endregion 
 
 
@@ -53,6 +54,7 @@ public class Bullet : MonoBehaviour
             {
                 GameObject tmp = Instantiate(fireball, transform.position + transform.right * 0.8f, transform.rotation);
                 tmp.transform.localScale = Vector2.one * 1.4f;
+                FindObjectOfType<AudioSource>().PlayOneShot(FireUp, 0.8f);
                 Destroy(tmp, 1);
             }
             other.transform.parent.GetComponent<Boss>().damage(atk);
@@ -60,6 +62,7 @@ public class Bullet : MonoBehaviour
 
         if (other.CompareTag("Draba") && gameObject.CompareTag("Fire"))
         {
+            FindObjectOfType<AudioSource>().PlayOneShot(FireUp, 0.8f);
             other.transform.GetComponent<Draba_G>().Burn();        
         }
 

@@ -103,6 +103,7 @@ public class Title : MonoBehaviour
 
     private void Start()
     {
+        print(gameObject.name);
         // 聲音控制
         AudioListener.volume = SoundSlider.value;
         if (SoundOFF) { AudioListener.pause = true; SoundButtonImage.sprite = SoundCloseSprie; }; //聲音關閉

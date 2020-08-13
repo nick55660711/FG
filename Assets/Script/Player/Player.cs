@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
             v2 = 1;
         }
 
+        if(Timer2>0.1f)
         rig.velocity = new Vector2( SpeedV * v , rig.velocity.y);
 
         // transform.Translate(Speed * Mathf.Abs(v)*Time.deltaTime , 0f, 0f);
@@ -167,7 +168,7 @@ public class Player : MonoBehaviour
 
     public void jump() 
     {
-        if (On_GroundAll && Input.GetKeyDown("z"))
+        if (On_GroundAll && Input.GetKeyDown("z")&&Timer3>0.1f)
         {
             rig.AddForce(new Vector2(0, JumpH));
             Timer3 = 0;
@@ -265,7 +266,8 @@ public class Player : MonoBehaviour
             OnDead();
             CanBeHit = false;
             rig.constraints = RigidbodyConstraints2D.FreezePositionX;
-            StartCoroutine(GM.GameOver(GameOverScreen));
+            SoundManager.Stop();
+           StartCoroutine(GM.GameOver(GameOverScreen));
            
 
         }
@@ -345,11 +347,11 @@ public class Player : MonoBehaviour
         #region 射線貼地判定
         // 向下射出一道射線偵測，如果有擊中目標則往下執行
         if (Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 
-            0.05f, LayerMask.GetMask("Ground")) )
+            0.08f, LayerMask.GetMask("Ground")) )
           
         {
             hit1 = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.15f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 
-                0.05f, LayerMask.GetMask("Ground"));
+                0.08f, LayerMask.GetMask("Ground"));
 
             bool OnGround = hit1.collider.CompareTag( "Ground") || hit1.collider.CompareTag( "Arrow") ||
                 hit1.collider.CompareTag( "Platform") || hit1.collider.CompareTag( "Box");
@@ -364,9 +366,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground")))
+        else if (Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 0.08f, LayerMask.GetMask("Ground")))
         {
-            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 0.05f, LayerMask.GetMask("Ground"));
+            hit2 = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.1f - 0.05f * v2, transform.localPosition.y - 0.35f), Vector2.down, 0.08f, LayerMask.GetMask("Ground"));
 
             bool OnGround = hit2.collider.CompareTag( "Ground" )|| hit2.collider.CompareTag( "Arrow") ||
                hit2.collider.CompareTag( "Platform") || hit2.collider.CompareTag ("Box");
@@ -511,6 +513,7 @@ public class Player : MonoBehaviour
             GameOverScreen.interactable = false;
             GameOverScreen.GetComponentsInChildren<Image>()[1].color = new Vector4(1, 1, 1, 0);
             GameOverScreen.GetComponentsInChildren<Image>()[2].color = new Vector4(1, 1, 1, 0);
+            SoundManager.Play();
             GM.Restart();
         }
     }

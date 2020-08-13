@@ -297,14 +297,14 @@ public class GameManager : MonoBehaviour
 
                 //道具+1
                 Crystal_No += 1;
-                CrystalText.text = " : " + Crystal_No;
+                CrystalText.text = "  " + Crystal_No;
 
                 break;
 
             case 1:
                 Herb_No++;
 
-                HerbText.text = " : " + Herb_No;
+                HerbText.text = "  " + Herb_No;
 
                 break;
         }
@@ -368,8 +368,8 @@ public class GameManager : MonoBehaviour
         //更新UI
         HpText.text = "Hp : " + player1.HP;
         HP_Bar.fillAmount = player1.HP / HP_MAX;
-        CrystalText.text = " : " + Crystal_No;
-        HerbText.text = " : " + Herb_No;
+        CrystalText.text = "  " + Crystal_No;
+        HerbText.text = "  " + Herb_No;
 
 
     }
@@ -458,8 +458,8 @@ public class GameManager : MonoBehaviour
         //更新UI
         HpText.text = "Hp : " + player1.HP;
         HP_Bar.fillAmount = player1.HP / HP_MAX;
-        CrystalText.text = " : " + Crystal_No;
-        HerbText.text = " : " + Herb_No;
+        CrystalText.text = "  " + Crystal_No;
+        HerbText.text = "  " + Herb_No;
 
         PauseTime = 0;
 

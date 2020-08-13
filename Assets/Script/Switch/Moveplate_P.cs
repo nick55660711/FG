@@ -91,7 +91,10 @@ public class Moveplate_P : MonoBehaviour
 
     public IEnumerator Move()
     {
-       
+
+
+        if (Goal)
+        {
 
         Goal = false;
         float dis = 0;
@@ -131,6 +134,7 @@ public class Moveplate_P : MonoBehaviour
             speed *= ReSpeed;
         yield return WAS2;
             StartCoroutine(Move());
+        }
         }
 
     }

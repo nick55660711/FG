@@ -25,7 +25,7 @@ public class CameraControll : MonoBehaviour
 
     public void Shake() {
         SetON = true;
-        transform.position = new Vector3(player1.transform.position.x, Y, -10);
+        transform.position = new Vector3(player1.transform.position.x, Y, depth);
     }
 
     public void CancelSet()
@@ -34,9 +34,11 @@ public class CameraControll : MonoBehaviour
         SetON = false;
 
     }
-
+    float depth = -10;
     private void Start()
     {
+        //transform.rotation = Quaternion.Euler(Vector3.zero);
+        //depth = -10;
         Y_fix = 0;
        GM = FindObjectOfType<GameManager>();
         player1 = FindObjectOfType<Player>();
@@ -44,10 +46,32 @@ public class CameraControll : MonoBehaviour
         CancelSet();
       //  GM.onChangeScene += CancelSet;
     }
+    /*
+    bool reverse;
+    WaitForSecondsRealtime WAS = new WaitForSecondsRealtime(0.0001f);
+    IEnumerator reversal()
+    {
+        Time.timeScale = 0;
+        // Vector3 Pos = new Vector3(transform.position.x, transform.position.y, 0);
+        float i = 0;
+        while (i<180)
+        {
+            i += 1;
+            transform.Rotate( Vector3.up);
+            yield return WAS;
+
+        }
 
 
 
 
+        transform.rotation =Quaternion.Euler (Vector3.up * 180);
+
+        Time.timeScale = 1;
+
+
+    }
+    */
 
     private void Update()
     {
@@ -68,15 +92,16 @@ public class CameraControll : MonoBehaviour
             X = transform.position.x;
             X =  Mathf.Lerp(X, player1.transform.position.x, 0.5f * Time.deltaTime * speed );
 
-            //if(player1.Timer2<2)
-            transform.position = new Vector3(X, Y, -10);
-           // else
-            //transform.position = new Vector3(player1.transform.position.x, Y, -10);
+            transform.position = new Vector3(X, Y,-10);
+        }
+        /*
+        if (!reverse&&player1.HP <90)
+        {
+            reverse = true;
+            StartCoroutine(reversal());
         }
 
-
-
-
+    */
     }
 
    

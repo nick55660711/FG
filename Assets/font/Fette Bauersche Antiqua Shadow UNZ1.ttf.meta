@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6126cd6d91a55234793c1c1ed10994cb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Fette Bauersche Antiqua Shaddow  UNZ Pro
+  fontNames:
+  - Fette Bauersche Antiqua Shaddow  UNZ Pro
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
