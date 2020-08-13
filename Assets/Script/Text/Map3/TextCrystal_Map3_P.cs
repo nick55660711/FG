@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TextCrystal_Map3_P : Dialogue
@@ -18,7 +19,7 @@ public class TextCrystal_Map3_P : Dialogue
     */
 
     string[] DialogueText = new string[] {
-        "少女：\n"  + "小時候我時常望向窗外的庭院，那裡有一棵被藤蔓寄生的大樹，枯朽且搖搖欲墜。",
+    "少女：\n"  + "小時候我時常望向窗外的庭院，那裡有一棵被藤蔓寄生的大樹，枯朽且搖搖欲墜。",
     "少女：\n"  +  "我長期臥病在床，一直持續接受治療卻沒有任何起色。",
     "少女：\n"  +  "父母為了我耗費大量心力與金錢，似乎也會委託附近的獵人收集森林的藥草。",
     "少女：\n"  + "對於家道中落的父親是無法承受的重壓。",
@@ -29,12 +30,24 @@ public class TextCrystal_Map3_P : Dialogue
     };
 
 
+    public SpriteRenderer blackscreen;
+    WaitForSecondsRealtime WAS4 = new WaitForSecondsRealtime(0.1f);
+    WaitForSecondsRealtime WAS2 = new WaitForSecondsRealtime(2);
+    IEnumerator end(int A,int B)
+    {
+        for (int i = A; i < B; i++)
+        {
+            blackscreen.color = new Vector4(0,0, 0, 0.1f * i);
+            yield return WAS4;
+        }
 
 
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
+            StartCoroutine(end(1,6));
             OpenDialogue();
             DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
         }
@@ -47,11 +60,34 @@ public class TextCrystal_Map3_P : Dialogue
         GetComponent<Crystal>().ID = 1;
     }
 
+    string endString = "Chapter1 結束";
+    public GameObject EndingText;
+    WaitForSecondsRealtime WAS5 = new WaitForSecondsRealtime(0.3f);
+
+    IEnumerator end2()
+    {
+        
+        yield return StartCoroutine(GM.BlackScreen(1));
+        GameObject tmp =  Instantiate(EndingText, GM.Blackout.transform);
+        
+        for (int i =0 ; i < endString.Length; i++)
+        {
+            //print(endString.Substring(i, 1));
+            tmp.GetComponent<Text>().text += endString.Substring(i,1);
+            yield return WAS5;
+        }
+        
+            yield return WAS2;
+
+        print("Finish");
+        SceneManager.LoadScene(0);
+
+    }
+
     private void finishDialogue()
     {
-        player1.GetSword = true;
-        CloseDialogue();
-        Destroy(gameObject);
+
+        StartCoroutine(end2());
     }
 
 

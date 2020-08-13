@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     WaitForSecondsRealtime WAS = new WaitForSecondsRealtime(0.01f);
 
-    IEnumerator BlackScreen(int A)
+    public IEnumerator BlackScreen(float A)
     {
         for (int i = 0; i < 10; i++)
         {
@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
             Blackout.alpha += 0.1f * A;
             yield return WAS;
         }
-
     }
+
     WaitForSecondsRealtime WAS2 = new WaitForSecondsRealtime(0.3f);
     IEnumerator BlackScreen(int A, string SceneName)
     {

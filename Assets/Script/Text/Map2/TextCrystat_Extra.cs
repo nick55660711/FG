@@ -7,7 +7,7 @@ public class TextCrystat_Extra : Dialogue
 {
     string[] DialogueText = new string[] {
         "少女：\n"  + "" + "騎士配備的劍，應該能用這把劍斬斷藤蔓",
-       "少女：\n"  + "" +"弟弟生前的持有物，心好痛…",
+       "少女：\n"  + "" +"",
         "少女：\n"  + "" + "(A切換武器，可以使用劍來砍除藤蔓)",
                                             };
 
