@@ -5,6 +5,7 @@ using UnityEngine;
 public class SetCamera : MonoBehaviour
 {
     CameraControll camera1;
+    
     private void Start()
     {
         camera1 = FindObjectOfType<CameraControll>();

@@ -164,7 +164,11 @@ public class Player : MonoBehaviour
         }
 
     }
-
+    public void StartShoot()
+    {
+        GetComponent<SpriteRenderer>().sprite = shooter;
+        bow.SetActive(true);
+    }
 
     public void jump() 
     {
@@ -439,10 +443,12 @@ public class Player : MonoBehaviour
             GetBow = false;
             bow.SetActive(false);
             GetComponent<SpriteRenderer>().sprite = stay;
+            GameObject.Find("弓").GetComponent<Image>().enabled =false;
         }
         
         if (PlayerPrefs.GetInt("Sword"+1)==0)
         {
+            GameObject.Find("劍").GetComponent<Image>().enabled = false;
             GetSword = false;
         }
         print(PlayerPrefs.GetString(scene.name + "PlayerLocate"));

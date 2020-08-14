@@ -57,7 +57,11 @@ public class Button_Call : Call_P
 
     }
 
-
+    protected override void Start()
+    {
+        base.Start();
+        HitOn = 0;
+    }
 
 
 

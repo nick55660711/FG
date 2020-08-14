@@ -168,6 +168,7 @@ public class Boss : MonoBehaviour
  
     WaitForSeconds WAS2 = new WaitForSeconds(4);
     WaitForSeconds WAS3 = new WaitForSeconds(0.00003f);
+    WaitForSeconds WAS4 = new WaitForSeconds(0.1f);
 
 
     IEnumerator Grow()
@@ -312,9 +313,16 @@ public class Boss : MonoBehaviour
             Draba_T1.size -= new Vector2(0, 1) * 0.1f;
             yield return WAS3;
         }
-       
+        while (SoundManager.volume>0)
+        {
+
+            SoundManager.volume -= 0.05f;
+            yield return WAS4;
+        }
+
         Tower[0].GetComponent<BoxCollider2D>().enabled = false;
         Tower[1].GetComponent<BoxCollider2D>().enabled = false;
+        
         SoundEffect.Stop();
         yield return WAS2;
         Destroy(Draba_TB_R);
@@ -324,7 +332,6 @@ public class Boss : MonoBehaviour
         Destroy(Draba_B.gameObject);
         // Instantiate(Crystal, Crystal_T.position , Quaternion.identity);
         //Step.SetActive(true);
-        SoundManager.Stop();
         // Crystal.transform.position = Crystal_T.position;
 
         Destroy(gameObject);

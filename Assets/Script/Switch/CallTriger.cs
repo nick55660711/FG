@@ -13,12 +13,12 @@ public class CallTriger : MonoBehaviour
     public Sprite UP_S;
     public Sprite Down_S;
     public bool draba , re;
-
+    
     private void Start()
     {
-      SP =  GetComponent<SpriteRenderer>();
+        SP = GetComponent<SpriteRenderer>();
+       
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")&&!Open)

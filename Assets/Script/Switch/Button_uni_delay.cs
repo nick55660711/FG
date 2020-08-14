@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button_Call_Uni : Call_P
+public class Button_uni_delay : Call_P
 {
     public int HitOn_1;
     public int OnThing;
@@ -12,7 +12,6 @@ public class Button_Call_Uni : Call_P
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-
         if ((collision.CompareTag("Player") || collision.CompareTag("Box")))
         {
 
@@ -20,19 +19,48 @@ public class Button_Call_Uni : Call_P
             OnThing++;
             if (!OnTriger)
             {
-                instance.PlayOneShot(StepSound,1);
+                instance.PlayOneShot(StepSound, 1);
                 OnTriger = true;
                 foreach (var item in Steps)
                 {
 
-                item.SetActive(!item.activeSelf);
+                    item.SetActive(!item.activeSelf);
                 }
 
             }
         }
     }
 
+    public void HitOff(){
+        instance.PlayOneShot(StepSound, 1);
+        SP.sprite = UP_S;
+        OnTriger = false;
+        foreach (var item in Steps)
+        {
 
+            item.SetActive(!item.activeSelf);
+        }
+        hold = false;
+        if (OnThing > 0)
+        {
+            SP.sprite = Down_S;
+            if (!OnTriger)
+            {
+                instance.PlayOneShot(StepSound, 1);
+                OnTriger = true;
+                foreach (var item in Steps)
+                {
+
+                    item.SetActive(!item.activeSelf);
+                }
+
+            }
+
+        }
+
+    }
+
+    bool hold;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -40,16 +68,10 @@ public class Button_Call_Uni : Call_P
         {
             OnThing--;
 
-            if (OnThing == 0)
+            if (OnThing == 0&& !hold)
             {
-                instance.PlayOneShot(StepSound,1);
-                SP.sprite = UP_S;
-                OnTriger = false;
-                foreach (var item in Steps)
-                {
-
-                    item.SetActive(!item.activeSelf);
-                }
+                hold = true;
+                Invoke("HitOff", 0.5f);
             }
         }
 

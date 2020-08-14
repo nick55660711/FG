@@ -16,6 +16,11 @@ public class SaveEvent2 : SaveState
     {
         if (PlayerPrefs.GetInt(scene.name + gameObject.name + 1) == 1)
         {
+            player1.GetBow = false;
+            player1.bow.SetActive(false);
+            player1.GetComponent<SpriteRenderer>().sprite = player1.stay;
+            GameObject.Find("弓").GetComponent<Image>().enabled = false;
+
             Destroy(gameObject, 0.2f);
         }
     }

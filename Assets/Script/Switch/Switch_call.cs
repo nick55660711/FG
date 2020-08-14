@@ -48,6 +48,32 @@ public class Switch_call : Call_P
 
         }
 
+    }
+
+
+
+    public IEnumerator retun()
+    {
+        if (Open)
+        {
+            Open = !Open;
+            foreach (var item in Door)
+            {
+                yield return new WaitUntil(() => { return item.GetComponent<Moveplate_P>().Goal; }); ;
+            }
+            OnTriger = true;
+
+
+            {
+                SP.sprite = UP_S;
+                if (MultipleTrigger)
+                    foreach (var item in SP2)
+                    {
+                        item.sprite = UP_S;
+                    }
+            }
+            StartCoroutine(trigerON());
+        }
 
     }
     protected virtual void OnTriggerExit2D(Collider2D collision)

@@ -33,6 +33,8 @@ public class TextCrystalR : Dialogue
     private void finishDialogue()
     {
         player1.GetBow = true;
+        player1.StartShoot();
+        GameObject.Find("弓").GetComponent<Image>().enabled = true;
         PlayerPrefs.SetInt("Bow"+1, 1);
         CloseDialogue();
         Destroy(gameObject);
