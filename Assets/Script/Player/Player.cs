@@ -402,7 +402,19 @@ public class Player : MonoBehaviour
 
     public void StartScene()
     {
-       
+        if (PlayerPrefs.GetInt("Bow" + 1) == 0)
+        {
+            GetBow = false;
+            bow.SetActive(false);
+            GetComponent<SpriteRenderer>().sprite = stay;
+            GameObject.Find("弓").GetComponent<Image>().enabled = false;
+        }
+
+        if (PlayerPrefs.GetInt("Sword" + 1) == 0)
+        {
+            GameObject.Find("劍").GetComponent<Image>().enabled = false;
+            GetSword = false;
+        }
         Stop = false;
         CanBeHit = true;
         scene = SceneManager.GetActiveScene();
@@ -470,6 +482,8 @@ public class Player : MonoBehaviour
 
     }
 
+
+    public bool cheat;
     private void Update()
     {
 
@@ -500,7 +514,7 @@ public class Player : MonoBehaviour
         jump();
         change();
         }
-        GM.Clear();
+        if(cheat)GM.Clear();
         Timer += Time.deltaTime;
         Timer2 += Time.deltaTime;
         Timer3 += Time.deltaTime;

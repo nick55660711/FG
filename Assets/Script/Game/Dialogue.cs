@@ -23,6 +23,7 @@ public class Dialogue : MonoBehaviour
 
     public void OpenDialogue()
     {
+        FindObjectOfType<Menu>().StopMenu = true;
         DialogueScreen.alpha = 1;
         DialogueScreen.blocksRaycasts = true;
         DialogueScreen.interactable = true;
@@ -31,6 +32,7 @@ public class Dialogue : MonoBehaviour
     }
     public void CloseDialogue()
     {
+        FindObjectOfType<Menu>().StopMenu = false;
         DialogueScreen.alpha = 0;
         DialogueScreen.blocksRaycasts = false;
         DialogueScreen.interactable = false;

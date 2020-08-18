@@ -322,7 +322,7 @@ public class Boss : MonoBehaviour
 
         Tower[0].GetComponent<BoxCollider2D>().enabled = false;
         Tower[1].GetComponent<BoxCollider2D>().enabled = false;
-        
+        SoundManager.Stop();
         SoundEffect.Stop();
         yield return WAS2;
         Destroy(Draba_TB_R);

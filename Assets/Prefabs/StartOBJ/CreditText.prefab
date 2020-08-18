@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1983332428776725052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983332428776725055}
+  - component: {fileID: 1983332428776725041}
+  - component: {fileID: 1983332428776725054}
+  m_Layer: 5
+  m_Name: CreditText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1983332428776725055
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983332428776725052}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1280, y: 1974}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &1983332428776725041
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983332428776725052}
+  m_CullTransparentMesh: 0
+--- !u!114 &1983332428776725054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983332428776725052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: a78fecfdd5e6e1a43bb5e20ed7826f71, type: 3}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 214
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\n\u7A0B\u5F0F\u3001\u4F01\u5283\uFF1A\u53E4\u666F\u4E1E\n\n\u4E3B\u7F8E\u8853\uFF1A\u5F35\u60E0\u6674\n\n\u7F8E\u8853\uFF1A\u5F35\u5C24\u8000\n\n\n\n\u4F7F\u7528\u7D20\u6750\n\n\u5716\u7247\n\n\u6309\u9215\nKENNEY\nSimplified
+    Platformer Pack\nhttps://kenney.nl/assets/simplified-platformer-pack\n\n\u97F3\u6A02\n\n\u6A19\u984C\n\u9B54\u738B\u9B42
+    BGM\u7D20\u6750 \u30C6\u30FC\u30DE13\nhttps://maoudamashii.jokersounds.com/list/game5.html\n\n\u68EE\u6797\u5834\u666F\u3001\u57CE\u5821\u5834\u666F\u3001\u7D50\u5C3E\n\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F
+    \u96E8\u306E\u30D7\u30EC\u30EA\u30E5\u30FC\u30C9\r,  \u30E1\u30C8\u30ED\u30DD\u30EA\u30B9\r, 
+    \u590F\u306E\u9727\r\nhttps://amachamusic.chagasi.com/\n\nBoss\u6230\u97F3\u6A02\n\u9B54\u738B\u9B42
+    BGM\u7D20\u6750 \u30DC\u30B9\u6226\u95D8\u66F2 \u30DC\u30B905\nhttps://maoudamashii.jokersounds.com/list/game3.html\n\n\n\n\u97F3\u6548
+    \n\nBfxr\nhttps://www.bfxr.net/\n\n\u9B54\u738B\u9B42 \u708E07\nhttps://maoudamashii.jokersounds.com/archives/se_maoudamashii_element_fire07.html\n\n\n\n\u5B57\u578B\n\n\u4E2D\u6587\u5B57\u578B\uFF1A\nMODI\u5DE5\u5EE0\r
+    \u9ED2\u8594\u8587\u30B7\u30F3\u30C7\u30EC\u30E9 ver1.00\r\nhttp://modi.jpn.org/font_amemuchi-cinderella.php\r\n\n\u7028\u6236\u5B57\u9AD4\nNonty.net\n\rhttps://nonty.net/font/freefont/setofont/\n\n\u82F1\u6587\u5B57\u578B\uFF1A\ndafont.com\r
+    Lissain.didone , kenyan coffee rg\r\nhttps://www.dafont.com/theme.php?cat=501&page=2&text=GAME\r\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<size=200>Thank
+    you for playing</size>\n\n\r\n"

@@ -59,8 +59,8 @@ public class TextCrystal1 : Dialogue
             yield return WAS2;
         }
         CloseDialogue();
-
-            player1.Stop = true;
+        FindObjectOfType<Menu>().StopMenu = true;
+        player1.Stop = true;
             player1.rig.velocity = new Vector2(-3, 0);
         player1.transform.eulerAngles = new Vector3(0, 180, 0);
         while (player1.transform.position.x > -13.4)

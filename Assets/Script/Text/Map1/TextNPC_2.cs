@@ -59,6 +59,7 @@ public class TextNPC_2 : Dialogue
         CloseDialogue();
         if (GM.Herb_No == 4)
         {
+            FindObjectOfType<AudioSource>().PlayOneShot(Heal);
             player1.HP = GM.HP_MAX;
             GM.HpUpdate();
             Trans.SetActive(true);
@@ -83,7 +84,7 @@ public class TextNPC_2 : Dialogue
             else
             {
                 DialogueScreen.GetComponentInChildren<Text>().text = DialogueText[DialogueID];
-                if (DialogueID == 1) FindObjectOfType<AudioSource>().PlayOneShot(Heal);
+                
             }
 
 

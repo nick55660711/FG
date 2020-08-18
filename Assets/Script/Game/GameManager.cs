@@ -41,14 +41,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(BlackScreen(1, scene.name));
 
     }
+    public AudioClip CastleBGM;
+    public AudioClip ForestBGM;
 
     public void ChangeScene(string SceneName)
     {
         /// <summary>
         /// 暫時儲存資料
         /// </summary>
-
+       
         SaveMapData();
+
         StartCoroutine(BlackScreen(1, SceneName));
 
 
@@ -63,6 +66,16 @@ public class GameManager : MonoBehaviour
 
             Blackout.alpha += 0.1f * A;
             yield return WAS;
+        }
+    }
+
+    public IEnumerator BlackScreen(float A, WaitForSecondsRealtime B)
+    {
+        for (int i = 0; i < 20; i++)
+        {
+
+            Blackout.alpha += 0.05f * A;
+            yield return B;
         }
     }
 
@@ -85,10 +98,11 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(SceneName);
 
-        
+
         yield return WAS2;
 
-      
+        if (SceneName == "Map1"&& SoundManager.clip != ForestBGM) { SoundManager.clip = ForestBGM; SoundManager.Play(); }
+        if (SceneName == "Map2"&& SoundManager.clip != CastleBGM) { SoundManager.clip = CastleBGM; SoundManager.Play(); }
         StartScene();
         player1.StartScene();
     }

@@ -18,6 +18,15 @@ public class SetCamera : MonoBehaviour
         {
             camera1.CameraSet(transform.position.y);
         }
+
+    } 
+    
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            camera1.CameraSet(transform.position.y);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

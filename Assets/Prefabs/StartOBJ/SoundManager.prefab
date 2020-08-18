@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2070180911571556009}
   - component: {fileID: 8991789387031248017}
   - component: {fileID: 6916142487148406458}
+  - component: {fileID: 8318873902156514476}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -42,7 +43,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9029ca9fe069ff0448f8f1ed89f417e1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1a647d257e26c3c4bb956a42d5395480, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.512
   m_Pitch: 1
@@ -140,3 +141,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7122d0a90750b1d4a96aab9995ead65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8318873902156514476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075839277398084826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4528c18ee04ebf94494540655f35d827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CastleBGM: {fileID: 8300000, guid: 10d92e9a3fa6fd54d80e7fbd6e14e80b, type: 3}
+  ForestBGM: {fileID: 8300000, guid: 1a647d257e26c3c4bb956a42d5395480, type: 3}
