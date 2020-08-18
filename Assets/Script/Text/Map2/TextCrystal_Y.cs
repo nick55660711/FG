@@ -36,7 +36,7 @@ public class TextCrystal_Y : Dialogue
     {
         player1.GetSword = true;
         GameObject.Find("劍").GetComponent<Image>().enabled = true;
-        PlayerPrefs.SetInt("Sword" + 1, 1);
+        PlayerPrefs.SetInt("Sword" + 3, 1);
         CloseDialogue();
         Destroy(gameObject);
     }

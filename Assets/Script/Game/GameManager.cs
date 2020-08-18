@@ -231,6 +231,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("HP" + temp, player1.HP);
         PlayerPrefs.SetFloat("Crystal_No" + temp, Crystal_No);
         PlayerPrefs.SetFloat("Herb_No" + temp, Herb_No);
+        PlayerPrefs.SetInt("Sword" + 1, PlayerPrefs.GetInt("Sword" + 3));
+        PlayerPrefs.SetInt("Bow" + 1, PlayerPrefs.GetInt("Bow" + 3));
         for (int i = 0; i < itemNo; i++)
         {
             string SaveName = PlayerPrefs.GetString(scene.buildIndex.ToString() + i);
