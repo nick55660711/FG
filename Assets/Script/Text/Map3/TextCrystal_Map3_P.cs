@@ -104,7 +104,7 @@ public class TextCrystal_Map3_P : Dialogue
 
         yield return WAS8;
 
-
+        Time.timeScale = 1;
         print("Finish");
         SceneManager.LoadScene(0);
 

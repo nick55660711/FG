@@ -343,6 +343,7 @@ public class Boss : MonoBehaviour
 
     public AudioSource SoundManager;
     public AudioSource SoundEffect;
+    public AudioSource SoundEffectprf;
 
 
     #region 事件
@@ -355,7 +356,7 @@ public class Boss : MonoBehaviour
         Tower[1].GetComponent<BoxCollider2D>().enabled = true;
         Right = true;
 
-        SoundEffect = Instantiate(SoundManager);
+        SoundEffect = Instantiate(SoundEffectprf);
         SoundEffect.clip = EarthQuake;
         SoundEffect.Stop();
         StartCoroutine(Grow_G());

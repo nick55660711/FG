@@ -5422,6 +5422,8 @@ MonoBehaviour:
   SoundManager: {fileID: 0}
   SoundEffect: {fileID: 1486651453236723749, guid: 3e8d414ed8ab9284a9001d3aafee16ab,
     type: 3}
+  SoundEffectprf: {fileID: 8342153497905951409, guid: 080ff66eb3d775b418a48b73128d29f7,
+    type: 3}
 --- !u!114 &1560454460
 MonoBehaviour:
   m_ObjectHideFlags: 0

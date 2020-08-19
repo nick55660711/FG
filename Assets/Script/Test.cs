@@ -5,45 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class Test : MonoBehaviour
 {
-    public GameObject Respwan;
     [Header("當前場景名稱")]
     public Scene SceneNow;
-
+    GameManager GM;
     private void Start()
-    {
-        Respwan = GameObject.Find("Start");
-        SceneNow = SceneManager.GetActiveScene();
+    {   
+        rig = GetComponent<Rigidbody2D>();
+       
     }
-
-
+    Rigidbody2D rig;
+    bool Nogravity;
 
 
     void Update()
     {
-        /*
+        
 
-        if (Input.GetKeyDown("r")) 
+        if (Input.GetKey("r")) 
         {
-            transform.position = Respwan.transform.position;
-            PlayerPrefs.SetFloat("HP",100);
-            PlayerPrefs.SetFloat("Crystal_No",0);
+            rig.AddForce(Vector2.up*50);
         }
-        */
+        
 
         if (Input.GetKeyDown("e"))
         {
             GetComponent<Player>().HP = 100;
             GetComponent<Player>().GetBow = true;
             GetComponent<Player>().GetSword = true;
+            FindObjectOfType<GameManager>().HpUpdate();
         }
         
-        /*
-        if (Input.GetKeyDown("t"))
-        {
-            SceneManager.LoadScene(SceneNow.name);
-        }
-        */
-        // if (Input.GetKeyDown("t")) { SceneManager.LoadScene("Map0"); }
+       
 
 
     }
