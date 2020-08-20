@@ -8,6 +8,7 @@ public class Button_uni_delay : Call_P
     public int OnThing;
     public GameObject[] Steps;
 
+    public float Button_delay_time;
     static AudioSource instance;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -71,7 +72,7 @@ public class Button_uni_delay : Call_P
             if (OnThing == 0&& !hold)
             {
                 hold = true;
-                Invoke("HitOff", 0.5f);
+                Invoke("HitOff", Button_delay_time);
             }
         }
 
